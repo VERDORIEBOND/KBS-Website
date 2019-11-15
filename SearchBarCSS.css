@@ -1,0 +1,39 @@
+body{
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background-color:black;
+    background-size: cover;
+}
+.Search-Bar{
+    width: 600px;
+    position: absolute;
+    top:10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: #4caf50 solid 3px;
+    border-radius: 20px;
+}
+.Search-txt{
+    border:blue;
+    outline: none;
+    background: none;
+    color:#4caf50;
+    font-size: 15px;
+    width:550px;
+    height: 20px;
+    float: left;
+    margin:0 10px;
+}
+.search-btn i {
+    color: dimgray;
+    float: right;
+    position: absolute;
+    top:3px;
+    right:6px;
+}
+.Winkelmandje{
+    color: blue;
+}
+
+
