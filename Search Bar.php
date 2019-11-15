@@ -1,5 +1,6 @@
-
-
+<?php
+include "functions.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +11,11 @@
 </head>
 <body>
 <div class="Search-Bar">
+    <form >
     <input class="Search-txt" type="text" placeholder="Zoeken" name="" value="">
+    </form>
     <a class="search-btn" href="#">
-    <i class="fas fa-search"></i>
+        <i class="fas fa-search"></i>
     </a>
 </div>
 
