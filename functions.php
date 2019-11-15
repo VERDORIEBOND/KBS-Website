@@ -9,7 +9,7 @@ while($row = mysqli_fetch_assoc($result)) {
         echo $val. "<br>";
     }
 }
-$search = function ($connection,$search){
+$search = function ($connection){
     $output = '';
     if(isset($_POST['search'])) {
         $search = $_POST['search'];
@@ -50,7 +50,9 @@ $itemsToProductCards = function ($connection)
         {
             ?>
             <div class="card">
-                <?php echo $Hinh ?>
+                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode( $row['Photo'] ) . '" />';
+                header('Content-type: image/jpeg'); ?>
+                <?php //echo $Hinh ?>
                 <h1><?php echo $row["StockItemName"]; ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?>></p>
                 <p>Some text about the jeans..</p>
