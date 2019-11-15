@@ -9,22 +9,23 @@ while($row = mysqli_fetch_assoc($result)) {
         echo $val. "<br>";
     }
 }
-function Search($search){
+$search = function ($connection,$search){
+    $output = '';
     if(isset($_POST['search'])) {
         $search = $_POST['search'];
-        $query = mysqli_query("SELECT StockItemName FROM stockitems WHERE StockItemName LIKE '%$search%'");
+        $query = mysqli_query($connection,"SELECT StockItemName FROM stockitems WHERE StockItemName LIKE '%$search%'");
         $count = mysqli_num_rows($query);
 
         if($count == 0){
-            $output = "There was no search results!";
-
+            $output = "There were no search results!";
         }else{
-
+            $output = '';
             }
 
         }
-    }
-}
+    return $output;
+    };
+
 
 
 
