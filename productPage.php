@@ -26,7 +26,8 @@ include "connection.php";
 
 // FUNCTIONS ----------->
 
-$itemsToProductCards($conn)
+$itemsToProductCards($conn);
+$search($conn);
 
 
 ?>
