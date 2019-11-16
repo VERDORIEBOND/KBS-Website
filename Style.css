@@ -3,25 +3,22 @@
     padding: 0px;
     font-family: sans-serif;
 }
-
 #sidebar {
     position: fixed;
     width: 250px;
     height: 100%;
     background: #2834ff;
 }
-#sidebar ul li{
-    color: rgba(255, 0, 6, 0.9);
+#sidebar li a{
+    color: rgba(255, 41, 119, 0.9);
     list-style: none;
-    padding: 15px 10px;
-    border-bottom: 1px solid rgb(5, 5, 5);
+    padding: 1px 20px;
+    border-bottom: 2px solid rgb(5, 5, 5);
 }
-#link-color{
-    color: #000000;
-
+#sidebar ul li a{
+    color: rgb(106, 193, 255);
+    font-size: 22px;
 }
-
-#a-link{
-    color: black;
-
+#sidebar ul li a:hover{
+    color: rgb(104, 236, 255);
 }
