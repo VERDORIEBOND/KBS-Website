@@ -14,6 +14,7 @@
     list-style: none;
     padding: 1px 20px;
     border-bottom: 2px solid rgb(5, 5, 5);
+    line-height: 1.6;
 }
 #sidebar ul li a{
     color: rgb(106, 193, 255);

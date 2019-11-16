@@ -38,23 +38,23 @@ $itemsToProductCards = function ($connection)
     while ($row = mysqli_fetch_assoc($result))
     {
         $shortItem = substr($row["StockItemName"],0,10);
-
-        $image_data = $row["Photo"];
-        $encoded_image = base64_encode($image_data);
-        $itemName = strstr($row["StockItemName"],'-',true);
-        //You dont need to decode it again.
-        $Hinh = "<img src='data:image/jpeg;base64,$encoded_image' alt=\"$itemName\">";
+        $resultString = $row["StockItemName"];
+        if (strpos($resultString, '-') !== false)
+        {
+            $itemName = strstr($row["StockItemName"],'-',true);
+        }
+        elseif (strpos($resultString, '(') !== false)
+        {
+            $itemName = strstr($row["StockItemName"],'(',true);
+        }
 
 
         if(!in_array($shortItem,$completedItems))
         {
             ?>
             <div class="card">
-                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode( $row['Photo'] ) . '" />';
-                header('Content-type: image/jpeg'); ?>
-                <?php //echo $Hinh ?>
-                <h1><?php echo $row["StockItemName"]; ?></h1>
-                <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?>></p>
+                <h1><?php echo $itemName ?></h1>
+                <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?></p>
                 <p>Some text about the jeans..</p>
                 <p>
                     <button>Add to Cart</button>
