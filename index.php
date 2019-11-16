@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Hello, world!</title>
+    <title>Wide World Importers</title>
 
     <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -17,10 +17,8 @@
 <body>
 
 <div id="sidebar">
-    <div class="toggle-button" onclick="toggleSidebar()">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="logo"><a href="#"><img src="images/WWi%20logo.jpg"></a>
+
     </div>
     <ul>
      <li><a href="#">Airline Novelties</a></li>
