@@ -1,6 +1,3 @@
-<?php
-include "functions.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +7,13 @@ include "functions.php";
     <title>SearchBar</title>
 </head>
 <body>
-<div class="Search-Bar">
-    <form >
-    <input class="Search-txt" type="text" placeholder="Zoeken" name="" value="">
-    </form>
-    <a class="search-btn" href="#">
-        <i class="fas fa-search"></i>
-    </a>
-</div>
+
+<div class="Header">
+    <img src="WWI.png" alt="">
+    <div class="Search-Bar">
+        <input class="Search-txt" type="text" placeholder="Zoeken" name="" value="">
+        <a class="search-btn" href="#"> <i class="fas fa-search"></i> </a>
+    </div>
 
 </div>
 </body>
