@@ -11,10 +11,11 @@
 <div class="Header">
     <img src="WWI.png" alt="">
     <div class="Search-Bar">
-        <input class="Search-txt" type="text" placeholder="Zoeken" name="" value="">
-        <a class="search-btn" href="#"> <i class="fas fa-search"></i> </a>
+        <form action="Search.php" method="get">
+            <input class="Search-txt" type="text" placeholder="Zoeken" name="search" value="" dir="ltr">
+            <input class="search-btn"  type="submit" value="Search" href="#">
+        <a class="search-btn" href="#" type-="submit"> <i class="fas fa-search"></i> </a>
     </div>
-
 </div>
 </body>
 </html>
