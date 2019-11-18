@@ -34,12 +34,12 @@
                 </ul>
             </li>
         </ul>
-        <form class="navbar-form navbar-left" action="/action_page.php">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        <div class="Search-Bar">
+            <form action="Search.php" method="get">
+                <input class="Search-txt" type="text" placeholder="Zoeken" name="search" value="" dir="ltr">
+                <input class="search-btn"  type="submit" value="Search" href="#">
+            </form>
+        </div>
     </div>
 </nav>
 
