@@ -47,8 +47,6 @@ $search = function ($connection){
 */
 
 
-
-
 $itemsToProductCards = function ($connection)
 {
     $completedItems = array();
