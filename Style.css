@@ -1,3 +1,6 @@
+body {
+    padding-top: 65px;
+}
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -76,4 +79,8 @@
         background-color: inherit;
         border-top:0 none;
     }
+}
+.navbar .navbar-inverse .navbar-expand-lg .navbar-fixed-top
+{
+    height: 65px;
 }

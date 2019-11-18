@@ -71,6 +71,7 @@ if (in_array($productName, $completedItems) == false) {
         ?>
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
+                <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
