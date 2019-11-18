@@ -1,3 +1,6 @@
+body {
+    padding-top: 65px;
+}
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -77,34 +80,7 @@
         border-top:0 none;
     }
 }
-.Search-Bar{
-    margin:auto;
-    width: 600px;
-    height: 30px;
-    position: absolute;
-    top:5%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border: #0abde3 solid 3px;
-    border-radius: 20px;
-}
-.Search-txt{
-    border:blue;
-    outline: none;
-    background: none;
-    color:#0abde3;
-    font-size: 15px;
-    width:550px;
-    height: 30px;
-    float: left;
-    margin:0 10px;
-}
-.search-btn{
-    color: dimgray;
-    float: right;
-    position: absolute;
-    top:3px;
-    right:6px;
-    border: #0abde3 solid 1px;
-    border-radius: 10px;
+.navbar .navbar-inverse .navbar-expand-lg .navbar-fixed-top
+{
+    height: 65px;
 }
