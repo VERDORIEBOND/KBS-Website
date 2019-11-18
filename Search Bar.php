@@ -14,6 +14,7 @@
         <form action="Search.php" method="get">
             <input class="Search-txt" type="text" placeholder="Zoeken" name="search" value="" dir="ltr">
             <input class="search-btn"  type="submit" value="Search" href="#">
+        </form>
     </div>
 </div>
 </body>
