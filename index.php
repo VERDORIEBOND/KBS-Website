@@ -12,19 +12,33 @@
     <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
+        <img src="images/WWI.png" alt="Logo" height="50"></a>
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
+            <a class="navbar-header">
+                <a class="navbar-brand" href="#">Sale!</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Airline Novelties</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Computing Novelties</a></li>
+                    <li><a href="#">Furry Footwear</a></li>
+                    <li><a href="#">Mugs</a></li>
+                    <li><a href="#">Novelty Items</a></li>
+                    <li><a href="#">Packing Materials</a></li>
+                    <li><a href="#">T-Shirts</a></li>
+                    <li><a href="#">Toys</a></li>
+                </ul>
+            </li>
         </ul>
         <div class="Search-Bar">
             <form action="Search.php" method="get">

@@ -83,4 +83,5 @@ body {
 .navbar .navbar-inverse .navbar-expand-lg .navbar-fixed-top
 {
     height: 65px;
+    display: flex; justify-content: center;
 }
