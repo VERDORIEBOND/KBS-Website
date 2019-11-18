@@ -36,7 +36,7 @@ body {
 }
 .btn-fb:hover{
     color: #fff;
-    background-color:#496ebc
+    background-color:#496ebc;
 }
 .btn-tw{
     color: #fff;
@@ -70,4 +70,18 @@ body {
     border: grey solid 1px;
     border-radius: 10px;
 }
+
+.search-text{
+    outline: none;
+    overflow: hidden;
+    width: 300px;
+    background: none;
+    border: #0abde3 solid 2px;
+    border-radius: 15px;
+    color:#0abde3;
+    float: none;
+    text-align: justify;
+    padding-left: 10px;
+}
+
 
