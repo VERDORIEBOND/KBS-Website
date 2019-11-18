@@ -1,7 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Product Page</title>
+
+    <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
+</head>
+<body>
+
 <?php
 
 include "connection.php";
-
+/*
 // Print categorie namen
 $result = mysqli_query($conn,"SELECT StockGroupName FROM StockGroups");
 while($row = mysqli_fetch_assoc($result)) {
@@ -26,7 +44,7 @@ $search = function ($connection){
     return $output;
     };
 
-
+*/
 
 
 
@@ -34,49 +52,47 @@ $search = function ($connection){
 $itemsToProductCards = function ($connection)
 {
     $completedItems = array();
-    $result = mysqli_query($connection,"SELECT StockItemName, RecommendedRetailPrice, Photo FROM stockitems;");
+    $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments FROM stockitems;");
     while ($row = mysqli_fetch_assoc($result))
-    {
-        $shortItem = substr($row["StockItemName"],0,10);
-        $resultString = $row["StockItemName"];
-        if (strpos($resultString, '-') !== false)
-        {
-            $itemName = strstr($row["StockItemName"],'-',true);
-        }
-        elseif (strpos($resultString, '(') !== false)
-        {
-            $itemName = strstr($row["StockItemName"],'(',true);
-        }
+{
+// Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
+$productName = $row["stockitem"];
+$numOfCols = 3;
+$rowCount = 0;
+$bootstrapColWidth = 12 / $numOfCols;
 
+if (in_array($productName, $completedItems) == false) {
 
-        if(!in_array($shortItem,$completedItems))
-        {
-            ?>
+?>
+<div class="row">
+    <?php
+    // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
+    foreach ($row as $rows) {
+        ?>
+        <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
-                <h1><?php echo $itemName ?></h1>
+                <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?></p>
-                <p>Some text about the jeans..</p>
+                <p><?php echo $row["MarketingComments"]; ?></p>
                 <p>
-                    <button>Add to Cart</button>
+                    <button>In winkelmandje</button>
                 </p>
             </div>
-            <?php
-        }
-        array_push($completedItems, $shortItem);
+        </div>
+        <?php
+        $rowCount++;
+        if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
     }
-print_r($completedItems);
+    ?> </div> <?php
+    array_push($completedItems,$productName);
+        }
+
+    }
+
     mysqli_free_result($result);
 }
 
-
-
-
-
-
-
-
-
-
-
-
 ?>
+
+</body>
+</html>
