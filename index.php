@@ -16,26 +16,24 @@
 
 </head>
 <body>
-
-<div id="sidebar">
-    <div class="logo"><a href="#"><img src="images/WWi%20logo.jpg"></a>
-
+<nav class="navbar navbar-inverse navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
     </div>
-    <ul>
-        <li><a href="#">PRODUCT PAGE</a></li>
-        <li><a href="#">Airline Novelties</a></li>
-        <li><a href="#">Clothing</a></li>
-        <li><a href="#">Computing Novelties</a></li>
-        <li><a href="#">Furry Footwear</a></li>
-        <li><a href="#">Mugs</a></li>
-        <li><a href="#">Novelty Items</a></li>
-        <li><a href="#">Packaging Materials</a></li>
-        <li><a href="#">T-Shirts</a></li>
-        <li><a href="#">Toys</a></li>
-    </ul>
-</div>
-
-
+</nav>
 
 
 
