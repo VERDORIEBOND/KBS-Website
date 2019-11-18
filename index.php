@@ -44,9 +44,13 @@
         </ul>
         <div class="Search-Bar">
             <form action="Search.php" method="get">
-                <input class="Search-txt" type="text" placeholder="Zoeken" name="search" value="" dir="ltr">
-                <input class="search-btn"  type="submit" value="Search" href="#">
+                <div class="search-txt">
+                    <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
+                    <input class="search-btn"  type="submit" value="Search" href="#">
+                </div>
+
             </form>
+
         </div>
     </div>
 </nav>
