@@ -27,7 +27,7 @@
         </div>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën
-                    <span class="caret"></span></a>
+
                 <ul class="dropdown-menu">
                     <li><a href="#">Airline Novelties</a></li>
                     <li><a href="#">Clothing</a></li>
