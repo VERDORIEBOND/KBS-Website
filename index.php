@@ -55,6 +55,12 @@
     </div>
 </nav>
 
+<div class="footer">
+    <p>Service</p>
+    <p>Verzenden</p>
+    <p>Betaling</p>
+    <p>Over ons</p>
+</div>
 
 
 </body>
