@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-expand-lg">
+<nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">WebSiteName</a>

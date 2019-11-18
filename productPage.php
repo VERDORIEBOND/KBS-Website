@@ -17,6 +17,7 @@
 <body>
 
 <?php
+include "index.php";
 include "functions.php";
 include "connection.php";
 
