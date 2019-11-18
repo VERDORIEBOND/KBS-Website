@@ -21,11 +21,12 @@
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
         <img src="images/WWI.png" alt="Logo" height="50"></a>
+
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-brand" href="#">Sale!</a>
         </div>
-            <li class="dropdown">
+            <span class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën
 
                 <ul class="dropdown-menu">
@@ -39,13 +40,17 @@
                     <li><a href="#">T-Shirts</a></li>
                     <li><a href="#">Toys</a></li>
                 </ul>
-            </li>
+            </span>
         </ul>
         <div class="Search-Bar">
             <form action="Search.php" method="get">
-                <input class="Search-txt" type="text" placeholder="Zoeken" name="search" value="" dir="ltr">
-                <input class="search-btn"  type="submit" value="Search" href="#">
+                <div class="search-txt">
+                    <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
+                    <input class="search-btn"  type="submit" value="Search" href="#">
+                </div>
+
             </form>
+
         </div>
     </div>
 </nav>
