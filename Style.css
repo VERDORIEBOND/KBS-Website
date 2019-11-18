@@ -85,3 +85,9 @@ body {
     height: 65px;
     display: flex; justify-content: center;
 }
+.search-btn{
+    background-color: #0abde3;
+    color: white;
+    border: grey solid 1px;
+    border-radius: 10px;
+}
