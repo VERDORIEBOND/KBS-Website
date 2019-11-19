@@ -20,15 +20,15 @@
 
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
+        <a href="index.php" />
         <img src="images/WWI.png" alt="Logo" height="50"></a>
 
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-brand" href="#">Sale!</a>
         </div>
-            <span class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën
-
+        <span class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Airline Novelties</a></li>
                     <li><a href="#">Clothing</a></li>
@@ -40,7 +40,7 @@
                     <li><a href="#">T-Shirts</a></li>
                     <li><a href="#">Toys</a></li>
                 </ul>
-            </span>
+                    </span>
         </ul>
         <div class="Search-Bar">
             <form action="Search.php" method="get">

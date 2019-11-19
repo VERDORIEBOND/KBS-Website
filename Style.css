@@ -81,10 +81,14 @@ body {
     padding-left: 10px;
 }
 
+a.dropdown{
+    list-style-type: none;
+}
+
 
 .footer{
     text-align: center;
-    display: block;
+
     padding: 1px;
     position: fixed;
     left: 0;
@@ -92,11 +96,12 @@ body {
     width: 100%;
     background-color: #000000;
     color: #6ac1ff;
-
 }
 
-.footer a{
-    padding-right: 300px;
-    padding-left: auto;
+.footer a {
+    padding-right: 250px;
+    padding-left: 250;
 }
+
+
 

@@ -49,20 +49,10 @@ $search = function ($connection){
 
 $itemsToProductCards = function ($connection)
 {
-    ?>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-    </div>
-    <span onclick="openNav()">open</span>
-<?php
-    $i=1;
+    $i=0;
     $completedItems = array();
     $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments FROM stockitems;");
+    echo '<div class="row">';
     while ($row = mysqli_fetch_assoc($result))
 {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
@@ -70,17 +60,14 @@ $productName = $row["stockitem"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
-if (in_array($productName, $completedItems) == false) {
-
-?>
-<div class="row">
-    <?php
+if (in_array($productName, $completedItems) == false)
+{
     // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
 
     //echo $bootstrapColWidth;
 
         ?>
-        <div class="col-md-<?php $i; ?>">
+        <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
                 <a href="#">
                 <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
@@ -96,16 +83,12 @@ if (in_array($productName, $completedItems) == false) {
         <?php
         $rowCount++;
         if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-    ?> </div> <?php
+
     array_push($completedItems,$productName);
         }
-$i + 1;
-if ($i <= 4)
-{
-    $i = 1;
-}
-
+        $i ++;
     }
+    echo '</div>';
 
     mysqli_free_result($result);
 }
