@@ -19,44 +19,25 @@
 <?php
 
 include "connection.php";
-/*
-// Print categorie namen
-$result = mysqli_query($conn,"SELECT StockGroupName FROM StockGroups");
-while($row = mysqli_fetch_assoc($result)) {
-    foreach ($row as $col => $val) {
-        echo $val. "<br>";
-    }
-}
-$search = function ($connection){
-    $output = '';
-    if(isset($_POST['search'])) {
-        $search = $_POST['search'];
-        $query = mysqli_query($connection,"SELECT StockItemName FROM stockitems WHERE StockItemName LIKE '%$search%'");
-        $count = mysqli_num_rows($query);
 
-        if($count == 0){
-            $output = "There were no search results!";
-        }else{
-            $output = '';
-            }
-
-        }
-    return $output;
-    };
-
-*/
-
+$filterItems = function ()
+{
+    echo '<div class="container-fluid">';
+    echo '</div>';
+};
 
 $itemsToProductCards = function ($connection)
 {
     $i=0;
     $completedItems = array();
     $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments FROM stockitems;");
+    echo '<div class="container-fluid">';
     echo '<div class="row">';
     while ($row = mysqli_fetch_assoc($result))
 {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
 $productName = $row["stockitem"];
+$productLink = str_replace(' ','_',$productName);
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
@@ -69,9 +50,8 @@ if (in_array($productName, $completedItems) == false)
         ?>
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
-                <a href="ProductDetails.php">
+                <a href=<?php echo $productLink ?>>
                 <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
-
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
@@ -88,7 +68,7 @@ if (in_array($productName, $completedItems) == false)
         }
         $i ++;
     }
-    echo '</div>';
+    echo '</div></div>';
 
     mysqli_free_result($result);
 }
