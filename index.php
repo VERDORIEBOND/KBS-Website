@@ -56,10 +56,13 @@
 </nav>
 
 <div class="footer">
-    <p>Service</p>
-    <p>Verzenden</p>
-    <p>Betaling</p>
-    <p>Over ons</p>
+    <ul>
+        <span><a href="#">Service</a> </span>
+        <span><a href="#">Verzenden</a> </span>
+        <span><a href="#">Betaling</a> </span>
+        <span><a href="#">Over ons</a> </span>
+
+    </ul>
 </div>
 
 

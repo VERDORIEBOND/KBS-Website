@@ -59,10 +59,7 @@ body {
 .nav .navbar .navbar-inverse .navbar-expand-lg .navbar-fixed-top
 {
     height: 65px;
-
 }
-
-
 
 .search-btn{
     background-color: #0abde3;
@@ -85,13 +82,21 @@ body {
 }
 
 
-.footer {
+.footer{
+    text-align: center;
+    display: block;
+    padding: 1px;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     background-color: #000000;
     color: #6ac1ff;
-    
+
+}
+
+.footer a{
+    padding-right: 300px;
+    padding-left: auto;
 }
 
