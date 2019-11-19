@@ -2,14 +2,21 @@ body {
     padding-top: 65px;
 }
 
-.navbar-brand{
+.navbar-links-categorieen{
+    color: #6ac1ff;
     position: relative;
-    left: -150px;
+    right: 200px;
+    padding-right: 20px;
+}
+.navbar-links-sale{
+    color: red;
+    position: relative;
+    right: 200px;
+    padding-right: 20px;
 }
 
 .dropdown-toggle{
-    position: relative;
-    left: -280px;
+    color:  #6ac1ff;
 }
 
 .card {
@@ -31,6 +38,7 @@ body {
 }
 .LogIn{
     position: absolute;
+    color:  #6ac1ff;
     right: 30px;
     top:10px;
     vertical-align: middle;
