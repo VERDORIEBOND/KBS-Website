@@ -1,0 +1,22 @@
+.Productname{
+    padding: 40px;
+    color: #496ebc;
+    font-size: 250%;
+}
+
+.Button {
+    width: 300px;
+
+    background-color: #55acee;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 400px;
+    top: 300px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+.Button:hover{
+background-color: blue;
+}
