@@ -22,7 +22,6 @@ body {
 
 .container-fluid img{
     position: relative;
-    left: -180px;
 }
 
 .card button {

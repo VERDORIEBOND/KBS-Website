@@ -37,7 +37,6 @@ $itemsToProductCards = function ($connection)
 {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
 $productName = $row["stockitem"];
-$productLink = str_replace(' ','_',$productName);
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
@@ -55,11 +54,9 @@ if (in_array($productName, $completedItems) == false)
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
-                    <div class="join-button">
                         <p>
                             <button>In winkelmandje</button>
                         </p>
-                    </div>
             </div>
         </div>
         <?php
