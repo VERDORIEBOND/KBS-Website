@@ -28,8 +28,14 @@ body {
 .container-fluid img{
     position: relative;
     left: -120px;
-
 }
+.LogIn{
+    position: absolute;
+    right: 30px;
+    top:10px;
+    vertical-align: middle;
+}
+
 
 .card button {
     border: none;

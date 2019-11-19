@@ -23,6 +23,7 @@
         <a href="index.php" />
         <img src="images/WWI.png" alt="Logo" height="50"></a>
 
+
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-brand" href="#">Sale!</a>
@@ -44,14 +45,16 @@
                     </span>
         </ul>
         <div class="Search-Bar">
-            <form action="Search.php" method="get">
+            <form action="function%20zoeken.php.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
                 </div>
-
             </form>
-
+            <div class="LogIn">
+                <span><a href="#"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></span><br>
+                <span><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></span>
+            </div
         </div>
     </div>
 </nav>
