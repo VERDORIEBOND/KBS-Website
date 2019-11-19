@@ -49,6 +49,18 @@ $search = function ($connection){
 
 $itemsToProductCards = function ($connection)
 {
+    ?>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <span onclick="openNav()">open</span>
+<?php
+    $i=1;
     $completedItems = array();
     $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments FROM stockitems;");
     while ($row = mysqli_fetch_assoc($result))
@@ -58,19 +70,21 @@ $productName = $row["stockitem"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
-
 if (in_array($productName, $completedItems) == false) {
 
 ?>
 <div class="row">
     <?php
     // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
-    foreach ($row as $rows) {
+
+    //echo $bootstrapColWidth;
+
         ?>
-        <div class="col-md-<?php echo $bootstrapColWidth; ?>">
+        <div class="col-md-<?php $i; ?>">
             <div class="card">
                 <a href="#">
                 <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
+
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
@@ -82,10 +96,14 @@ if (in_array($productName, $completedItems) == false) {
         <?php
         $rowCount++;
         if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-    }
     ?> </div> <?php
     array_push($completedItems,$productName);
         }
+$i + 1;
+if ($i <= 4)
+{
+    $i = 1;
+}
 
     }
 
