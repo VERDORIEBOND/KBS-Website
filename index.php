@@ -26,6 +26,7 @@
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-brand" href="#">Sale!</a>
+                <a class="navbar-brand" href="#">Alle Categorieën</a>
         </div>
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>

@@ -7,6 +7,11 @@ body {
     left: -150px;
 }
 
+.dropdown-toggle{
+    position: relative;
+    left: -280px;
+}
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -22,6 +27,8 @@ body {
 
 .container-fluid img{
     position: relative;
+    left: -120px;
+
 }
 
 .card button {
