@@ -25,9 +25,11 @@ include "connection.php";
 
 
 
-// FUNCTIONS ----------->
 
+// FUNCTIONS ----------->
+$filterItems();
 $itemsToProductCards($conn);
+
 //$search($conn);
 
 

@@ -101,12 +101,9 @@ a.dropdown{
     width: 100%;
     background-color: #000000;
     color: #6ac1ff;
+    height: 20px;
 }
 
 .footer a {
     padding-right: 250px;
-    padding-left: 250;
 }
-
-
-
