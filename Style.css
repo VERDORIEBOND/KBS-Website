@@ -1,6 +1,12 @@
 body {
     padding-top: 65px;
 }
+
+.navbar-brand{
+    position: relative;
+    left: -150px;
+}
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -12,6 +18,11 @@ body {
 .price {
     color: grey;
     font-size: 22px;
+}
+
+.container-fluid img{
+    position: relative;
+    left: -180px;
 }
 
 .card button {
@@ -56,10 +67,6 @@ body {
         border-top:0 none;
     }
 }
-.nav .navbar .navbar-inverse .navbar-expand-lg .navbar-fixed-top
-{
-    height: 65px;
-}
 
 .search-btn{
     background-color: #0abde3;
@@ -84,7 +91,6 @@ body {
 a.dropdown{
     list-style-type: none;
 }
-
 
 .footer{
     z-index: 1;
