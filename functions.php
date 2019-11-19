@@ -17,8 +17,90 @@
 <body>
 
 <?php
-
 include "connection.php";
+
+
+$checkIfCategory = function ($connection,$navCategory)
+{
+    $onceTrue = false;
+    $sql = "SELECT StockGroupName FROM wideworldimporters.stockgroups";
+    $result = mysqli_query($connection,$sql);
+    while ($row = mysqli_fetch_assoc($result))
+{
+    if ($row['StockGroupName'] == $navCategory)
+    {
+        $onceTrue = true;
+    }
+    if($onceTrue == true)
+    {
+        return $onceTrue;
+    }
+}
+};
+$itemsCategory = function ($connection, $category)
+{
+    $i=0;
+    $completedItems = array();
+    $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
+    $result = mysqli_query($connection,$sql);
+    echo '<div class="container-fluid">';
+    echo '<div class="row">';
+    while ($row = mysqli_fetch_assoc($result))
+    {
+// Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
+        $productName = $row["stockitem"];
+        $numOfCols = 3;
+        $rowCount = 0;
+        $bootstrapColWidth = 12 / $numOfCols;
+        if (in_array($productName, $completedItems) == false)
+        {
+            // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
+
+            //echo $bootstrapColWidth;
+
+            ?>
+            <div class="col-md-<?php echo $bootstrapColWidth; ?>">
+                <div class="card">
+                    <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
+                        <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
+                        <h1><?php echo $productName ?></h1>
+                        <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
+                        <p><?php echo $row["MarketingComments"]; ?></p>
+                        <span>
+                    <p>
+                        <button>In winkelmandje</button>
+                    </p>
+                </span>
+                </div>
+            </div>
+            <?php
+            $rowCount++;
+            if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
+
+            array_push($completedItems,$productName);
+        }
+        $i ++;
+    }
+    echo '</div></div>';
+
+    mysqli_free_result($result);
+};
+//Haalt de naam op van een artikel en print hem
+
+/*
+$detailprinter = function ($connection) {
+    $numFromUrl = $_GET['productId'];
+    $sql= "SELECT StockItemID, StockItemName From stockitems WHERE StockItemID = '$numFromUrl'";
+    $result = mysqli_query($connection, $sql);
+    while($row = mysqli_fetch_array($result))   {
+        echo $row['StockItemName'];
+
+    }
+};
+*/
+
+
+
 
 $filterItems = function ()
 {
@@ -142,13 +224,12 @@ if (in_array($productName, $completedItems) == false)
 };
 //Haalt de naam op van een artikel en print hem
 
-$detailprinter = function ($connection) {
+$detailPrinter = function ($connection) {
     $numFromUrl = $_GET['productId'];
-    $sql= "SELECT StockItemID, StockItemName From stockitems WHERE StockItemID = '$numFromUrl'";
+    $sql= "SELECT StockItemID, StockItemName FROM stockitems WHERE StockItemID = '$numFromUrl'";
     $result = mysqli_query($connection, $sql);
     while($row = mysqli_fetch_array($result))   {
         echo $row['StockItemName'];
-
     }
 }
 

@@ -75,7 +75,7 @@ include "connection.php";
 include "functions.php";
 
 //Print de naam van het gekozen artikel
-$detailprinter($conn);
+//$detailprinter($conn);
 
 
 ?>

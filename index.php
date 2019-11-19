@@ -32,15 +32,15 @@
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Airline Novelties</a></li>
-                    <li><a href="#">Clothing</a></li>
-                    <li><a href="#">Computing Novelties</a></li>
-                    <li><a href="#">Furry Footwear</a></li>
-                    <li><a href="#">Mugs</a></li>
-                    <li><a href="#">Novelty Items</a></li>
-                    <li><a href="#">Packing Materials</a></li>
-                    <li><a href="#">T-Shirts</a></li>
-                    <li><a href="#">Toys</a></li>
+                    <li><a href="productPage.php?productGroup=Airline Novelties">Airline Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Clothing">Clothing</a></li>
+                    <li><a href="productPage.php?productGroup=Computing Novelties">Computing Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Furry Footwear">Furry Footwear</a></li>
+                    <li><a href="productPage.php?productGroup=Mugs">Mugs</a></li>
+                    <li><a href="productPage.php?productGroup=Novelty Items">Novelty Items</a></li>
+                    <li><a href="productPage.php?productGroup=Packing Materials">Packing Materials</a></li>
+                    <li><a href="productPage.php?productGroup=T-Shirts">T-Shirts</a></li>
+                    <li><a href="productPage.php?productGroup=Toys">Toys</a></li>
                 </ul>
                     </span>
         </ul>

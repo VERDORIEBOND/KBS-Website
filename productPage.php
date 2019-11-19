@@ -27,8 +27,17 @@ include "connection.php";
 
 
 // FUNCTIONS ----------->
-$filterItems();
-$itemsToProductCards($conn);
+//$filterItems();
+if($checkIfCategory($conn, $_GET['productGroup']))
+{
+    $itemsCategory($conn, $_GET['productGroup']);
+}
+else
+{
+    $itemsToProductCards($conn);
+}
+
+
 
 //$search($conn);
 
