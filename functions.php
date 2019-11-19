@@ -69,7 +69,7 @@ if (in_array($productName, $completedItems) == false)
         ?>
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
-                <a href="#">
+                <a href="ProductDetails.php">
                 <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
 
                 <h1><?php echo $productName ?></h1>
