@@ -121,9 +121,11 @@ if (in_array($productName, $completedItems) == false)
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
+                    <span>
                         <p>
                             <button>In winkelmandje</button>
                         </p>
+                    </span>
             </div>
         </div>
         <?php
@@ -137,9 +139,28 @@ if (in_array($productName, $completedItems) == false)
     echo '</div></div>';
 
     mysqli_free_result($result);
+};
+//Haalt de naam op van een artikel en print hem
+
+$detailprinter = function ($connection) {
+    $numFromUrl = $_GET['productId'];
+    $sql= "SELECT StockItemID, StockItemName From stockitems WHERE StockItemID = '$numFromUrl'";
+    $result = mysqli_query($connection, $sql);
+    while($row = mysqli_fetch_array($result))   {
+        echo $row['StockItemName'];
+
+    }
 }
 
+
+
+
+
+
+
+
 ?>
+
 
 </body>
 </html>
