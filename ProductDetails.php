@@ -15,6 +15,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <!-- Product CSS -->
+    <link rel="stylesheet" href="ProductDetails.css" type="text/css">
+
+
+
 </head>
 <body>
 
@@ -69,30 +74,8 @@
 include "connection.php";
 include "functions.php";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Print de naam van het gekozen artikel
+$detailprinter($conn);
 
 
 ?>

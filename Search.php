@@ -1,4 +1,5 @@
 <?php
+
 include "connection.php";
 
 $completedItems = array();
