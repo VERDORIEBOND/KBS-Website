@@ -30,7 +30,7 @@ $itemsToProductCards = function ($connection)
 {
     $i=0;
     $completedItems = array();
-    $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments FROM stockitems;");
+    $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, StockItemID FROM stockitems;");
     echo '<div class="container-fluid">';
     echo '<div class="row">';
     while ($row = mysqli_fetch_assoc($result))
@@ -50,14 +50,16 @@ if (in_array($productName, $completedItems) == false)
         ?>
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
-                <a href=<?php echo $productLink ?>>
+                <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                 <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
                 <h1><?php echo $productName ?></h1>
-                <p class="price"><?php echo $row["RecommendedRetailPrice"]; ?></p>
+                <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
-                <p>
-                    <button>In winkelmandje</button>
-                </p>
+                    <div class="join-button">
+                        <p>
+                            <button>In winkelmandje</button>
+                        </p>
+                    </div>
             </div>
         </div>
         <?php
