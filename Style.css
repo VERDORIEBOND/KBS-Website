@@ -32,9 +32,9 @@ body {
     font-size: 22px;
 }
 
-.container-fluid img{
+.container-fluid a img{
     position: relative;
-    left: -120px;
+    left: 120px;
 }
 .LogIn{
     position: absolute;

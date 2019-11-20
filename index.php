@@ -20,7 +20,7 @@
 
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
-        <a href="index.php" />
+        <a href="index.php" >
         <img src="images/WWI.png" alt="Logo" height="50"></a>
 
 
