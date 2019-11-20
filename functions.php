@@ -22,10 +22,10 @@ include "connection.php";
 
 $checkIfCategory = function ($connection,$navCategory)
 {
-    $onceTrue = false;
-    $sql = "SELECT StockGroupName FROM wideworldimporters.stockgroups";
+    $onceTrue = false;                                                          //this value will be returned once we have determined of the category exists in our database
+    $sql = "SELECT StockGroupName FROM wideworldimporters.stockgroups";         //We select all known category's from our database
     $result = mysqli_query($connection,$sql);
-    while ($row = mysqli_fetch_assoc($result))
+    while ($row = mysqli_fetch_assoc($result))                                  //For each result from the database we check if the given category matches with the existing category's
 {
     if ($row['StockGroupName'] == $navCategory)
     {
@@ -37,27 +37,23 @@ $checkIfCategory = function ($connection,$navCategory)
     }
 }
 };
-$itemsCategory = function ($connection, $category)
+$itemsCategory = function ($connection, $category)                              //With this function we display all items corresponding to a specific category
 {
-    $i=0;
-    $completedItems = array();
+    $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
     $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
     $result = mysqli_query($connection,$sql);
-    echo '<div class="container-fluid">';
+    echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
     echo '<div class="row">';
-    while ($row = mysqli_fetch_assoc($result))
+    while ($row = mysqli_fetch_assoc($result))                                  //For each result in our SQL query we will make a product card with the product details.
     {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
         $productName = $row["stockitem"];
-        $numOfCols = 3;
+        $numOfCols = 3;                                                         //The amount of rows we want the products to display in
         $rowCount = 0;
         $bootstrapColWidth = 12 / $numOfCols;
-        if (in_array($productName, $completedItems) == false)
+        if (in_array($productName, $completedItems) == false)                   //Check if we didnt yet make a product card for the product
         {
-            // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
-
-            //echo $bootstrapColWidth;
-
+                                                                                // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
             ?>
             <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                 <div class="card">
@@ -77,9 +73,8 @@ $itemsCategory = function ($connection, $category)
             $rowCount++;
             if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
 
-            array_push($completedItems,$productName);
+            array_push($completedItems,$productName);                      //Once we made a product card we add the product to the array with products we made so it wont be made again
         }
-        $i ++;
     }
     echo '</div></div>';
 
