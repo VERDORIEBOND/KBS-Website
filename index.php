@@ -45,7 +45,7 @@
                     </span>
         </ul>
         <div class="Search-Bar">
-            <form action="function%20zoeken.php.php" method="get">
+            <form action="new%20search%20functie.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
