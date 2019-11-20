@@ -125,3 +125,15 @@ a.dropdown{
 .footer a {
     padding-right: 250px;
 }
+div.card
+{
+    padding: 10px;
+    margin-bottom: 50px;
+    height: 600px;
+}
+div.card span p button
+{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
