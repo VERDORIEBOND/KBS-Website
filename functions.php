@@ -221,19 +221,19 @@ if (in_array($productName, $completedItems) == false)
 
 $detailPrinter = function ($connection) {
     $numFromUrl = $_GET['productId'];
-    $sql= "SELECT StockItemID, StockItemName FROM stockitems WHERE StockItemID = '$numFromUrl'";
+    $sql = "SELECT StockItemID, StockItemName FROM stockitems WHERE StockItemID = '$numFromUrl'";
     $result = mysqli_query($connection, $sql);
-    while($row = mysqli_fetch_array($result))   {
+    while ($row = mysqli_fetch_array($result)) {
         echo $row['StockItemName'];
     }
+};
+$prijsgever = function ($connection) {
+    $numFromUrl = $_GET['productId'];
+    $result = mysqli_query($connection,"SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID = '$numFromUrl'");
+    while ($row = mysqli_fetch_assoc($result)){
+        echo $row["RecommendedRetailPrice"] . " €";
+    }
 }
-
-
-
-
-
-
-
 
 ?>
 

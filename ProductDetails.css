@@ -1,13 +1,21 @@
 .Productname{
-    padding: 40px;
+    left: 250px;
+    position: relative;
     color: #496ebc;
     font-size: 250%;
+    top: 80px;
 }
-
+.Productfoto{
+    position: absolute;
+    width: 600px;
+    left: 250px;
+    top: 210px;
+}
 .Button {
-    width: 300px;
+    width: 500px;
+    padding: 5px 20px;
     background-color: #55acee;
-    border: none;
+    text-decoration: none;
     color: white;
     position: absolute;
     right: 400px;
@@ -15,7 +23,33 @@
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 8px;
+
 }
 .Button:hover{
-background-color: blue;
+background-color: #496ebc;
+}
+.Prijs{
+    position: absolute;
+    left: 1030px;
+    top: 200px;
+    font-size: 36px;
+    color: black;
+}
+.Button-twee{
+    width: 500px;
+    padding: 1px  20px;
+    background-color: orangered;
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    right: 400px;
+    top: 395px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.Button-twee:hover{
+    background-color: brown;
 }

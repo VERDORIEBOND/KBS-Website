@@ -22,7 +22,17 @@ include "index.php";
     echo $detailPrinter($conn);
     ?>
 </div>
+<div class="Productfoto">
+    <?php
+    echo '<img src="images/no-product-image.png" alt="ProductImage">';
+    ?>
+</div>
 
+<div class="Prijs">
+    <?php
+    echo $prijsgever($conn);
+    ?>
+</div>
 
 
 
@@ -30,8 +40,10 @@ include "index.php";
 
 <div class="Button">
     <h2>Winkelwagen</h2>
+</div>
 
-
+<div class="Button-twee">
+    <h3>Verlanglijstje</h3>
 </div>
 
 
