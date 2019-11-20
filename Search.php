@@ -1,7 +1,7 @@
 <?php
 
 include "connection.php";
-
+include "functions.php"
 $completedItems = array();
 $output="";
 
@@ -27,6 +27,8 @@ if(isset($_GET['search']) && $_GET['search'] !== '')
         }
     }
 }
+
+
 
     print("$output");
     mysqli_close($conn);
