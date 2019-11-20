@@ -11,7 +11,7 @@ body {
 .navbar-links-sale{
     color: red;
     position: relative;
-    right: 200px;
+    right: 8px;
     padding-right: 20px;
 }
 
@@ -32,10 +32,7 @@ body {
     font-size: 22px;
 }
 
-.container-fluid img{
-    position: relative;
-    left: -120px;
-}
+
 .LogIn{
     position: absolute;
     color:  #6ac1ff;
