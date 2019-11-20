@@ -17,7 +17,7 @@
 <body>
 
 <?php
-
+include "index.php";
 include "connection.php";
 
 $completedItems = array();
