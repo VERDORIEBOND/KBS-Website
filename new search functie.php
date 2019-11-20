@@ -50,7 +50,7 @@ if(isset($_GET['search']) && $_GET['search'] !== '')
                 ?>
                 <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                     <div class="card">
-                        <a href="ProductDetails.php?productId=<?php echo $row["stockitem"] ?>">
+                        <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                             <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
                             <h1><?php echo $name ?></h1>
                             <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
