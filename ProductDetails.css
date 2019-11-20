@@ -53,3 +53,23 @@ background-color: #496ebc;
 .Button-twee:hover{
     background-color: brown;
 }
+
+.Omschrijving{
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    right: 400px;
+    top: 470px;
+    font-size: 16px;
+    border: 1px solid #3b5998;
+    border-radius: 8px;
+
+
+}
+
+.Stock{
+    position: absolute;
+    left: 1030px;
+
+    top: 260px;
+}

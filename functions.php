@@ -233,7 +233,16 @@ $prijsgever = function ($connection) {
     while ($row = mysqli_fetch_assoc($result)){
         echo $row["RecommendedRetailPrice"] . " €";
     }
-}
+};
+
+$stockzoeker = function ($connection)   {
+    $numFromUrl = $_GET['productId'];
+    $query = "SELECT StockItemID, QuantityOnHand FROM stockitemholdings WHERE StockItemID = '$numFromUrl'";
+    $result2 = mysqli_query($connection, $query);
+    while ($row = mysqli_fetch_array($result2)) {
+        echo "stock = " . $row ['QuantityOnHand'];
+    }
+};
 
 ?>
 

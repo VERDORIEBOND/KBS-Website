@@ -34,9 +34,11 @@ include "index.php";
     ?>
 </div>
 
-
-
-
+<div class="Stock">
+    <?php
+    echo $stockzoeker($conn);
+    ?>
+</div>
 
 <div class="Button">
     <h2>Winkelwagen</h2>
@@ -46,6 +48,9 @@ include "index.php";
     <h3>Verlanglijstje</h3>
 </div>
 
+<div class="Omschrijving">
+    <p>Omschrijving</p>
+</div>
 
 
 </body>
