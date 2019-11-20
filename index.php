@@ -29,7 +29,7 @@
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-links-sale" href="#">Sale!</a>
-                <a class="navbar-links-categorieen" href="#">Alle Categorieën</a>
+                <a class="navbar-links-categorieen" href="productPage.php">Alle Categorieën</a>
         </div>
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
