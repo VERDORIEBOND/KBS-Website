@@ -40,7 +40,7 @@ $checkIfCategory = function ($connection,$navCategory)
 $itemsCategory = function ($connection, $category)                              //With this function we display all items corresponding to a specific category
 {
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
-    $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
+    $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
     $result = mysqli_query($connection,$sql);
     echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
     echo '<div class="row">';
