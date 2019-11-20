@@ -70,15 +70,30 @@
     </ul>
 </div>
 
+<div class ="Productname">
 <?php
 include "connection.php";
 include "functions.php";
 
 //Print de naam van het gekozen artikel
+
 //$detailprinter($conn);
 
 
+$detailPrinter($conn);
+
+
+
+
+
 ?>
+</div>
+<div class="Button">
+    <h2>Winkelwagen</h2>
+
+
+</div>
+
 
 
 </body>
