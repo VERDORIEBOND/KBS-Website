@@ -2,6 +2,11 @@ body {
     padding-top: 65px;
 }
 
+.navbar-logo{
+    position: relative;
+    right: 150px;
+}
+
 .navbar-links-categorieen{
     color: #6ac1ff;
     position: relative;
@@ -32,10 +37,7 @@ body {
     font-size: 22px;
 }
 
-.container-fluid a img{
-    position: relative;
-    left: 120px;
-}
+
 .LogIn{
     position: absolute;
     color:  #6ac1ff;
