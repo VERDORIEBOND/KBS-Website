@@ -142,3 +142,16 @@ div.card span p button
     bottom: 0px;
     left: 0px;
 }
+div.card a h1
+{
+    color: darkslategrey;
+}
+div.card a p.price
+{
+    font-size: larger;
+}
+div.card a p
+{
+    color: darkslategrey;
+    font-size: medium;
+}
