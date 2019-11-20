@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
+    <link rel="stylesheet" href="ssearchCSS.css">
 </head>
 <body>
 
@@ -27,12 +28,15 @@ if(isset($_GET['search']) && $_GET['search'] !== '')
 {
     $search = $_GET['search'];
     $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'");
-    $c = mysqli_num_rows($query);
+    $numberOfrows = mysqli_num_rows($query);
+
     echo '<div class="container-fluid">';
     echo '<div class="row">';
-    if ($c == 0)
+    if ($numberOfrows == 0)
     {
-        $output = 'Geen resultaat voor <b>"' . $search . '"</b>';
+        $output = "<h1>Geen resultaat voor <b>  '$search'</b></h1>";
+        print($output);
+
     }
     else {
         while ($row = mysqli_fetch_array($query))

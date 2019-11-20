@@ -52,6 +52,7 @@
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
                 </div>
+
             </form>
             <div class="LogIn">
                 <span><a href="#"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></span><br>
