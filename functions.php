@@ -227,20 +227,21 @@ $detailPrinter = function ($connection) {
         echo $row['StockItemName'];
     }
 };
+//deze functie kijkt wat een artikel kost en print de prijs uit de database
 $prijsgever = function ($connection) {
     $numFromUrl = $_GET['productId'];
     $result = mysqli_query($connection,"SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID = '$numFromUrl'");
     while ($row = mysqli_fetch_assoc($result)){
-        echo $row["RecommendedRetailPrice"] . " €";
+        echo "€". $row["RecommendedRetailPrice"];
     }
 };
-
+//deze funtie kijkt hoeveel voorraad er bij het gekozen product horen
 $stockzoeker = function ($connection)   {
     $numFromUrl = $_GET['productId'];
     $query = "SELECT StockItemID, QuantityOnHand FROM stockitemholdings WHERE StockItemID = '$numFromUrl'";
     $result2 = mysqli_query($connection, $query);
     while ($row = mysqli_fetch_array($result2)) {
-        echo "stock = " . $row ['QuantityOnHand'];
+        echo "Voorraad = " . $row ['QuantityOnHand'];
     }
 };
 
