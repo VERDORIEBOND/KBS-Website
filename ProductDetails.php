@@ -45,7 +45,7 @@ include "index.php";
     echo $stockzoeker($conn);
     ?>
 </div>
-<div class="productTemp">
+<div class= "ProductTemp">
     <?php
     //print de voorraad
     echo $tempShower($conn);
