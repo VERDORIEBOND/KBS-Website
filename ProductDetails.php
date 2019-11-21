@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="ProductDetails.css">
 </head>
 
+
 <body>
 
 <?php
@@ -16,6 +17,7 @@ include "index.php";
 
 
 ?>
+
 <div class="Productname">
     <?php
     //$detailprinter($conn);
@@ -55,6 +57,7 @@ include "index.php";
 <div class="Omschrijving">
     <p>Omschrijving</p>
 </div>
+
 
 
 </body>
