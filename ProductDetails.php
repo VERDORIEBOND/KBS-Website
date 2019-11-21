@@ -45,6 +45,12 @@ include "index.php";
     echo $stockzoeker($conn);
     ?>
 </div>
+<div class="productTemp">
+    <?php
+    //print de voorraad
+    echo $tempShower($conn);
+    ?>
+</div>
 <?php //dit zijn de knoppen en de omschrijving ?>
 <div class="Button">
     <h2>Winkelwagen</h2>
