@@ -244,6 +244,14 @@ $stockzoeker = function ($connection)   {
         echo "Voorraad = " . $row ['QuantityOnHand'];
     }
 };
+$tempShower = function ($connection)   {
+    $numFromUrl = $_GET['productId'];
+    $query = "SELECT c.Temperature, s.StockItemID FROM coldroomtemperatures c JOIN stockitems s on c.ColdRoomSensorNumber = s.IsChillerStock where s.StockItemID = '$numFromUrl' AND s.IsChillerStock = 1;";
+    $result2 = mysqli_query($connection, $query);
+    while ($row = mysqli_fetch_array($result2)) {
+        echo "Temperatuur Koeling = " . $row ['Temperature'];
+    }
+};
 
 ?>
 
