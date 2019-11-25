@@ -55,7 +55,7 @@
 
             </form>
             <div class="LogIn">
-                <span><a href="#"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></span><br>
+                <span><a href="Register.php"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></span><br>
                 <span><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></span>
             </div
         </div>
