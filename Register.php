@@ -24,58 +24,125 @@
 include "index.php";
 include "functions.php";
 include "connection.php";
+error_reporting(0);
 
+if(isset($_POST['submit'])){
 
+    $email = $password = $confirm_password = $firstname = $lastname = $adres = $postal = $city = $phone = "";
+    $email_err = $password_err = $confirm_password_err = $firstname_err = $lastname_err = $postal_err = $city_err = $phone_err = "";
+
+    if(empty(trim($_POST['email']))){
+        $email_err="Voer een emailadres in";
+    } else{
+        $email = $_POST['email'];
+    }if(empty(trim($_POST['password']))){
+        $password_err="Voer een wachtwoord in";
+    } else{
+        if(trim($_POST['password']) != trim($_POST['confirm_password'])){
+            $password_err="De wachtwoorden komen niet over een";
+        } else{
+            if(strlen(trim($_POST['password'])) <= 6){
+                $password_err = "Het wachtwoord moet minimaal 7 tekens lang zijn";
+            } else{
+                $password = trim($_POST['password']);
+            }
+        }
+    }if(empty(trim($_POST['confirm_password']))){
+        $confirm_password_err="Herhaal het wachtwoord";
+    } else{
+        if(trim($_POST['password']) != trim($_POST['confirm_password'])){
+            $confirm_password_err="De wachtwoorden komen niet over een";
+        }
+    }if(empty(trim($_POST['first_name']))){
+        $firstname_err="Voer een voornaam in";
+    } else{
+        if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['first_name']))){
+            $firstname_err="De voornaam mag alleen letters bevatten m.u.v. ' en -";
+        } else{
+            $firstname = trim($_POST['first_name']);
+        }
+    }if(empty(trim($_POST['last_name']))){
+        $lastname_err="Voer een achternaam in";
+    } else{
+        if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['last_name']))){
+            $lastname_err="De achternaam mag alleen letters bevatten m.u.v. ' en -";
+        } else{
+            $lastname = trim($_POST['last_name']);
+        }
+    }if(empty(trim($_POST['adres']))){
+        $adres_err="Voer een adres in";
+    } else{
+        if(!ctype_alpha(str_replace(array(),'',$_POST['adres'])))
+        $adres = trim($_POST['adres']);
+    }if(empty(trim($_POST['postal_code']))){
+        $postal_err="Voer een postcode in";
+    } else{
+        if(PostcodeCheck($_POST['postal_code']) == false){
+            $postal_err="Ongeldige postcode";
+        } else{
+            $postal = PostcodeCheck($_POST['postal_code']);
+        }
+    }if(empty(trim($_POST['city']))){
+        $city_err="Voer een plaatsnaam in";
+    } else{
+        $city = trim($_POST['city']);
+    }if(trim(!ctype_digit($_POST['phone']))){
+        $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
+    } else{
+        $phone = trim($_POST['phone']);
+    }
+}
 ?>
 <div class="wrapper">
     <h2>Registreren</h2>
     <form action="" method="post">
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
             <label>Emailadres</label>
-            <input type="text" name="email" placeholder="Emailadres" class="form-control" value="">
-            <span class="help-block"></span>
+            <input type="email" name="email" placeholder="Emailadres" class="form-control" value="<?php echo $email; ?>">
+            <span class="help-block"><?php echo $email_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label>Wachtwoord</label>
             <input type="password" name="password" placeholder="Wachtwoord" class="form-control" value="">
-            <span class="help-block"></span>
+            <span class="help-block"><?php echo $password_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
             <label>Herhaal Wachtwoord</label>
             <input type="password" name="confirm_password" placeholder="Herhaal wachtwoord" class="form-control" value="">
-            <span class="help-block"></span>
+            <span class="help-block"><?php echo $confirm_password_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
             <label>Voornaam</label>
-            <input type="text" name="first_name" placeholder="Voornaam" class="form-control">
-            <span class="help-block"></span>
+            <input type="text" name="first_name" placeholder="Voornaam" class="form-control" value="<?php echo $firstname; ?>">
+            <span class="help-block"><?php echo $firstname_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
             <label>Achternaam</label>
-            <input type="text" name="last_name" placeholder="Achternaam" class="form-control">
+            <input type="text" name="last_name" placeholder="Achternaam" class="form-control" value="<?php echo $lastname; ?>">
+            <span class="help-block"><?php echo $lastname_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($adres_err)) ? 'has-error' : ''; ?>">
             <label>Adres</label>
-            <input type="text" name="adres" placeholder="Adres" class="form-control">
-            <span class="help-block"></span>
+            <input type="text" name="adres" placeholder="Adres" class="form-control" value="<?php echo $adres; ?>">
+            <span class="help-block"><?php echo $adres_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($postal_err)) ? 'has-error' : ''; ?>">
             <label>Postcode</label>
-            <input type="text" name="postal_code" placeholder="Postcode" class="form-control">
-            <span class="help-block"></span>
+            <input type="text" name="postal_code" placeholder="Postcode" class="form-control" value="<?php echo $postal; ?>">
+            <span class="help-block"><?php echo $postal_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($city_err)) ? 'has-error' : ''; ?>">
             <label>Stad</label>
-            <input type="text" name="city" placeholder="Stad" class="form-control">
-            <span class="help-block"></span>
+            <input type="text" name="city" placeholder="Stad" class="form-control" value="<?php echo $city; ?>">
+            <span class="help-block"><?php echo $city_err; ?></span>
         </div>
-        <div class="form-group">
+        <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
             <label>Telefoonnummer</label>
-            <input type="text" name="telefoon" placeholder="Telefoonnummer" class="form-control">
-            <span class="help-block"></span>
+            <input type="text" name="phone" placeholder="Telefoonnummer" class="form-control" value="<?php echo $phone; ?>">
+            <span class="help-block"><?php echo $phone_err; ?></span>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Registreren">
+            <input type="submit" class="btn btn-primary" value="Registreren" name="submit">
             <input type="reset" class="btn btn-default" value="Reset">
         </div>
         <p>Heb je al een account? <a href="#">Login</a>.</p>
