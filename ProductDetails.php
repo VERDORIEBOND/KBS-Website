@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+
     <title>Wide World Importers</title>
     <link rel="stylesheet" type="text/css" href="ProductDetails.css">
 </head>
@@ -63,7 +64,11 @@ include "index.php";
 <div class="Omschrijving">
     <p>Omschrijving</p>
 </div>
-
+<div class="TempShower"
+    <?php
+     echo $tempShower($conn);
+    ?>
+</div>
 
 
 </body>

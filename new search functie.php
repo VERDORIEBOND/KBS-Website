@@ -20,36 +20,40 @@
 <?php
 include "index.php";
 include "connection.php";
-// Define empty variables
-$completedItems = array();
 
-if(isset($_GET['search']) && $_GET['search'] !== '') //Check if search bar isn't empty
+$completedItems = array();
+$output="";
+
+if(isset($_GET['search']) && $_GET['search'] !== '')//if the search button clicked and the search button must not equal emty value
 {
-    $search = $_GET['search'];  //Retrieve search term from search bar
-    $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'"); //Search in database form the search term either by name or ID
-    $numberOfrows = mysqli_num_rows($query); //Check the amount of results for the search term
+    $search = trim($_GET['search']);
+    $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'");
+    //here above will show the informarion from the DataBase using the database in the SQL
+    $numberOfrows = mysqli_num_rows($query);// counting the result
 
     echo '<div class="container-fluid">';
     echo '<div class="row">';
-    if ($numberOfrows == 0) //Check if there are any results
+    if ($numberOfrows == 0)//if the counting result is zero then it will print the next phrase
     {
-        $output = "<h1>Geen resultaat voor <b>  '$search'</b></h1>"; // Shows that there are no matches for the search term
+        $output = "<h1>Geen resultaat voor <b>  '$search'</b></h1>";
         print($output);
 
     }
-    else {
-        while ($row = mysqli_fetch_array($query))
+    else { //if the counting does not equal to zero
+        while ($row = mysqli_fetch_array($query)) //when the a result is getten then he we will continue to find other results using the "WHILE" loop
         {
-            //Defining variables per result
-            $numOfCols = 3;
-            $rowCount = 0;
-            $bootstrapColWidth = 12 / $numOfCols;
-            $name = $row['stockitem'];
-            $id = $row['StockItemID'];
-            $prijs = $row['RecommendedRetailPrice'];
-            if (in_array($name, $completedItems) == false) { //Check if item hasn't already been displayed
 
-                                                             //Creating Product card
+            $numOfCols = 3; //number of columens will show just as three columens
+            $rowCount = 0;// here will counting the columens from the product
+            $bootstrapColWidth = 12 / $numOfCols;
+            $name = $row['stockitem'];//the name of the product
+            $id = $row['StockItemID'];// ID or the artikel number
+            $prijs = $row['RecommendedRetailPrice'];//getting the price as a row from the database
+            if (in_array($name, $completedItems) == false) { //if the name is in the array $completedItems then he will not added it
+
+
+
+
                 ?>
                 <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                     <div class="card">
@@ -67,20 +71,25 @@ if(isset($_GET['search']) && $_GET['search'] !== '') //Check if search bar isn't
                 </div>
                 <?php
             }
-            $rowCount++;
-            if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-            array_push($completedItems,$name); //Add the item to list of already displayed items
+            $rowCount++;//here will continues to count
+            if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';//if the counting for the row and the moduls of the columens number is equal 0 then print
+            array_push($completedItems,$name);// here will he get the name and the array (the corresponding information that he find about that produc)
+            $output .= "$name<br>";
         }
 
     }
     echo ('</div></div>');
-    mysqli_free_result($query); //empty the query
+    mysqli_free_result($query);//printing the result
 }
 
 
 
-mysqli_close($conn); //Close connection with database
+mysqli_close($conn);
 ?>
+
+
+
+
 
 </body>
 </html>
