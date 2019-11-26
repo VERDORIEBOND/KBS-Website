@@ -21,7 +21,7 @@ include "index.php";
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="E-mail adress">
                             <span class="input-group-btn">
-                                    <button class="btn" type="submit">Nu Inschrijven</button>
+                                    <input type="submit" name="button1">Nu Inschrijven</button>
                                 </span>
                         </div>
                     </form>
@@ -32,7 +32,15 @@ include "index.php";
 </section>
 <?php
 
+if(isset($_GET['button1']))
+{
 
+    $email = $_GET['email'];
+    $subject = "Je bent ingeschreven voor de nieuwsbrief!";
+    $message = "Je bent nu ingeschreven voor de nieuwsbrief, gefeliciteerd!";
+    mail($email,$subject,$message);
+    echo $email;
+}
 ?>
 
 
