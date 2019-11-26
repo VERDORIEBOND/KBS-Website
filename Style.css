@@ -155,4 +155,33 @@ div.card a p
     color: darkslategrey;
     font-size: medium;
 }
-.ge
+.newsletter {
+    padding: 40px 0;
+    background: #f2f2f2;
+}
+
+.newsletter .content {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2; }
+.newsletter .content h4 {
+    color: #243c4f;
+    margin-bottom: 30px; }
+.newsletter .content .form-control {
+    height: 50px;
+    border-color: #ffffff;
+    border-radius:0;
+}
+.newsletter .content.form-control:focus {
+    box-shadow: none;
+    border: 2px solid #243c4f;
+}
+.newsletter .content .btn {
+    min-height: 50px;
+    border-radius:0;
+    background: #222222;
+    color: #fff;
+    font-weight:600;
+}
