@@ -178,7 +178,7 @@ div.card a p
     box-shadow: none;
     border: 2px solid #243c4f;
 }
-.newsletter .content .btn {
+.newsletter .content .input-group {
     min-height: 50px;
     border-radius:0;
     background: #222222;
