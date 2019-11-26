@@ -20,37 +20,36 @@
 <?php
 include "index.php";
 include "connection.php";
-
+// Define empty variables
 $completedItems = array();
-$output="";
 
-if(isset($_GET['search']) && $_GET['search'] !== '')
+if(isset($_GET['search']) && $_GET['search'] !== '') //Check if search bar isn't empty
 {
-    $search = $_GET['search'];
-    $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'");
-    $numberOfrows = mysqli_num_rows($query);
+    $search = $_GET['search'];  //Retrieve search term from search bar
+    $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'"); //Search in database form the search term either by name or ID
+    $numberOfrows = mysqli_num_rows($query); //Check the amount of results for the search term
 
     echo '<div class="container-fluid">';
     echo '<div class="row">';
-    if ($numberOfrows == 0)
+    if ($numberOfrows == 0) //Check if there are any results
     {
-        $output = "<h1>Geen resultaat voor <b>  '$search'</b></h1>";
+        $output = "<h1>Geen resultaat voor <b>  '$search'</b></h1>"; // Shows that there are no matches for the search term
         print($output);
 
     }
     else {
         while ($row = mysqli_fetch_array($query))
         {
-
+            //Defining variables per result
             $numOfCols = 3;
             $rowCount = 0;
             $bootstrapColWidth = 12 / $numOfCols;
             $name = $row['stockitem'];
             $id = $row['StockItemID'];
             $prijs = $row['RecommendedRetailPrice'];
-            if (in_array($name, $completedItems) == false) {
+            if (in_array($name, $completedItems) == false) { //Check if item hasn't already been displayed
 
-
+                                                             //Creating Product card
                 ?>
                 <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                     <div class="card">
@@ -70,23 +69,18 @@ if(isset($_GET['search']) && $_GET['search'] !== '')
             }
             $rowCount++;
             if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-            array_push($completedItems,$name);
-            $output .= "$name<br>";
+            array_push($completedItems,$name); //Add the item to list of already displayed items
         }
 
     }
     echo ('</div></div>');
-    mysqli_free_result($query);
+    mysqli_free_result($query); //empty the query
 }
 
 
 
-mysqli_close($conn);
+mysqli_close($conn); //Close connection with database
 ?>
-
-
-
-
 
 </body>
 </html>
