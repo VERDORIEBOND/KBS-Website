@@ -42,7 +42,7 @@ include "index.php";
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="E-mail adress" name="emailin">
                             <span class="input-group-btn">
-                                    <input type="submit" name="button1">Nu Inschrijven</button>
+                                    <input type="submit" name="button1" value="Nu Inschrijven!">Nu Inschrijven</button>
                                 </span>
                         </div>
                     </form>
@@ -91,7 +91,7 @@ try {
     $mail->send();
     echo 'Message has been sent';
 } catch (Exception $e) {
-    //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 }
 ?>

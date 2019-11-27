@@ -179,9 +179,15 @@ div.card a p
     border: 2px solid #243c4f;
 }
 .newsletter .content .input-group {
+    font-size: large;
     min-height: 50px;
     border-radius:0;
     background: #222222;
     color: #fff;
     font-weight:600;
+}
+button, html input[type="button"], input[type="reset"], input[type="submit"]
+{
+    font-size: large;
+    background: transparent;
 }
