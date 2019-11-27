@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<div lang="en">
 <head>
 
     <title>Wide World Importers</title>
@@ -7,12 +7,13 @@
 </head>
 
 
-<body>
+
 
 <?php
 include "connection.php";
 include "functions.php";
 include "index.php";
+
 
 //Print de naam van het gekozen artikel
 
@@ -56,10 +57,15 @@ include "index.php";
 <div class="Button">
     <h2>Winkelwagen</h2>
 </div>
+    <div class="verlanglijstje-btn">
+        <form action="winkelmandje.php" method="get">
+            <input type="submit" name="V-btn" value="Verlanglijstje" href="#">
 
-<div class="Button-twee">
-    <h3>Verlanglijstje</h3>
-</div>
+            <h3>Verlanglijstje</h3>
+        </form>
+    </div>
+
+
 
 <div class="Omschrijving">
     <p>Omschrijving</p>
