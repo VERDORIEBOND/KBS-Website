@@ -34,6 +34,12 @@ if(isset($_POST['submit'])){
     if(empty(trim($_POST['email']))){
         $email_err="Voer een emailadres in";
     } else{
+        $sqlemail = $_POST['email'];
+        $sql = "SELECT email FROM CustomerPrivate WHERE email = $sqlemail";
+        $check = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($check) > 0){
+            $email_err=("Dit emailadres is reeds in gebruik, heeft u al een account:". ?> <a href="#">Login</a> <?php);
+        }
         $email = $_POST['email'];
     }if(empty(trim($_POST['password']))){
         $password_err="Voer een wachtwoord in";
@@ -90,6 +96,9 @@ if(isset($_POST['submit'])){
         $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
     } else{
         $phone = trim($_POST['phone']);
+    }if(isset($email, $password, $firstname, $lastname, $adres, $postal, $city) && empty($phone_err)){
+        $sql1 = "INSERT INTO ConsumerPrivate (email, password, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
+
     }
 }
 ?>
