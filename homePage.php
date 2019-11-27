@@ -19,7 +19,7 @@ include "index.php";
                         <h2>SCHRIJF JE IN VOOR DE NIEUWSLETTER</h2>
                         <h4>En mis nooit meer aanbiedingen en coupons!</h4>
                         <div class="input-group">
-                            <input type="email" class="form-control" placeholder="E-mail adress">
+                            <input type="text" class="form-control" placeholder="E-mail adress" name="emailin">
                             <span class="input-group-btn">
                                     <input type="submit" name="button1">Nu Inschrijven</button>
                                 </span>
@@ -32,14 +32,20 @@ include "index.php";
 </section>
 <?php
 
+
+ini_set('SMTP', 'smtp.gmail.com');
+ini_set('smtp_port', '587');
 if(isset($_GET['button1']))
 {
-
-    $email = $_GET['email'];
+    $email = $_GET['emailin'];
     $subject = "Je bent ingeschreven voor de nieuwsbrief!";
     $message = "Je bent nu ingeschreven voor de nieuwsbrief, gefeliciteerd!";
-    mail($email,$subject,$message);
-    echo $email;
+    $headers = "From: sender\'s email";
+    if (mail($email, $subject, $message,$headers)) {
+        echo "Email successfully sent to $email...";
+    } else {
+        echo "Email sending failed...";
+    }
 }
 ?>
 

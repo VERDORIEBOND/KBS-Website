@@ -60,7 +60,6 @@ include "index.php";
     <div class="verlanglijstje-btn">
         <form action="winkelmandje.php" method="get">
             <input type="submit" name="V-btn" value="Verlanglijstje" href="#">
-
             <h3>Verlanglijstje</h3>
         </form>
     </div>
