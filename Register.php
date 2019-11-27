@@ -39,8 +39,9 @@ if(isset($_POST['submit'])){
         $check = mysqli_query($conn, $sql);
         if(mysqli_num_rows($check) > 0){
             $email_err=("Dit emailadres is reeds in gebruik, heeft u al een account:". ?> <a href="#">Login</a> <?php);
+        } else {
+            $email = $_POST['email'];
         }
-        $email = $_POST['email'];
     }if(empty(trim($_POST['password']))){
         $password_err="Voer een wachtwoord in";
     } else{
