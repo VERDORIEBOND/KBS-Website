@@ -328,7 +328,7 @@ $signupEmail = "<!doctype html>
                                 <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">
                                   <tbody>
                                     <tr>
-                                      <td> <a href=\"localhost/homePage.php\" target=\"_blank\">Naar de site</a> </td>
+                                      <td> <a href=\"https://www.youtube.com/watch?v=dQw4w9WgXcQ\" target=\"_blank\">Naar de site</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
