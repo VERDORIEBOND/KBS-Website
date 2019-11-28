@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
         $sql = "SELECT email FROM CustomerPrivate WHERE email = $sqlemail";
         $check = mysqli_query($conn, $sql);
         if(mysqli_num_rows($check) > 0){
-            $email_err="Dit emailadres is reeds in gebruik, heeft u al een account: <a href='#'>Login</a>";
+            $email_err="Dit emailadres is reeds in gebruik, heeft u al een account?: <a href='#'>Login</a>";
         } else {
             $email = $_POST['email'];
         }
@@ -99,7 +99,7 @@ if(isset($_POST['submit'])){
         $phone = trim($_POST['phone']);
     }if(isset($email, $password, $firstname, $lastname, $adres, $postal, $city) && empty($phone_err)){
         $sql1 = "INSERT INTO ConsumerPrivate (email, password, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
-
+        echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
     }
 }
 ?>
