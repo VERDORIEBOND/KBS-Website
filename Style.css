@@ -41,10 +41,11 @@ body {
 
 .LogIn{
     position: absolute;
-    color:  #6ac1ff;
-    right: 30px;
-    top:10px;
-    vertical-align: middle;
+    color: #6ac1ff;
+    right: 2%;
+    top: 27%;
+    font-size: 150%;
+
 }
 
 
