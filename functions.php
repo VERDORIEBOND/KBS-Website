@@ -37,7 +37,7 @@ $checkIfCategory = function ($connection,$navCategory)
     }
 }
 };
-$itemsCategory = function ($connection, $category)                              //With this function we display all items corresponding to a specific category
+$itemsCategory = function ($connection, $category,$imgDirectory)                              //With this function we display all items corresponding to a specific category
 {
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
     $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
@@ -58,7 +58,7 @@ $itemsCategory = function ($connection, $category)                              
             <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                 <div class="card">
                     <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
-                        <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
+                        <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
                         <h1><?php echo $productName ?></h1>
                         <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
                         <p><?php echo $row["MarketingComments"]; ?></p>
@@ -174,9 +174,12 @@ $itemsToProductCards = function ($connection)
 {
     $i=0;
     $completedItems = array();
-    $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, StockItemID FROM stockitems;");
+    $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID;");
     echo '<div class="container-fluid">';
     echo '<div class="row">';
+
+
+
     while ($row = mysqli_fetch_assoc($result))
 {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
@@ -184,6 +187,48 @@ $productName = $row["stockitem"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
+
+        if($row['StockGroupName'] == 'Airline Novelties')
+        {
+            $imgDirectory = "images/categories/Airline%20Novelties.png";
+        }
+        if($row['StockGroupName'] == 'Clothing')
+        {
+            $imgDirectory = "images/categories/Clothing.png";
+        }
+        if($row['StockGroupName'] == 'Computing Novelties')
+        {
+            $imgDirectory = "images/categories/Computer%20Novelties.png";
+        }
+        if($row['StockGroupName'] == 'Furry Footwear')
+        {
+            $imgDirectory = "images/categories/Furry%20Footwear.png";
+        }
+        if($row['StockGroupName'] == 'Mugs')
+        {
+            $imgDirectory = "images/categories/Mugs.png";
+        }
+        if($row['StockGroupName'] == 'Novelty Items')
+        {
+            $imgDirectory = "images/categories/Novelty%20Items.png";
+        }
+        if($row['StockGroupName'] == 'Packaging Materials')
+        {
+            $imgDirectory = "images/categories/Packing%20Materials.png";
+        }
+        if($row['StockGroupName'] == 'T-Shirts')
+        {
+            $imgDirectory = "images/categories/T-Shirts.png";
+        }
+        if($row['StockGroupName'] == 'Toys')
+        {
+            $imgDirectory = "images/categories/Toys.png";
+        }
+        if($row['StockGroupName'] == 'USB Novelties')
+        {
+            $imgDirectory = "images/categories/USB%20Novelties.png";
+        }
+
 if (in_array($productName, $completedItems) == false)
 {
     // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
@@ -194,7 +239,7 @@ if (in_array($productName, $completedItems) == false)
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
                 <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
-                <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
+                <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>

@@ -26,12 +26,11 @@ include "connection.php";
 
 
 
-
 // FUNCTIONS ----------->
 //$filterItems();
 if($checkIfCategory($conn, $_GET['productGroup']))
 {
-    $itemsCategory($conn, $_GET['productGroup']);
+    $itemsCategory($conn, $_GET['productGroup'], $imgCategory($_GET['productGroup']) );
 }
 else
 {
