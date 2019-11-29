@@ -263,6 +263,51 @@ function PostcodeCheck($postcode)
         return false;
     }
 }
+
+$imgCategory = function ($category)
+{
+    if($category == 'Airline Novelties')
+    {
+        return "images/categories/Airline%20Novelties.png";
+    }
+    if($category == 'Clothing')
+    {
+        return "images/categories/Clothing.png";
+    }
+    if($category == 'Computing Novelties')
+    {
+        return "images/categories/Computer%20Novelties.png";
+    }
+    if($category == 'Furry Footwear')
+    {
+        return "images/categories/Furry%20Footwear.png";
+    }
+    if($category == 'Mugs')
+    {
+        return "images/categories/Mugs.png";
+    }
+    if($category == 'Novelty Items')
+    {
+        return "images/categories/Novelty%20Items.png";
+    }
+    if($category == 'Packaging Materials')
+    {
+        return "images/categories/Packing%20Materials.png";
+    }
+    if($category == 'T-Shirts')
+    {
+        return "images/categories/T-Shirts.png";
+    }
+    if($category == 'Toys')
+    {
+        return "images/categories/Toys.png";
+    }
+    if($category == 'USB Novelties')
+    {
+        return "images/categories/USB%20Novelties.png";
+    }
+}
+
 ?>
 
 

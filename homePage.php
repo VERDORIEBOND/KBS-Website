@@ -1,10 +1,20 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
 
+<link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <?php
 include 'HTML Emails.php';
+include 'connection.php';
+include 'index.php';
+include 'functions.php';
 
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
@@ -20,7 +30,7 @@ $mail = new PHPMailer(true);
 
 ?>
 <!--Carousel Wrapper-->
-<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel" style="width: 1000px; height:600px; margin-left: auto; margin-right: auto; margin-bottom: 20px">
+<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel" style="width: 1000px; height:600px; margin-left: auto; margin-right: auto; margin-bottom: 20px; margin-top: 20px">
     <!--Indicators-->
     <ol class="carousel-indicators">
         <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
@@ -38,7 +48,7 @@ $mail = new PHPMailer(true);
             </div>
             <div class="carousel-caption">
                 <h3 class="h3-responsive">Light mask</h3>
-                <p>First text</p>
+                <p>Furry Footwear</p>
             </div>
         </div>
         <div class="carousel-item">
@@ -50,7 +60,7 @@ $mail = new PHPMailer(true);
             </div>
             <div class="carousel-caption">
                 <h3 class="h3-responsive">Strong mask</h3>
-                <p>Secondary text</p>
+                <p>Clothing</p>
             </div>
         </div>
         <div class="carousel-item">
@@ -62,7 +72,7 @@ $mail = new PHPMailer(true);
             </div>
             <div class="carousel-caption">
                 <h3 class="h3-responsive">Slight mask</h3>
-                <p>Third text</p>
+                <p>Toys</p>
             </div>
         </div>
     </div>
@@ -83,17 +93,14 @@ $mail = new PHPMailer(true);
 
 
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 
 <div class="container">
     <div class="row">
         <div class="row">
             <div class="col-md-9">
                 <h3>
-                    Carousel Product Cart Slider</h3>
+                    Hot Items</h3>
             </div>
             <div class="col-md-3">
                 <!-- Controls -->
@@ -109,18 +116,23 @@ $mail = new PHPMailer(true);
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
+                        <?php
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
                         <div class="col-sm-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                Sample Product</h5>
+                                                <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                $199.99</h5>
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -132,25 +144,30 @@ $mail = new PHPMailer(true);
                                         <p class="btn-add">
                                             <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <?php
+                        }
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
                         <div class="col-sm-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                Product Example</h5>
+                                                <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                $249.99</h5>
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                         </div>
@@ -159,55 +176,30 @@ $mail = new PHPMailer(true);
                                         <p class="btn-add">
                                             <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            <?php
+                        }
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
                         <div class="col-sm-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                Next Sample Product</h5>
+                                                <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                $149.99</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                        <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                Sample Product</h5>
-                                            <h5 class="price-text-color">
-                                                $199.99</h5>
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -219,7 +211,42 @@ $mail = new PHPMailer(true);
                                         <p class="btn-add">
                                             <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <?php
+                        }
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
+                        <div class="col-sm-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-md-6">
+                                            <h5>
+                                                <?php echo $row['stockitem'] ?></h5>
+                                            <h5 class="price-text-color">
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                        </div>
+                                        <div class="rating hidden-sm col-md-6">
+                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div>
@@ -228,20 +255,25 @@ $mail = new PHPMailer(true);
                         </div>
                     </div>
                 </div>
+                <?php
+                }
+                $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                while ($row = mysqli_fetch_assoc($result))
+                {
+                ?>
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                Product with Variants</h5>
+                                                <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                $199.99</h5>
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -253,25 +285,30 @@ $mail = new PHPMailer(true);
                                         <p class="btn-add">
                                             <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <?php
+                        }
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
                         <div class="col-sm-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                Grouped Product</h5>
+                                                <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                $249.99</h5>
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                         </div>
@@ -280,55 +317,30 @@ $mail = new PHPMailer(true);
                                         <p class="btn-add">
                                             <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            <?php
+                        }
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
                         <div class="col-sm-3">
                             <div class="col-item">
                                 <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
                                 </div>
                                 <div class="info">
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                Product with Variants</h5>
+                                                <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                $149.99</h5>
-                                        </div>
-                                        <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                        <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                    </div>
-                                    <div class="clearfix">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="col-item">
-                                <div class="photo">
-                                    <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                </div>
-                                <div class="info">
-                                    <div class="row">
-                                        <div class="price col-md-6">
-                                            <h5>
-                                                Product with Variants</h5>
-                                            <h5 class="price-text-color">
-                                                $199.99</h5>
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -340,13 +352,49 @@ $mail = new PHPMailer(true);
                                         <p class="btn-add">
                                             <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
-                                            <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
                                     <div class="clearfix">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            <?php
+                        }
+                        $result = mysqli_query($conn,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY RAND() LIMIT 1;");                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                        ?>
+                        <div class="col-sm-3">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img src="<?php echo $imgCategory($row['StockGroupName']) ?>" class="img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-md-6">
+                                            <h5>
+                                                <?php echo $row['stockitem'] ?></h5>
+                                            <h5 class="price-text-color">
+                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                        </div>
+                                        <div class="rating hidden-sm col-md-6">
+                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add">
+                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

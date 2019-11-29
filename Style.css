@@ -317,8 +317,9 @@ div .col-sm-3
     max-height: 400px;
     min-width: auto;
 }
-div.carousel-item div.carousel-caption
+div.carousel-item div.carousel-caption p
 {
     font-size: 80px;
-    color: yellow;
+    background-color: black;
+    color: white;
 }
