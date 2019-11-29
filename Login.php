@@ -14,11 +14,12 @@ error_reporting(0);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        .wrapper2{ width: 350px; padding: 20px; }
     </style>
 </head>
 <body>
-<div class="wrapper">
+<div style="display:flex;justify-content: center;align-items: baseline;">
+<div class="wrapper2">
     <h2>Login</h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -36,6 +37,7 @@ error_reporting(0);
         </div>
         <p>Heb je nog geen account? <a href="Register.php">Registreer</a>.</p>
     </form>
+</div>
 </div>
 </body>
 </html>

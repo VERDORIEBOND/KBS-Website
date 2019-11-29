@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
     <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
+        body{ font: 14px sans-serif;  }
+        .wrapper{ width: 350px; padding: 20px; position: absolute; }
     </style>
 </head>
 <body>
@@ -101,8 +101,12 @@ if(isset($_POST['submit'])){
         $sql1 = "INSERT INTO ConsumerPrivate (email, password, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
         echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
     }
+    if(isset($email, $password, $firstname, $lastname, $adres, $postal, $city)){
+        echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
+    }
 }
 ?>
+<div style="display:flex;justify-content: center;align-items: baseline;">
 <div class="wrapper">
     <h2>Registreren</h2>
     <form action="" method="post">
@@ -155,7 +159,11 @@ if(isset($_POST['submit'])){
             <input type="submit" class="btn btn-primary" value="Registreren" name="submit">
             <input type="reset" class="btn btn-default" value="Reset">
         </div>
-        <p>Heb je al een account? <a href="#">Login</a>.</p>
+        <p>Heb je al een account? <a href="Login.php">Login</a>.</p>
     </form>
+</div>
+</div>
+
+
 </body>
 </html>
