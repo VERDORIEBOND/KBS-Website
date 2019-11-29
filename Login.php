@@ -3,6 +3,30 @@ include "index.php";
 include "connection.php";
 include "functions.php";
 error_reporting(0);
+session_start();
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: welcome.php");
+    exit;
+}
+
+$email = $password = "";
+$email_err = $password_err = "";
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+
+if(empty(trim($_POST["email"]))){
+    $username_err = "Voer een emailadres in.";
+} else{
+    $username = trim($_POST["username"]);
+}
+
+
+if(empty(trim($_POST["password"]))){
+    $password_err = "Voer een wachtwoord in";
+} else{
+    $password = trim($_POST["password"]);
+}
 
 
 
@@ -22,10 +46,10 @@ error_reporting(0);
 <div class="wrapper2">
     <h2>Login</h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+        <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
             <label>Emailadres</label>
-            <input type="text" name="email" class="form-control" value="<?php echo $username; ?>" placeholder="Emailadres">
-            <span class="help-block"><?php echo $username_err; ?></span>
+            <input type="text" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="Emailadres">
+            <span class="help-block"><?php echo $email_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label>Wachtwoord</label>

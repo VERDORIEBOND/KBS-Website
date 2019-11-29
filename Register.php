@@ -99,7 +99,7 @@ if(isset($_POST['submit'])){
         $phone = trim($_POST['phone']);
     }if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)){
         $sql1 = "INSERT INTO ConsumerPrivate (email, password, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
-        echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
+        echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
     }
     if(isset($email, $password, $firstname, $lastname, $adres, $postal, $city)){
         echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
