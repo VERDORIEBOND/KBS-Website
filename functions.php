@@ -400,7 +400,6 @@ $imgCategory = function ($category)
     }
 }
 
-
 ?>
 
 
