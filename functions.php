@@ -174,7 +174,7 @@ $itemsToProductCards = function ($connection)
 {
     $i=0;
     $completedItems = array();
-    $result = mysqli_query($connection,"SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID;");
+    $result = mysqli_query($connection,"SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID;");
     echo '<div class="container-fluid">';
     echo '<div class="row">';
 
@@ -183,7 +183,7 @@ $itemsToProductCards = function ($connection)
     while ($row = mysqli_fetch_assoc($result))
 {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
-$productName = $row["stockitem"];
+$productName = $row["StockItemName"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
