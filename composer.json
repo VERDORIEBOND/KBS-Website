@@ -2,7 +2,8 @@
   "require":
   {
     "phpmailer/phpmailer": "~6.1",
-    "quickshiftin/php-pdf-invoice": "~1.7.0"
+    "quickshiftin/php-pdf-invoice": "^1.10"
   }
 
 }
+
