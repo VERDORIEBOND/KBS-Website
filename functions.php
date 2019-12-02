@@ -40,14 +40,14 @@ $checkIfCategory = function ($connection,$navCategory)
 $itemsCategory = function ($connection, $category,$imgDirectory)                              //With this function we display all items corresponding to a specific category
 {
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
-    $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
+    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
     $result = mysqli_query($connection,$sql);
     echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
     echo '<div class="row">';
     while ($row = mysqli_fetch_assoc($result))                                  //For each result in our SQL query we will make a product card with the product details.
     {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
-        $productName = $row["stockitem"];
+        $productName = $row["StockItemName"];
         $numOfCols = 3;                                                         //The amount of rows we want the products to display in
         $rowCount = 0;
         $bootstrapColWidth = 12 / $numOfCols;
