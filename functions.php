@@ -280,7 +280,7 @@ $prijsgever = function ($connection) {
         echo "€". $row["RecommendedRetailPrice"];
     }
 };
-//deze funtie kijkt hoeveel voorraad er bij het gekozen product horen
+//deze funtie kijkt hoeveel voorraad er bij het gekozen product hoort
 $stockzoeker = function ($connection)   {
     $numFromUrl = $_GET['productId'];
     $query = "SELECT StockItemID, QuantityOnHand FROM stockitemholdings WHERE StockItemID = '$numFromUrl'";
@@ -352,6 +352,7 @@ $imgCategory = function ($category)
         return "images/categories/USB%20Novelties.png";
     }
 }
+
 
 ?>
 
