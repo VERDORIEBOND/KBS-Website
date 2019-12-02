@@ -34,16 +34,22 @@ if(isset($_POST['submit'])){
     if(empty(trim($_POST['email']))){
         $email_err="Voer een emailadres in";
     } else{
-        $sqlemail = $_POST['email'];
-        $stmt= $conn->prepare('SELECT email FROM ConsumerPrivate WHERE email = ?');
-        $stmt->bind_param('s', $sqlemail);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if(mysqli_num_rows($result) > 0){
-            $email_err="Dit emailadres is reeds in gebruik, heeft u al een account?: <a href='#'>Login</a>";
-        } else {
-            $email = $_POST['email'];
+        $sql= "SELECT email FROM Consumerprivate WHERE email = ?";
+        if($stmt = mysqli_prepare($conn, $sql)){
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            $param_email = trim($_POST["email"]);
+            if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "Dit emailadres is reeds in gebruik";
+                } else{
+                    $email = trim($_POST["email"]);
+                }
+            } else{
+                echo "Er is een fout opgetreden in het systeem";
+            }
         }
+        mysqli_stmt_close($stmt);
     }if(empty(trim($_POST['password']))){
         $password_err="Voer een wachtwoord in";
     } else{
@@ -53,7 +59,7 @@ if(isset($_POST['submit'])){
             if(strlen(trim($_POST['password'])) <= 6){
                 $password_err = "Het wachtwoord moet minimaal 7 tekens lang zijn";
             } else{
-                $password = password_hash(trim($_POST['password']));
+                $password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT);
             }
         }
     }if(empty(trim($_POST['confirm_password']))){
@@ -100,11 +106,25 @@ if(isset($_POST['submit'])){
     } else{
         $phone = trim($_POST['phone']);
     }if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)){
-        $sql1 = "INSERT INTO ConsumerPrivate (email, passwrd, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
+        $sql1 = "INSERT INTO ConsumerPrivate (email, passwrd, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?)";
+        if($stmt1=mysqli_prepare($conn,$sql1)){
+            mysqli_stmt_bind_param($stmt1,"ssssssss",$param_email,$param_password,$param_firstname,$param_lastname,$param_adres,$param_postal,$param_city,$param_phone);
+            $param_email=$email;
+            $param_password=$password;
+            $param_firstname=$firstname;
+            $param_lastname=$lastname;
+            $param_adres=$adres;
+            $param_postal=$postal;
+            $param_city=$city;
+            $param_phone=$phone;
+            if(mysqli_stmt_execute($stmt1)){
+                echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
+            } else{
+                echo "Fout opgetreden in het systeem.";
+            }
+        }
         echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
-    }
-    if(isset($email, $password, $firstname, $lastname, $adres, $postal, $city)){
-        echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
+        mysqli_stmt_close($stmt1);
     }
 }
 ?>
@@ -165,7 +185,5 @@ if(isset($_POST['submit'])){
     </form>
 </div>
 </div>
-
-
 </body>
 </html>
