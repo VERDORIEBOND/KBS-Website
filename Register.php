@@ -35,9 +35,11 @@ if(isset($_POST['submit'])){
         $email_err="Voer een emailadres in";
     } else{
         $sqlemail = $_POST['email'];
-        $sql = "SELECT email FROM CustomerPrivate WHERE email = $sqlemail";
-        $check = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($check) > 0){
+        $stmt= $conn->prepare('SELECT email FROM ConsumerPrivate WHERE email = ?');
+        $stmt->bind_param('s', $sqlemail);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if(mysqli_num_rows($result) > 0){
             $email_err="Dit emailadres is reeds in gebruik, heeft u al een account?: <a href='#'>Login</a>";
         } else {
             $email = $_POST['email'];
@@ -51,7 +53,7 @@ if(isset($_POST['submit'])){
             if(strlen(trim($_POST['password'])) <= 6){
                 $password_err = "Het wachtwoord moet minimaal 7 tekens lang zijn";
             } else{
-                $password = trim($_POST['password']);
+                $password = password_hash(trim($_POST['password']));
             }
         }
     }if(empty(trim($_POST['confirm_password']))){
@@ -98,7 +100,7 @@ if(isset($_POST['submit'])){
     } else{
         $phone = trim($_POST['phone']);
     }if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)){
-        $sql1 = "INSERT INTO ConsumerPrivate (email, password, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
+        $sql1 = "INSERT INTO ConsumerPrivate (email, passwrd, first_name, last_name, adres, postal, city, phone) VALUES ($email, $password, $firstname, $adres, $postal, $city, $phone)";
         echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
     }
     if(isset($email, $password, $firstname, $lastname, $adres, $postal, $city)){
