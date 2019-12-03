@@ -35,7 +35,7 @@ $total_pages_sql = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemst
 $result = mysqli_query($conn,$total_pages_sql);
 $row = $result->fetch_assoc();
 $total_rows = $row["aantal"];
-mysqli_free_result($result);
+
 $total_pages = ceil( $total_rows/ $nr_of_records_per_page);
 
 $itemsCategoryLimit($conn, $category, $offset, $nr_of_records_per_page);
@@ -56,5 +56,7 @@ $itemsCategoryLimit($conn, $category, $offset, $nr_of_records_per_page);
 </ul>
 </body>
 </html>
-
+<?php
+mysqli_free_result($result);
+?>
 
