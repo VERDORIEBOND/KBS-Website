@@ -29,16 +29,21 @@ include "index.php";
 
 <div class="Productfoto">
     <?php
-    echo "<img src='images/no-product-image.png'>";
+
     //foto printen
 
     $numFromUrl = $_GET['productId'];
-    $query = "SELECT i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl';";
+    $query = "SELECT distinct i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1;";
     $result= mysqli_query($conn,$query);
-    while($row = mysqli_fetch_array($result)) {
-        echo $row['groupname'];
-    }
+    while($row = mysqli_fetch_assoc($result)) {
 
+
+        ?>
+        <div class="foto">
+            <img src="<?php echo $imgCategory($row['groupname']) ?>">
+        </div>
+        <?php
+    }
     ?>
 </div>
 
