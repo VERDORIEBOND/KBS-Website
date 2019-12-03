@@ -22,6 +22,7 @@ include "connection.php";
 
 
 
+
 $checkIfCategory = function ($connection,$navCategory)
 {
     $onceTrue = false;                                                          //this value will be returned once we have determined of the category exists in our database
@@ -92,9 +93,38 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         $pagenr = 1;
     }
 
+
     $nr_of_records_per_page = 5;
+
+    if (isset($_POST['use_button'])) {
+        $nr_of_records_per_page = 25;
+    }
+    if (isset($_POST['use_button1'])) {
+        $nr_of_records_per_page = 50;
+    }
+    if (isset($_POST['use_button2'])) {
+        $nr_of_records_per_page = 75;
+    }
+    if (isset($_POST['use_button3'])) {
+        $nr_of_records_per_page = 100;
+    }
+
+    echo
+    "<form action='' method='post'>
+<input type='submit' name='use_button' value='25' />
+<input type='submit' name='use_button1' value='50' />
+<input type='submit' name='use_button2' value='75' />
+<input type='submit' name='use_button3' value='100' />
+</form>";
+
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
+
+
+
+
+
+
 
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
     $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' LIMIT $offset,$maxitemspp";
@@ -141,7 +171,7 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         <li class="Prev-buton" >
             <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
         </li>
-        <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
+        <li class="<?php if($pagenr >= $total_pages){ echo 'enabled'; } ?>">
             <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
         </li>
         <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
