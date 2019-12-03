@@ -452,7 +452,8 @@ $imgCategory = function ($category)
     {
         return "images/categories/USB%20Novelties.png";
     }
-}
+};
+
 
 ?>
 
