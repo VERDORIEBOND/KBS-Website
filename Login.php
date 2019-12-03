@@ -12,7 +12,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 $email = $password = "";
 $email_err = $password_err = "";
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_POST['submit'])){
     if (empty(trim($_POST["email"]))) {
         $username_err = "Voer een emailadres in.";
     } else {
@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
     }
     if(empty($username_err) && empty($password_err)){
-        $sql = "SELECT Consumerid, username, passwrd FROM Consumerprivate WHERE username = ?";
+        $sql = "SELECT Consumerid, email, passwrd FROM Consumerprivate WHERE email = ?";
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username_err = "Er is geen account met dit emailadres";
                 }
             } else{
-                echo "Er is een fout in het syteem opgetreden";
+                $username_err= "Er is een fout in het syteem opgetreden";
             }
         }
         mysqli_stmt_close($stmt);
