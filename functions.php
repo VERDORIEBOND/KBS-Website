@@ -52,9 +52,7 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         $pagenr = 1;
     }
 
-
     $nr_of_records_per_page = 5;
-
     if (isset($_POST['use_button'])) {
         $nr_of_records_per_page = 25;
     }
@@ -234,7 +232,6 @@ $filterItems = function ()
 
 $itemsToProductCards = function ($connection)
 {
-
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
     } else {
@@ -242,6 +239,28 @@ $itemsToProductCards = function ($connection)
     }
 
     $nr_of_records_per_page = 5;
+
+    if (isset($_POST['use_button'])) {
+        $nr_of_records_per_page = 25;
+    }
+    if (isset($_POST['use_button1'])) {
+        $nr_of_records_per_page = 50;
+    }
+    if (isset($_POST['use_button2'])) {
+        $nr_of_records_per_page = 75;
+    }
+    if (isset($_POST['use_button3'])) {
+        $nr_of_records_per_page = 100;
+    }
+
+    echo
+    "<form action='' method='post'>
+<p class='Resultaten'>Resultaten per pagina:</p>
+<input class='Sort' type='submit' name='use_button' value='25' />
+<input type='submit' name='use_button1' value='50' />
+<input type='submit' name='use_button2' value='75' />
+<input type='submit' name='use_button3' value='100' />
+</form>";
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
 
