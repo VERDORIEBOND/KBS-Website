@@ -133,7 +133,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -168,7 +168,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                         </div>
@@ -200,7 +200,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -235,7 +235,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -274,7 +274,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -309,7 +309,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                         </div>
@@ -341,7 +341,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -376,7 +376,7 @@ $mail = new PHPMailer(true);
                                             <h5>
                                                 <?php echo $row['stockitem'] ?></h5>
                                             <h5 class="price-text-color">
-                                                <?php echo $row['RecommendedRetailPrice'] ?></h5>
+                                                <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
