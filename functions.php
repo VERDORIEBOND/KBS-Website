@@ -84,20 +84,11 @@ $itemsCategoryLimit = function($connection, $category, $offset, $nr_of_records_p
 };
 
 
+
 $itemsCategory = function ($connection, $category,$imgDirectory)                              //With this function we display all items corresponding to a specific category
 {
-    if (isset($_GET['pagenr'])){
-        $pagenr = $_GET['pagenr'];
-    } else {
-        $pagenr = 1;
-    }
-
-    $nr_of_records_per_page = 5;
-    $offset = ($pagenr-1) * $nr_of_records_per_page;
-    $maxitemspp = $pagenr * $nr_of_records_per_page;
-
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
-    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' LIMIT $offset,$maxitemspp";
+    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
     $result = mysqli_query($connection,$sql);
     echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
     echo '<div class="row">';
@@ -134,24 +125,9 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         }
     }
     echo '</div></div>';
-    ?>
-    <ul class="pagination">
-        <li><a href="?pagenr=1&productGroup=<?php echo $category ?>">First</a></li>
-        <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
-        <li class="Prev-buton" >
-            <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
-        </li>
-        <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-            <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
-        </li>
-        <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
-    </ul>
-
-    <?php
 
     mysqli_free_result($result);
 };
-
 //Haalt de naam op van een artikel en print hem
 
 /*
@@ -244,22 +220,9 @@ $filterItems = function ()
 
 $itemsToProductCards = function ($connection)
 {
-
-    if (isset($_GET['pagenr'])){
-        $pagenr = $_GET['pagenr'];
-    } else {
-        $pagenr = 1;
-    }
-
-    $nr_of_records_per_page = 5;
-    $offset = ($pagenr-1) * $nr_of_records_per_page;
-    $maxitemspp = $pagenr * $nr_of_records_per_page;
-
     $i=0;
     $completedItems = array();
-    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID LIMIT $offset,$maxitemspp";
-    $result = mysqli_query($connection, $sql);
-
+    $result = mysqli_query($connection,"SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID;");
     echo '<div class="container-fluid">';
     echo '<div class="row">';
 
@@ -272,9 +235,6 @@ $productName = $row["StockItemName"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
-$total_rows = $row["aantal"];
-$total_pages = ceil( $total_rows/ $nr_of_records_per_page);
-
 
         if($row['StockGroupName'] == 'Airline Novelties')
         {
@@ -347,20 +307,7 @@ if (in_array($productName, $completedItems) == false)
         $i ++;
     }
     echo '</div></div>';
-    ?>
 
-    <ul class="pagination">
-    <li><a href="?pagenr=1&productGroup=<?php echo $category ?>">First</a></li>
-    <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
-    <li class="Prev-buton" >
-        <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
-    </li>
-    <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-        <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
-    </li>
-    <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
-</ul>
-<?php
     mysqli_free_result($result);
 };
 //Haalt de naam op van een artikel en print hem
@@ -452,8 +399,7 @@ $imgCategory = function ($category)
     {
         return "images/categories/USB%20Novelties.png";
     }
-};
-
+}
 
 ?>
 
