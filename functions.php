@@ -382,9 +382,10 @@ if (in_array($productName, $completedItems) == false)
 };
 //Haalt de naam op van een artikel en print hem
 
+
 $detailPrinter = function ($connection) {
     $numFromUrl = $_GET['productId'];
-    $sql = "SELECT StockItemID, StockItemName FROM stockitems WHERE StockItemID = '$numFromUrl'";
+    $sql = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID = '$numFromUrl'";
     $result = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_array($result)) {
         echo $row['StockItemName'];
@@ -407,6 +408,27 @@ $stockzoeker = function ($connection)   {
         echo "Voorraad = " . $row ['QuantityOnHand'];
     }
 };
+
+$winkelwagendetails = function($connection){
+    $returnValue = []; ?>
+
+<?php
+    foreach ($_SESSION["cart"] as $key => $value){
+        if ($value>0) {
+            $query = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID ='$key'";
+            $results = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($results);
+            $productdetails = ["ProductId" => $row["StockItemID"], "Name" => $row["StockItemName"], "Price" => $row["RecommendedRetailPrice"], "Aantal" => $value];
+            array_push($returnValue, $productdetails);
+        }
+
+    }
+
+    return $returnValue;
+
+
+};
+
 $tempShower = function ($connection)   {
     $numFromUrl = $_GET['productId'];
     $query = "SELECT c.Temperature, s.StockItemID FROM coldroomtemperatures c JOIN stockitems s on c.ColdRoomSensorNumber = s.IsChillerStock where s.StockItemID = '$numFromUrl' AND s.IsChillerStock = 1;";

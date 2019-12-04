@@ -1,11 +1,6 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 body {
     padding-top: 65px;
-    padding-bottom: 70px;
 }
 
 .navbar-logo{
@@ -116,11 +111,27 @@ body {
     text-align: justify;
     padding-left: 10px;
 }
+
 a.dropdown{
     list-style-type: none;
 }
 
+.footer{
+    z-index: 1;
+    text-align: center;
+    padding: 1px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000;
+    color: #6ac1ff;
+    height: 20px;
+}
 
+.footer a {
+    padding-right: 250px;
+}
 div.card
 {
     padding: 10px;
@@ -150,7 +161,6 @@ div.card a p
     padding: 40px 0;
     background: #f2f2f2;
     margin-bottom: 60px;
-    position: unset;
 }
 
 .newsletter .content {
@@ -314,51 +324,3 @@ div.carousel-item div.carousel-caption p
     background-color: black;
     color: white;
 }
-
-.footer{
-    background-color: #000000;
-    padding: -5px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    text-align: center;
-}
-
-.footer a{
-    padding-right: 20%;
-}
-
-.Over{
-    color: #6ac1ff;
-    padding-right: 40%;
-    padding-left: 1%;
-}
-
-.Contact{
-    color: #6ac1ff;
-    padding-right: 40%;
-
-}
-
-.Verzenden{
-    color: #6ac1ff;
-}
-.Welkom{
-    color: #6ac1ff;
-    position: absolute;
-    right: 2%;
-    top: 27%;
-    text-align: right;
-}
-.dropdown1{
-    position: absolute;
-    color: #6ac1ff;
-    right: 10%;
-    top: 27%;
-    font-size: 150%;
-}
-
-
-

@@ -1,7 +1,3 @@
-<?php
-error_reporting(0);
-session_start();
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,40 +44,38 @@ session_start();
                     <li><a href="productPage.php?productGroup=T-Shirts">T-Shirts</a></li>
                     <li><a href="productPage.php?productGroup=Toys">Toys</a></li>
                 </ul>
-        </span>
+                    </span>
+        </ul>
         <div class="Search-Bar">
             <form action="new%20search%20functie.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
                 </div>
+
             </form>
-        </div>
-            <?php if($_SESSION['loggedin'] == true){?>
-                <span class="dropdown1">
-                    <a data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"></a>
-                <ul class="dropdown-menu">
-                    <li><a href="reset-password.php">Wachtwoord veranderen</a></li>
-                    <li><a href="logout.php">Uitloggen</a></li>
-                </ul>
-                </span>
-                <span class="Welkom">
-                    <p>Welkom <?php print($_SESSION['name']); ?></p>
-                </span>
-            <?php } else{ ?>
             <div class="LogIn">
-            <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a>
+                <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a></span><br>
+
+                </body>
+
+                </html>
             </div>
-            <?php } ?>
+
+        </div>
     </div>
 </nav>
+
 <div class="footer">
     <ul>
         <span><a href="#">Service</a> </span>
         <span><a href="#">Verzenden</a> </span>
         <span><a href="#">Betaling</a> </span>
         <span><a href="#">Over ons</a> </span>
+
     </ul>
 </div>
+
+
 </body>
 </html>
