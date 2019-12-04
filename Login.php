@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $email;
-                            $_SESSION["name"] = $name
+                            $_SESSION["name"] = $name;
                             echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
                         } else{
                             $password_err = "Verkeerd wachtwoord";

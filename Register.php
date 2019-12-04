@@ -29,6 +29,7 @@ error_reporting(0);
 
         $email = $password = $confirm_password = $firstname = $lastname = $adres = $postal = $city = $phone = "";
         $email_err = $password_err = $confirm_password_err = $firstname_err = $lastname_err = $postal_err = $city_err = $phone_err = "";
+        $newsletter=false;
 
         if(empty(trim($_POST['email']))){
             $email_err="Voer een emailadres in";
@@ -104,10 +105,13 @@ error_reporting(0);
             $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
         } else{
             $phone = trim($_POST['phone']);
-        }if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)){
-            $sql1 = "INSERT INTO ConsumerPrivate (email, passwrd, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?)";
+        }if(!empty($_POST['newsletter'])){
+            $newsletter=true;
+        }
+        if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)){
+            $sql1 = "INSERT INTO ConsumerPrivate (email, passwrd, first_name, last_name, adres, postal, city, phone, newsletter) VALUES (?,?,?,?,?,?,?,?,?)";
             if($stmt1=mysqli_prepare($conn,$sql1)){
-                mysqli_stmt_bind_param($stmt1,"ssssssss",$param_email,$param_password,$param_firstname,$param_lastname,$param_adres,$param_postal,$param_city,$param_phone);
+                mysqli_stmt_bind_param($stmt1,"sssssssss",$param_email,$param_password,$param_firstname,$param_lastname,$param_adres,$param_postal,$param_city,$param_phone,$param_newsletter);
                 $param_email=$email;
                 $param_password=$password;
                 $param_firstname=$firstname;
@@ -116,6 +120,7 @@ error_reporting(0);
                 $param_postal=$postal;
                 $param_city=$city;
                 $param_phone=$phone;
+                $param_newsletter=$newsletter;
                 if(mysqli_stmt_execute($stmt1)){
                     echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
                 } else{
@@ -175,6 +180,10 @@ error_reporting(0);
             <label>Telefoonnummer</label>
             <input type="text" name="phone" placeholder="Telefoonnummer" class="form-control" value="<?php echo $phone; ?>">
             <span class="help-block"><?php echo $phone_err; ?></span>
+        </div>
+        <div class="form-group">
+            <label>Wilt u onze nieuwsbrief ontvangen?</label>
+            <input type="checkbox" value="1" name="newsletter" <?=isset($_POST['newsletter'])?"checked":''; ?>>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary" name="submit">Registreren</button>

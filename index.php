@@ -1,3 +1,7 @@
+<?php
+error_reporting(0);
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,20 +48,27 @@
                     <li><a href="productPage.php?productGroup=T-Shirts">T-Shirts</a></li>
                     <li><a href="productPage.php?productGroup=Toys">Toys</a></li>
                 </ul>
-                    </span>
-        </ul>
+        </span>
         <div class="Search-Bar">
             <form action="new%20search%20functie.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
                 </div>
-
             </form>
-            <div class="LogIn">
-                <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a></span><br>
-            </div>
         </div>
+            <?php if($_SESSION['loggedin'] == true){?>
+                <span class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"></a>
+                <ul class="dropdown-menu">
+                    <li><a href="logout.php">Uitloggen</a></li>
+                </ul>
+                </span>
+            <?php } else{ ?>
+            <div class="LogIn">
+            <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a>
+            </div>
+            <?php } ?>
     </div>
 </nav>
 <div class="footer">
