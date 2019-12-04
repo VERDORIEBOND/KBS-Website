@@ -4,7 +4,9 @@ include "connection.php";
 include "functions.php";
 include"index.php";
 
-
+if($_SESSION['loggedin'] != true){
+    echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
+}
 
 if(isset($_POST['add'])) {
     if (isset($_SESSION["cart"][$_POST["Id"]]) && $_SESSION["cart"][$_POST["Id"]] > 0) {
