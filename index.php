@@ -1,3 +1,7 @@
+<?php
+error_reporting(0);
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,7 +18,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/dda578f1eb.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -22,8 +25,8 @@
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-logo">
-        <a href="homePage.php" >
-        <img src="images/WWI.png" alt="Logo" height="50"></a>
+            <a href="homePage.php" >
+                <img src="images/WWI.png" alt="Logo" height="50"></a>
         </div>
 
 
@@ -45,50 +48,52 @@
                     <li><a href="productPage.php?productGroup=T-Shirts">T-Shirts</a></li>
                     <li><a href="productPage.php?productGroup=Toys">Toys</a></li>
                 </ul>
-                    </span>
-        </ul>
+        </span>
         <div class="Search-Bar">
             <form action="new%20search%20functie.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
                 </div>
-
             </form>
-            <div class="LogIn">
-                <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a></span><br>
-
-            <div class=" <div class= col-xs-4 col-md-offset-2 winkelmandje ">
-
+        </div>
+        <?php if($_SESSION['loggedin'] == true){?>
+            <div class="verlanglijstje1">
+                <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
+            </div>
+            <div class="winkelmandje1">
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
             </div>
-                <div class="verlanglijstje">
-                    <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
-                </div>
+            <span class="dropdown1">
+                    <a data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"></a>
+                <ul class="dropdown-menu">
+                    <li><a href="reset-password.php">Wachtwoord veranderen</a></li>
+                    <li><a href="logout.php">Uitloggen</a></li>
+                </ul>
+                </span>
+            <span class="Welkom">
+                    <p>Welkom <?php print($_SESSION['name']); ?></p>
+                </span>
+        <?php } else{ ?>
+            <div class="verlanglijstje">
+                <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
             </div>
-        </div>
+            <div class="winkelmandje">
+                <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
+            </div>
+            <div class="LogIn">
+            <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a>
+            </div>
+        <?php } ?>
     </div>
 </nav>
-
-                </body>
-
-                </html>
-            </div>
-
-        </div>
-    </div>
-</nav>
-
 <div class="footer">
     <ul>
         <span><a href="#">Service</a> </span>
         <span><a href="#">Verzenden</a> </span>
         <span><a href="#">Betaling</a> </span>
         <span><a href="#">Over ons</a> </span>
-
     </ul>
 </div>
-
-
 </body>
 </html>
