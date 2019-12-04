@@ -74,7 +74,10 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
 <input type='submit' name='use_button2' value='75' />
 <input type='submit' name='use_button3' value='100' />
 </form>";
-
+    $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ";
+    $result_rows = mysqli_query($connection, $total_rows);
+    $row = mysqli_fetch_assoc($result_rows);
+    $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
 
@@ -129,10 +132,11 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         <li class="Prev-buton" >
             <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
         </li>
-        <li class="<?php if($pagenr >= $total_pages){ echo 'enabled'; } ?>">
-            <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1);} ?>">Next</a>
+        <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
+            <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
         </li>
-        <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
+        <li><a href="?pagenr=<?php echo $total_pages; ?>&productGroup=<?php echo $category ?>">Last</a></li>
+
     </ul>
 
     <?php
@@ -263,7 +267,6 @@ $itemsToProductCards = function ($connection)
 </form>";
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
-
     $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ";
     $result_rows = mysqli_query($connection, $total_rows);
     $row = mysqli_fetch_assoc($result_rows);
