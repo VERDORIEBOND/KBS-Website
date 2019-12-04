@@ -7,12 +7,26 @@ include "getOrderData.php";
 include "connection.php";
 class MyOrderItem implements OrderItem
 {
+    function __construct()
+    {
+        $conn = NULL;
+        include "connection.php";
+        $this->conn = $conn;
+    }
+
     /**
      * The name or description of the product
      * @return string
      */
-    public function getName();
-
+    public function getName()
+    {
+        $sql = "SELECT StockGroupName FROM wideworldimporters.stockgroups";
+        $result = mysqli_query($this->conn,$sql);
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            return $row['StockGroupName'];
+        }
+    }
     /**
      * The 'SKU' or unique identifier for your product
      * @return string

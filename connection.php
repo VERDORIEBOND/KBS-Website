@@ -13,9 +13,3 @@ $conn = mysqli_connect($host,$user,$password,$databasename,$port);
 if (!$conn){
     die("Connection failed: ".mysqli_connect_error());
 }
-
-
-
-
-
-?>
