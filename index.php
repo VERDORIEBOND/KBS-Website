@@ -56,23 +56,16 @@
             </form>
             <div class="LogIn">
                 <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a></span><br>
-
-                </body>
-
-                </html>
             </div>
-
         </div>
     </div>
 </nav>
-
 <div class="footer">
     <ul>
         <span><a href="#">Service</a> </span>
         <span><a href="#">Verzenden</a> </span>
         <span><a href="#">Betaling</a> </span>
         <span><a href="#">Over ons</a> </span>
-
     </ul>
 </div>
 </body>

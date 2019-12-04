@@ -177,8 +177,8 @@ error_reporting(0);
             <span class="help-block"><?php echo $phone_err; ?></span>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Registreren" name="submit">
-            <input type="reset" class="btn btn-default" value="Reset">
+            <button type="submit" class="btn btn-primary" name="submit">Registreren</button>
+            <button type="reset" class="btn btn-default">Reset</button>
         </div>
         <p>Heb je al een account? <a href="Login.php">Login</a>.</p>
     </form>

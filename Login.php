@@ -13,31 +13,32 @@ $email = $password = "";
 $email_err = $password_err = "";
 
 if(isset($_POST['submit'])){
-    if (empty(trim($_POST["email"]))) {
-        $username_err = "Voer een emailadres in.";
+    if (empty(trim($_POST['email']))) {
+        $email_err = "Voer een emailadres in";
     } else {
-        $email = trim($_POST["email"]);
+        $email = trim($_POST['email']);
     }
-    if (empty(trim($_POST["password"]))) {
+    if (empty(trim($_POST['password']))) {
         $password_err = "Voer een wachtwoord in";
     } else {
-        $password = trim($_POST["password"]);
+        $password = trim($_POST['password']);
     }
     if(empty($username_err) && empty($password_err)){
-        $sql = "SELECT Consumerid, email, passwrd FROM Consumerprivate WHERE email = ?";
+        $sql = "SELECT Consumerid, email, passwrd, first_name FROM Consumerprivate WHERE email = ?";
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $name);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $email;
+                            $_SESSION["name"] = $name
                             echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
                         } else{
                             $password_err = "Verkeerd wachtwoord";
@@ -68,7 +69,7 @@ if(isset($_POST['submit'])){
 <div style="display:flex;justify-content: center;align-items: baseline;">
     <div class="wrapper2">
         <h2>Login</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form action="" method="post">
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Emailadres</label>
                 <input type="text" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="Emailadres">
@@ -78,12 +79,9 @@ if(isset($_POST['submit'])){
                 <label>Wachtwoord</label>
                 <input type="password" name="password" class="form-control" placeholder="Wachtwoord">
                 <span class="help-block"><?php echo $password_err; ?></span>
-                <script type="text/javascript">
-
-                </script>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <button type="submit" class="btn btn-primary" name="submit">Login</button>
             </div>
             <p>Heb je nog geen account? <a href="Register.php">Registreer</a>.</p>
         </form>
