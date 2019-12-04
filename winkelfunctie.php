@@ -3,6 +3,7 @@ session_start();
 include "connection.php";
 include "functions.php";
 include"index.php";
+include "orderEmail.php";
 
 
 
@@ -155,7 +156,19 @@ if (isset($_GET["action"])&&$_GET["action"] == "delete"){
                 </td>
 
                 </tr>
+
         </table>
+        <form method="get" action="winkelfunctie.php">
+            <input type="submit" name="button1" value="Order"></button>
+        <?php
+            if(isset($_GET['button1']))
+            {
+                $orderEmail();
+                echo "Test";
+            }
+        ?>
+</form>
+
     </div>
 
 
