@@ -105,10 +105,13 @@ $mail = new PHPMailer(true);
             </div>
             <div class="col-md-3">
                 <!-- Controls -->
-                <div class="controls pull-right hidden-xs">
-                    <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example"
-                       data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example"
-                                                data-slide="next"></a>
+                <div class="controls pull-right hidden-xs" style="padding: 5px;">
+                    <div class="col-xs-2">
+                        <a class="inline left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a>
+                    </div>
+                    <div class="col-xs-4 col-md-offset-2">
+                    <a class="inline right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,9 +139,6 @@ $mail = new PHPMailer(true);
                                                 <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
@@ -175,7 +175,7 @@ $mail = new PHPMailer(true);
                                     </div>
                                     <div class="separator clear-left">
                                         <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
+                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -203,9 +203,6 @@ $mail = new PHPMailer(true);
                                                 <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
@@ -238,9 +235,6 @@ $mail = new PHPMailer(true);
                                                 <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
@@ -277,9 +271,6 @@ $mail = new PHPMailer(true);
                                                 <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
@@ -344,9 +335,6 @@ $mail = new PHPMailer(true);
                                                 <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
@@ -379,9 +367,6 @@ $mail = new PHPMailer(true);
                                                 <?php echo "€".$row['RecommendedRetailPrice'] ?></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
-                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                            </i><i class="fa fa-star"></i>
                                         </div>
                                     </div>
                                     <div class="separator clear-left">

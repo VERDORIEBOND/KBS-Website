@@ -7,6 +7,11 @@ date_default_timezone_set('CET');
 
 class MyOrder implements Order
 {
+    public function getOrderNote()
+    {
+        // TODO: Implement getOrderNote() method.
+    }
+
     function __construct()
     {
         $conn = NULL;
@@ -141,7 +146,7 @@ class MyOrder implements Order
      */
     public function getSaleDate()
     {
-        $date = date(DATE_RFC2822);
-        return '25 Sep 2013';
+        $date = date('M jS Y g:i a');
+        return date_format($date,'M jS Y g:i a');
     }
 }

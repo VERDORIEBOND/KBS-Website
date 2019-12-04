@@ -43,8 +43,8 @@ if(isset($_GET['search']) && $_GET['search'] !== '')//if the search button click
         while ($row = mysqli_fetch_array($query)) //when the a result is getten then he we will continue to find other results using the "WHILE" loop
         {
 
-            $numOfCols = 3; //number of columens will show just as three columens
-            $rowCount = 0;// here will counting the columens from the product
+            $numOfCols = 3; //number of colums will show just as three colums
+            $rowCount = 0;// here will counting the colums from the product
             $bootstrapColWidth = 12 / $numOfCols;
             $name = $row['stockitem'];//the name of the product
             $id = $row['StockItemID'];// ID or the artikel number
