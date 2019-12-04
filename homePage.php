@@ -409,7 +409,7 @@ include "index.php";
             <div class="col-sm-12">
                 <div class="content">
                     <form>
-                        <h2>SCHRIJF JE IN VOOR DE NIEUWSLETTER</h2>
+                        <h2>SCHRIJF JE IN VOOR DE NIEUWSBRIEF</h2>
                         <h4>En mis nooit meer aanbiedingen en coupons!</h4>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="E-mail adress" name="emailin">
@@ -444,7 +444,7 @@ if(isset($_GET['button1']))
         }
         else
         {
-            return true;
+
         }
     }
 
@@ -491,9 +491,9 @@ if(isset($_GET['button1']))
 
             $mail->send();
 
-            //echo 'Message has been sent';
+            echo "<script type='text/javascript'>alert('U bent nu ingeschreven voor de nieuwsbrief!');</script>";
         } catch (Exception $e) {
-            //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
 }
