@@ -1,6 +1,6 @@
 <?php
 namespace Quickshiftin\Pdf\Invoice;
-
+//include 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\StringHelper.php';
 use \Zend_Pdf;
 use \Zend_Pdf_Style;
 use \Zend_Pdf_Font;

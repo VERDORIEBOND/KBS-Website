@@ -1,19 +1,22 @@
 <?php
 use Quickshiftin\Pdf\Invoice\Invoice as PdfInvoice;
 use Quickshiftin\Pdf\Invoice\Factory as InvoiceFactory;
-use Quickshiftin\Pdf\Invoice\Spec\Order as Order;
-
+include 'MyOrder.php';
+//include 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Factory.php';
+//include 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Invoice.php';
+include 'C:\xampp\htdocs\vendor\autoload.php';
 $orderEmail = function()
 {
-    $className = "Order";
-    $myOrder = new $className;
+
+    $myOrder = new \myapp\MyOrder();
+
     $oInvoiceFactory = new InvoiceFactory();
     $oInvoicePdf     = new PdfInvoice();
-
     // Configure fonts - just put ttf font files somewhere your project can access them
-    $oInvoicePdf->setRegularFontPath(__DIR__ . '/../assets/Arial.ttf');
-    $oInvoicePdf->setBoldFontPath(__DIR__ . '/../assets/Arial Bold.ttf');
-    $oInvoicePdf->setItalicFontPath(__DIR__ . '/../assets/Arial Italic.ttf');
+
+    $oInvoicePdf->setRegularFontPath(__DIR__ . '\vendor\quickshiftin\php-pdf-invoice\assets\Arial.ttf');
+    $oInvoicePdf->setBoldFontPath(__DIR__ . '\vendor\quickshiftin\php-pdf-invoice\assets\Arial Bold.ttf');
+    $oInvoicePdf->setItalicFontPath(__DIR__ . '\vendor\quickshiftin\php-pdf-invoice\assets-\Arial Italic.ttf');
 
     // Set Colors
     $red    = '#d53f27';
@@ -42,8 +45,8 @@ $orderEmail = function()
     $oPdf = $oInvoicePdf->getPdf($myOrder);
 
     // A string rendition, you could echo this to the browser with headers to implement a download
-    echo $pdf = $oPdf->render();
+    $pdf = $oPdf->render();
 
     // You can also simply save it to a file
-    file_put_contents('/tmp/test.pdf', $pdf);
+    file_put_contents('D:\test.pdf', $pdf);
 };

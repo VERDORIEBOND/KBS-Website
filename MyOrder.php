@@ -2,20 +2,17 @@
 
 
 namespace MyApp;
+include 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Spec\Order.php';
 use Quickshiftin\Pdf\Invoice\Spec\Order;
 date_default_timezone_set('CET');
 
 class MyOrder implements Order
 {
-    public function getOrderNote()
-    {
-        // TODO: Implement getOrderNote() method.
-    }
-
+    private $conn;
     function __construct()
     {
         $conn = NULL;
-        include "connection.php";
+        include_once "connection.php";
         $this->conn = $conn;
     }
     /**
@@ -40,7 +37,7 @@ class MyOrder implements Order
      */
     public function getCustomerShipCharge()
     {
-        return 0;
+        return 0.0;
     }
 
     /**
@@ -49,7 +46,7 @@ class MyOrder implements Order
      */
     public function getSalesTaxAmount()
     {
-        $totaltax = 0;
+        $totaltax = 0.0;
         $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
@@ -67,7 +64,7 @@ class MyOrder implements Order
      */
     public function getTotalCost()
     {
-        $totalprice = 0;
+        $totalprice = 0.0;
         $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
@@ -93,7 +90,7 @@ class MyOrder implements Order
      */
     public function getPaymentMethod()
     {
-        return "Ideal";
+        return "iDeal";
     }
 
     /**
@@ -142,11 +139,18 @@ class MyOrder implements Order
 
     /**
      * Get the date of the sale
-     * @return DateTime
+     * @returnDateTime
      */
-    public function getSaleDate()
+    public function getSaleDate($sFormat)
     {
-        $date = date('M jS Y g:i a');
-        return date_format($date,'M jS Y g:i a');
+        $date = new \DateTime('2000-01-01');
+        return $date->format($sFormat);
+
+        //$date = date('M jS Y g:i a');
+        //return date_format($date,'M jS Y g:i a');
+    }
+    public function getOrderNote()
+    {
+
     }
 }

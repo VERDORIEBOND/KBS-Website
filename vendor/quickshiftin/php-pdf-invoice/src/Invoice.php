@@ -15,6 +15,12 @@
  */
 namespace Quickshiftin\Pdf\Invoice;
 
+function money_format($lc,$price)
+{
+    return $price;
+}
+
+
 use Quickshiftin\Pdf\Invoice\Spec\Order as OrderSpec;
 use Quickshiftin\Pdf\Invoice\Spec\OrderItem as OrderItemSpec;
 

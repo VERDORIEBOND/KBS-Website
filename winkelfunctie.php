@@ -1,10 +1,10 @@
 <?php
 session_start();
-include "connection.php";
-include "functions.php";
-include"index.php";
-include "orderEmail.php";
-
+include_once "connection.php";
+include_once "functions.php";
+include_once "index.php";
+include_once "orderEmail.php";
+//error_reporting(-1);
 
 
 if(isset($_POST['add'])) {
@@ -159,15 +159,17 @@ if (isset($_GET["action"])&&$_GET["action"] == "delete"){
 
         </table>
         <form method="get" action="winkelfunctie.php">
-            <input type="submit" name="button1" value="Order"></button>
+            <input type="submit" name="button1" value="Order">
+        </form>
         <?php
+
             if(isset($_GET['button1']))
             {
                 $orderEmail();
-                echo "Test";
             }
+
         ?>
-</form>
+
 
     </div>
 
