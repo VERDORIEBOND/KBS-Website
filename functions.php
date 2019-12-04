@@ -135,7 +135,7 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
             <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
         </li>
-        <li><a href="?pagenr=<?php echo $total_pages; ?>&productGroup=<?php echo $category ?>">Last</a></li>
+        <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
 
     </ul>
 
@@ -374,7 +374,7 @@ if (in_array($productName, $completedItems) == false)
     <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
         <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
     </li>
-        <li><a href="?pagenr=<?php echo $total_pages; ?>&productGroup=<?php echo $category ?>">Last</a></li>
+        <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
 
 </ul>
 <?php
