@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/dda578f1eb.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -57,6 +58,10 @@
             <div class="LogIn">
                 <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a></span><br>
 
+            <div class="winkelmandje">
+
+                <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
+            </div>
                 </body>
 
                 </html>
