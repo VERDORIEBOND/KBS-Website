@@ -58,11 +58,15 @@ session_start();
             </form>
         </div>
             <?php if($_SESSION['loggedin'] == true){?>
-                <span class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"></a>
+                <span class="dropdown1">
+                    <a data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"></a>
                 <ul class="dropdown-menu">
+                    <li><a href="reset-password.php">Wachtwoord veranderen</a></li>
                     <li><a href="logout.php">Uitloggen</a></li>
                 </ul>
+                </span>
+                <span class="Welkom">
+                    <p>Welkom <?php print($_SESSION['name']); ?></p>
                 </span>
             <?php } else{ ?>
             <div class="LogIn">

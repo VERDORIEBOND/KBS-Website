@@ -341,5 +341,20 @@ div.carousel-item div.carousel-caption p
 .Verzenden{
     color: #6ac1ff;
 }
+.Welkom{
+    color: #6ac1ff;
+    position: absolute;
+    right: 2%;
+    top: 27%;
+    text-align: right;
+}
+.dropdown1{
+    position: absolute;
+    color: #6ac1ff;
+    right: 10%;
+    top: 27%;
+    font-size: 150%;
+}
+
 
 
