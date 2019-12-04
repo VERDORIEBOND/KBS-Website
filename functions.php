@@ -52,7 +52,7 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         $pagenr = 1;
     }
 
-    $nr_of_records_per_page = 5;
+    $nr_of_records_per_page = 10;
     if (isset($_POST['use_button'])) {
         $nr_of_records_per_page = 25;
     }
@@ -238,7 +238,7 @@ $itemsToProductCards = function ($connection)
         $pagenr = 1;
     }
 
-    $nr_of_records_per_page = 5;
+    $nr_of_records_per_page = 10;
 
     if (isset($_POST['use_button'])) {
         $nr_of_records_per_page = 25;
@@ -264,9 +264,14 @@ $itemsToProductCards = function ($connection)
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
 
+    $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ";
+    $result_rows = mysqli_query($connection, $total_rows);
+    $row = mysqli_fetch_assoc($result_rows);
+    $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
+print("test".$offset);
     $i=0;
     $completedItems = array();
-    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID LIMIT $offset,$maxitemspp";
+    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID LIMIT $offset,$nr_of_records_per_page";
     $result = mysqli_query($connection, $sql);
 
     echo '<div class="container-fluid">';
@@ -281,8 +286,10 @@ $productName = $row["StockItemName"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
-$total_rows = $row["aantal"];
-$total_pages = ceil( $total_rows/ $nr_of_records_per_page);
+
+
+
+
 
 
         if($row['StockGroupName'] == 'Airline Novelties')
@@ -356,6 +363,7 @@ if (in_array($productName, $completedItems) == false)
         $i ++;
     }
     echo '</div></div>';
+
     ?>
 
     <ul class="pagination">
@@ -367,7 +375,8 @@ if (in_array($productName, $completedItems) == false)
     <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
         <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
     </li>
-    <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
+        <li><a href="?pagenr=<?php $total_pages; ?>&productGroup=<?php echo $category ?>">Last</a></li>
+
 </ul>
 <?php
     mysqli_free_result($result);
