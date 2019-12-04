@@ -20,6 +20,9 @@
 include "connection.php";
 
 
+
+
+
 $checkIfCategory = function ($connection,$navCategory)
 {
     $onceTrue = false;                                                          //this value will be returned once we have determined of the category exists in our database
@@ -38,56 +41,51 @@ $checkIfCategory = function ($connection,$navCategory)
 }
 };
 
-$itemsCategoryLimit = function($connection, $category, $offset, $nr_of_records_per_page){
-    $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
-    $sql = "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' LIMIT ".$offset.", ".$nr_of_records_per_page;
-
-    $result = mysqli_query($connection,$sql);
-    echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
-    echo '<div class="row">';
-    while ($row = mysqli_fetch_assoc($result))                                  //For each result in our SQL query we will make a product card with the product details.
-    {
-// Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
-        $productName = $row["stockitem"];
-        $numOfCols = 3;                                                         //The amount of rows we want the products to display in
-        $rowCount = 0;
-        $bootstrapColWidth = 12 / $numOfCols;
-        if (in_array($productName, $completedItems) == false)                   //Check if we didnt yet make a product card for the product
-        {
-            // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
-            ?>
-            <div class="col-md-<?php echo $bootstrapColWidth; ?>">
-                <div class="card">
-                    <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
-                        <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
-                        <h1><?php echo $productName ?></h1>
-                        <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
-                        <p><?php echo $row["MarketingComments"]; ?></p>
-                        <span>
-                    <p>
-                        <button>In winkelmandje</button>
-                    </p>
-                </span>
-                </div>
-            </div>
-            <?php
-            $rowCount++;
-            if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
-
-            array_push($completedItems,$productName);                      //Once we made a product card we add the product to the array with products we made so it wont be made again
-        }
-    }
-    echo '</div></div>';
-
-    mysqli_free_result($result);
-};
 
 
 
 $itemsCategory = function ($connection, $category,$imgDirectory)                              //With this function we display all items corresponding to a specific category
 {
+    if (isset($_GET['pagenr'])){
+        $pagenr = $_GET['pagenr'];
+    } else {
+        $pagenr = 1;
+    }
+
+    $nr_of_records_per_page = 5;
+    if (isset($_POST['use_button'])) {
+        $nr_of_records_per_page = 25;
+    }
+    if (isset($_POST['use_button1'])) {
+        $nr_of_records_per_page = 50;
+    }
+    if (isset($_POST['use_button2'])) {
+        $nr_of_records_per_page = 75;
+    }
+    if (isset($_POST['use_button3'])) {
+        $nr_of_records_per_page = 100;
+    }
+
+    echo
+    "<form action='' method='post'>
+<p class='Resultaten'>Resultaten per pagina:</p>
+<input class='Sort' type='submit' name='use_button' value='25' />
+<input type='submit' name='use_button1' value='50' />
+<input type='submit' name='use_button2' value='75' />
+<input type='submit' name='use_button3' value='100' />
+</form>";
+
+    $offset = ($pagenr-1) * $nr_of_records_per_page;
+    $maxitemspp = $pagenr * $nr_of_records_per_page;
+
+
+
+
+
+
+
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
-    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
+    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' LIMIT $offset,$maxitemspp";
     $result = mysqli_query($connection,$sql);
     echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
     echo '<div class="row">';
@@ -124,9 +122,24 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         }
     }
     echo '</div></div>';
+    ?>
+    <ul class="pagination">
+        <li><a href="?pagenr=1&productGroup=<?php echo $category ?>">First</a></li>
+        <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
+        <li class="Prev-buton" >
+            <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
+        </li>
+        <li class="<?php if($pagenr >= $total_pages){ echo 'enabled'; } ?>">
+            <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1);} ?>">Next</a>
+        </li>
+        <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
+    </ul>
+
+    <?php
 
     mysqli_free_result($result);
 };
+
 //Haalt de naam op van een artikel en print hem
 
 /*
@@ -219,9 +232,43 @@ $filterItems = function ()
 
 $itemsToProductCards = function ($connection)
 {
+    if (isset($_GET['pagenr'])){
+        $pagenr = $_GET['pagenr'];
+    } else {
+        $pagenr = 1;
+    }
+
+    $nr_of_records_per_page = 5;
+
+    if (isset($_POST['use_button'])) {
+        $nr_of_records_per_page = 25;
+    }
+    if (isset($_POST['use_button1'])) {
+        $nr_of_records_per_page = 50;
+    }
+    if (isset($_POST['use_button2'])) {
+        $nr_of_records_per_page = 75;
+    }
+    if (isset($_POST['use_button3'])) {
+        $nr_of_records_per_page = 100;
+    }
+
+    echo
+    "<form action='' method='post'>
+<p class='Resultaten'>Resultaten per pagina:</p>
+<input class='Sort' type='submit' name='use_button' value='25' />
+<input type='submit' name='use_button1' value='50' />
+<input type='submit' name='use_button2' value='75' />
+<input type='submit' name='use_button3' value='100' />
+</form>";
+    $offset = ($pagenr-1) * $nr_of_records_per_page;
+    $maxitemspp = $pagenr * $nr_of_records_per_page;
+
     $i=0;
     $completedItems = array();
-    $result = mysqli_query($connection,"SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID;");
+    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID LIMIT $offset,$maxitemspp";
+    $result = mysqli_query($connection, $sql);
+
     echo '<div class="container-fluid">';
     echo '<div class="row">';
 
@@ -234,6 +281,9 @@ $productName = $row["StockItemName"];
 $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
+$total_rows = $row["aantal"];
+$total_pages = ceil( $total_rows/ $nr_of_records_per_page);
+
 
         if($row['StockGroupName'] == 'Airline Novelties')
         {
@@ -306,7 +356,20 @@ if (in_array($productName, $completedItems) == false)
         $i ++;
     }
     echo '</div></div>';
+    ?>
 
+    <ul class="pagination">
+    <li><a href="?pagenr=1&productGroup=<?php echo $category ?>">First</a></li>
+    <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
+    <li class="Prev-buton" >
+        <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
+    </li>
+    <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
+        <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
+    </li>
+    <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
+</ul>
+<?php
     mysqli_free_result($result);
 };
 //Haalt de naam op van een artikel en print hem
@@ -398,7 +461,8 @@ $imgCategory = function ($category)
     {
         return "images/categories/USB%20Novelties.png";
     }
-}
+};
+
 
 ?>
 

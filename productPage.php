@@ -21,7 +21,7 @@ error_reporting(0);
 include "index.php";
 include "functions.php";
 include "connection.php";
-
+;
 
 
 

@@ -31,11 +31,11 @@ if (isset($_GET['productGroup'])){
 }
 
 
-$total_pages_sql = "SELECT count(distinct regexp_substr(StockItemName, '[a-z ]+')   , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category'";
+$total_pages_sql = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' LIMIT 0, 5";
 $result = mysqli_query($conn,$total_pages_sql);
 $row = $result->fetch_assoc();
 $total_rows = $row["aantal"];
-mysqli_free_result($result);
+
 $total_pages = ceil( $total_rows/ $nr_of_records_per_page);
 
 $itemsCategoryLimit($conn, $category, $offset, $nr_of_records_per_page);
@@ -56,5 +56,7 @@ $itemsCategoryLimit($conn, $category, $offset, $nr_of_records_per_page);
 </ul>
 </body>
 </html>
-
+<?php
+mysqli_free_result($result);
+?>
 

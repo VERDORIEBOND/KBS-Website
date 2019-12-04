@@ -1,5 +1,5 @@
 <!doctype html>
-<div lang="en">
+<div lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 
     <title>Wide World Importers</title>
@@ -29,8 +29,21 @@ include "index.php";
 
 <div class="Productfoto">
     <?php
+
     //foto printen
-    echo '<img src="images/no-product-image.png" alt="ProductImage">';
+
+    $numFromUrl = $_GET['productId'];
+    $query = "SELECT distinct i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1;";
+    $result= mysqli_query($conn,$query);
+    while($row = mysqli_fetch_assoc($result)) {
+
+
+        ?>
+        <div class="foto">
+            <img src="<?php echo $imgCategory($row['groupname']) ?>">
+        </div>
+        <?php
+    }
     ?>
 </div>
 
@@ -49,7 +62,7 @@ include "index.php";
 </div>
 <div class= "ProductTemp">
     <?php
-    //print de voorraad
+    //print de temperatuur
     echo $tempShower($conn);
     ?>
 </div>
@@ -60,7 +73,6 @@ include "index.php";
     <div class="verlanglijstje-btn">
         <form action="winkelmandje.php" method="get">
             <input type="submit" name="V-btn" value="Verlanglijstje" href="#">
-            <h3>Verlanglijstje</h3>
         </form>
     </div>
 
@@ -69,12 +81,8 @@ include "index.php";
 <div class="Omschrijving">
     <p>Omschrijving</p>
 </div>
-<div class="TempShower"
+<div class="TempShower">
     <?php
      echo $tempShower($conn);
     ?>
 </div>
-
-
-</body>
-</html>
