@@ -36,11 +36,7 @@ include "index.php";
     $query = "SELECT i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1;";
     $result= mysqli_query($conn,$query);
     while($row = mysqli_fetch_assoc($result)) {
-
-
         ?>
-
-
             <div class="foto">
                 <img src="<?php echo $imgCategory($row['groupname']) ?>" class= alt="a" />
             <?php } ?>
