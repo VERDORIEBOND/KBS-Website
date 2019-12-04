@@ -415,8 +415,8 @@ $winkelwagendetails = function($connection){
 <?php
     foreach ($_SESSION["cart"] as $key => $value){
         if ($value>0) {
-            // $query = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID ='$key'";
-            $query="SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE StockItemID ='$key';";
+            $query = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID ='$key'";
+            //$query="SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE StockItemID ='$key';";
 
             $results = mysqli_query($connection, $query);
             $row = mysqli_fetch_array($results,MYSQLI_BOTH);

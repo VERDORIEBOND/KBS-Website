@@ -5,7 +5,7 @@ use Quickshiftin\Pdf\Invoice\Spec\Order as Order;
 
 $orderEmail = function()
 {
-    $className = "order";
+    $className = "Order";
     $myOrder = new $className;
     $oInvoiceFactory = new InvoiceFactory();
     $oInvoicePdf     = new PdfInvoice();
@@ -42,7 +42,7 @@ $orderEmail = function()
     $oPdf = $oInvoicePdf->getPdf($myOrder);
 
     // A string rendition, you could echo this to the browser with headers to implement a download
-    $pdf = $oPdf->render();
+    echo $pdf = $oPdf->render();
 
     // You can also simply save it to a file
     file_put_contents('/tmp/test.pdf', $pdf);

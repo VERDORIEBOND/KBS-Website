@@ -101,7 +101,7 @@ $mail = new PHPMailer(true);
         <div class="row">
             <div class="col-md-9">
                 <h3>
-                    Hot Items</h3>
+                    Populaire producten</h3>
             </div>
             <div class="col-md-3">
                 <!-- Controls -->
@@ -432,39 +432,70 @@ if(isset($_GET['button1']))
 {
     $email = $_GET['emailin'];
     $subject = "Je bent ingeschreven voor de nieuwsbrief!";
-try {
-    //Server settings
-    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'wideworldimporters.5@gmail.com';                     // SMTP username
-    $mail->Password   = 'aardappel';                               // SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-    $mail->Port       = 587;                                    // TCP port to connect to
-   //Recipients
-    $mail->setFrom('wideworldimporters.5@gmail.com', 'Wide World Importers');
-    $mail->addAddress($email);     // Add a recipient
-    //$mail->addReplyTo('info@example.com', 'Information');
-    //$mail->addCC('cc@example.com');
-    //$mail->addBCC('bcc@example.com');
+    $emailInDatabase = false;
 
-    // Attachments
-    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    $sql = "SELECT email FROM nieuwsbriefinschrijving";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($result))
+    {
+        if ($row['email'] == $email)
+        {
+            $emailInDatabase = true;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = $subject;
-    $mail->Body    = $signupEmail;                                    //for html clients
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';        //for non html clients
 
-    $mail->send();
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        echo "<script type='text/javascript'>alert('Het email adress is onjuist');</script>";
+    }
+    elseif ($emailInDatabase == true)
+    {
+        echo "<script type='text/javascript'>alert('U bent al ingeschreven voor de nieuwbrief');</script>";
+    }
+    else {
+        $sql = "INSERT INTO nieuwsbriefinschrijving (email)VALUES ('$email')";
+        mysqli_query($conn, $sql);
 
-    //echo 'Message has been sent';
-} catch (Exception $e) {
-    //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+        $subject = "Je bent ingeschreven voor de nieuwsbrief!";
+        try {
+            //Server settings
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->Username = 'wideworldimporters.5@gmail.com';                     // SMTP username
+            $mail->Password = 'aardappel';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            $mail->Port = 587;                                    // TCP port to connect to
+            //Recipients
+            $mail->setFrom('wideworldimporters.5@gmail.com', 'Wide World Importers');
+            $mail->addAddress($email);     // Add a recipient
+            //$mail->addReplyTo('info@example.com', 'Information');
+            //$mail->addCC('cc@example.com');
+            //$mail->addBCC('bcc@example.com');
+
+            // Attachments
+            //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $subject;
+            $mail->Body = $signupEmail;                                    //for html clients
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';        //for non html clients
+
+            $mail->send();
+
+            //echo 'Message has been sent';
+        } catch (Exception $e) {
+            //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
 }
 ?>
 
