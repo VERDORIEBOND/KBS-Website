@@ -45,10 +45,10 @@ if(isset($_POST['submit'])){
                         }
                     }
                 } else{
-                    $username_err = "Er is geen account met dit emailadres";
+                    $email_err = "Er is geen account met dit emailadres";
                 }
             } else{
-                $username_err= "Er is een fout in het syteem opgetreden";
+                $email_err= "Er is een fout in het syteem opgetreden";
             }
         }
         mysqli_stmt_close($stmt);

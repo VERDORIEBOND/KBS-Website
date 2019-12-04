@@ -127,6 +127,15 @@ error_reporting(0);
                     echo "Fout opgetreden in het systeem.";
                 }
             }
+            if($newsletter=true){
+                $sql2= "INSERT INTO Nieuwsbriefinschrijving (email, has_account) VALUES (?,?)";
+                if($stmt2=mysqli_prepare($conn,$sql2)){
+                    mysqli_stmt_bind_param($stmt2,"si",$param1_email,$param_account);
+                    $param1_email=$email;
+                    $param_account=1;
+                    mysqli_stmt_execute($stmt2);
+                }
+            }
             echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
             mysqli_stmt_close($stmt1);
         }

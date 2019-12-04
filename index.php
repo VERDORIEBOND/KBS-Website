@@ -75,9 +75,6 @@ session_start();
                     <p>Welkom <?php print($_SESSION['name']); ?></p>
                 </span>
         <?php } else{ ?>
-            <div class="verlanglijstje">
-                <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
-            </div>
             <div class="winkelmandje">
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
             </div>
