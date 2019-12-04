@@ -58,10 +58,18 @@
             <div class="LogIn">
                 <span><a href="Login.php"><span class="glyphicon glyphicon-user" ></span></a></span><br>
 
-            <div class="winkelmandje">
+            <div class=" <div class= col-xs-4 col-md-offset-2 winkelmandje ">
 
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
             </div>
+                <div class="verlanglijstje">
+                    <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
                 </body>
 
                 </html>

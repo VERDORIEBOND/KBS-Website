@@ -55,12 +55,17 @@ include "index.php";
 </div>
 <?php //dit zijn de knoppen en de omschrijving ?>
 <div class="Button">
-    <h2>Winkelwagen</h2>
+    <form method="POST" action="verlanglijstje.php">
+        <input type="submit" name="add"   value="Toevoegen aan verlanglijst">
+        <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
+        <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
+    </form>
+
 </div>
     <div class="verlanglijstje-btn">
         <form method="POST" action="winkelfunctie.php">
 
-            <input type="submit" name="add"  class="btn btn-success" value="Add to Cart">
+            <input type="submit" name="add"   value="Toevoegen an winkelmand">
             <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
             <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
 
