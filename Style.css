@@ -341,10 +341,10 @@ div.carousel-item div.carousel-caption p
 .Verzenden{
     color: #6ac1ff;
 }
-.LogIn .winkelmandje{
+.LogIn .winkelmandje .fa-shopping-cart{
     position: absolute;
     color: #6ac1ff;
-    right: 4%;
+    right: 50%;
     top: 40%;
     font-size: 150%;
 }

@@ -58,10 +58,14 @@ include "index.php";
     <h2>Winkelwagen</h2>
 </div>
     <div class="verlanglijstje-btn">
-        <form action="winkelmandje.php" method="get">
-            <input type="submit" name="V-btn" value="Verlanglijstje" href="#">
-            <h3>Verlanglijstje</h3>
+        <form method="POST" action="winkelfunctie.php">
+
+            <input type="submit" name="add"  class="btn btn-success" value="Add to Cart">
+            <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
+            <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
+
         </form>
+
     </div>
 
 
