@@ -3,7 +3,7 @@
 <head>
 
     <title>Wide World Importers</title>
-    <link rel="stylesheet" type="text/css" href="ProductDetails.css">
+    <link rel="stylesheet" type="text/css" href="productDetails.css">
 </head>
 
 

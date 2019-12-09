@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Product Page</title>
 
-    <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
@@ -105,7 +105,7 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
             ?>
             <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                 <div class="card">
-                    <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
+                    <a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                         <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
                         <h1><?php echo $productName ?></h1>
                         <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
@@ -341,7 +341,7 @@ if (in_array($productName, $completedItems) == false)
         ?>
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">
-                <a href="ProductDetails.php?productId=<?php echo $row["StockItemID"] ?>">
+                <a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                 <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>

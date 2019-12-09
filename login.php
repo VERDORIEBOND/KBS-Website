@@ -83,7 +83,7 @@ if(isset($_POST['submit'])){
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="submit">Login</button>
             </div>
-            <p>Heb je nog geen account? <a href="Register.php">Registreer</a>.</p>
+            <p>Heb je nog geen account? <a href="register.php">Registreer</a>.</p>
         </form>
     </div>
 

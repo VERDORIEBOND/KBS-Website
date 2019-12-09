@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Product Page</title>
 
-    <link rel="stylesheet" type="text/css" href="Style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
@@ -122,7 +122,7 @@ error_reporting(0);
                 $param_phone=$phone;
                 $param_newsletter=$newsletter;
                 if(mysqli_stmt_execute($stmt1)){
-                    echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
+                    echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
                 } else{
                     echo "Fout opgetreden in het systeem.";
                 }
@@ -136,7 +136,7 @@ error_reporting(0);
                     mysqli_stmt_execute($stmt2);
                 }
             }
-            echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
+            echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
             mysqli_stmt_close($stmt1);
         }
     }
@@ -198,7 +198,7 @@ error_reporting(0);
             <button type="submit" class="btn btn-primary" name="submit">Registreren</button>
             <button type="reset" class="btn btn-default">Reset</button>
         </div>
-        <p>Heb je al een account? <a href="Login.php">Login</a>.</p>
+        <p>Heb je al een account? <a href="login.php">Login</a>.</p>
     </form>
 </div>
 </div>

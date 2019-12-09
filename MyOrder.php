@@ -2,7 +2,7 @@
 
 
 namespace MyApp;
-include 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Spec\Order.php';
+include_once 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Spec\Order.php';
 use Quickshiftin\Pdf\Invoice\Spec\Order;
 date_default_timezone_set('CET');
 
@@ -118,13 +118,7 @@ class MyOrder implements Order
      */
     public function getOrderItems()
     {
-        $orderItems = array();
-        $sql = "SELECT StockItemName FROM wideworldimporters.stockitems WHERE StockItemID = 5 OR StockItemID = 56 OR StockItemID = 26;";
-        $result = mysqli_query($this->conn,$sql);
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            array_push($orderItems,$row['StockItemName']);
-        }
+        $orderItems = MyOrderItem::class;
         return $orderItems;
     }
 

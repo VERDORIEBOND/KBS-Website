@@ -38,7 +38,7 @@ $orderEmail = function()
     $oInvoicePdf->setLineColor($oInvoiceFactory->createColorGrayscale(0));
 
     // Configure logo
-    $oInvoicePdf->setLogoPath(__DIR__ . 'images/WWI.png');
+    $oInvoicePdf->setLogoPath(__DIR__ . 'images/WWIJPG.jpg');
 
     // Build the PDF
     // $oPdf is an instance of Zend_Pdf

@@ -4,13 +4,14 @@ include_once "connection.php";
 include_once "functions.php";
 include_once "index.php";
 include_once "orderEmail.php";
-//error_reporting(-1);
+error_reporting(-1);
+$InvoiceTest = new Quickshiftin\Pdf\Invoice\InvoiceTest();
 
 
 if(isset($_POST['add'])) {
     if (isset($_SESSION["cart"][$_POST["Id"]]) && $_SESSION["cart"][$_POST["Id"]] > 0) {
         echo '<script>alert("Product is already Added to Cart")</script>';
-        echo '<script>window.location="ProductDetails.php"</script>';
+        echo '<script>window.location="productDetails.php"</script>';
 
     } else {
         $_SESSION["cart"][$_POST["Id"]] = 1;
@@ -165,7 +166,8 @@ if (isset($_GET["action"])&&$_GET["action"] == "delete"){
 
             if(isset($_GET['button1']))
             {
-                $orderEmail();
+                //$orderEmail();
+                $InvoiceTest->testSomething();
             }
 
         ?>
