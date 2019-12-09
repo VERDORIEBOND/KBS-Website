@@ -76,7 +76,7 @@ include "index.php";
     <div class="verlanglijstje-btn">
         <form method="POST" action="winkelfunctie.php">
 
-            <input type="submit" name="add"   value="Toevoegen an winkelmand">
+            <input type="submit" name="add"   value="Toevoegen aan winkelmand">
             <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
             <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
 

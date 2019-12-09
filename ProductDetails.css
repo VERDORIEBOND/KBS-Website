@@ -19,7 +19,7 @@
     text-decoration: none;
     color: white;
     position: absolute;
-    left: 80%;
+    left: 65%;
     top: 40%;
     text-align: center;
     font-size: 16px;
@@ -33,7 +33,7 @@ background-color: #496ebc;
 }
 .Prijs{
     position: absolute;
-    left: 80%;
+    left: 65%;
     top: 30%;
     font-size: 36px;
     color: black;
@@ -45,7 +45,7 @@ background-color: #496ebc;
     text-decoration: none;
     color: white;
     position: absolute;
-    left: 80%;
+    left: 65%;
     top: 46%;
     text-align: center;
     font-size: 16px;
@@ -60,7 +60,7 @@ background-color: #496ebc;
     position: absolute;
     width: 500px;
     height: 10%;
-    left: 80%;
+    left: 65%;
     top: 51%;
     font-size: 16px;
     border: 1px solid #3b5998;
@@ -71,13 +71,13 @@ background-color: #496ebc;
 
 .Stock{
     position: absolute;
-    left: 80%;
+    left: 65%;
     width: auto%;
     top: 35%;
 }
 .ProductTemp{
     position: absolute;
-    left: 80%;
+    left: 65%;
     top: 37%;
 }
 .alt\=\"a\"{
