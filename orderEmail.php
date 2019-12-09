@@ -19,8 +19,8 @@ $orderEmail = function()
     $oInvoicePdf->setItalicFontPath(__DIR__ . '\vendor\quickshiftin\php-pdf-invoice\assets-\Arial Italic.ttf');
 
     // Set Colors
-    $red    = '#d53f27';
-    $yellow = '#e8e653';
+    $red    = '#00bcf2';
+    $yellow = '#dbd6d3';
 
     // Title section of invoice
     // Background color for title section of invoice, the default is white
@@ -48,5 +48,5 @@ $orderEmail = function()
     $pdf = $oPdf->render();
 
     // You can also simply save it to a file
-    file_put_contents('D:\test.pdf', $pdf);
+    file_put_contents('C:\test.pdf', $pdf);
 };
