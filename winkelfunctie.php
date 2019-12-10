@@ -6,7 +6,7 @@ include_once "connection.php";
 include_once "functions.php";
 include_once "index.php";
 //include_once "orderEmail.php";
-error_reporting(0);
+error_reporting(-1);
 //$InvoiceTest = new Quickshiftin\Pdf\Invoice\InvoiceTest();
 
 
