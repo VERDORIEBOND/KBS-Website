@@ -65,9 +65,46 @@ session_start();
     </ul>
 
 </nav>
-
 <!--- SALE NAVIGATION BAR --->
 
+<div class="snowflakes" aria-hidden="true">
+    <div class="snowflake">
+        ❅
+    </div>
+    <div class="snowflake">
+        ❆
+    </div>
+    <div class="snowflake">
+        ❅
+    </div>
+    <div class="snowflake">
+        ❆
+    </div>
+    <div class="snowflake">
+        ❅
+    </div>
+    <div class="snowflake">
+        ❆
+    </div>
+    <div class="snowflake">
+        ❅
+    </div>
+    <div class="snowflake">
+        ❆
+    </div>
+    <div class="snowflake">
+        ❅
+    </div>
+    <div class="snowflake">
+        ❆
+    </div>
+    <div class="snowflake">
+        ❅
+    </div>
+    <div class="snowflake">
+        ❆
+    </div>
+</div>
 
 
 
@@ -99,7 +136,7 @@ session_start();
                 </ul>
         </span>
         <div class="Search-Bar">
-            <form action="new%20search%20functie.php" method="get">
+            <form action="searchFunction.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
                     <input class="search-btn"  type="submit" value="Search" href="#">
@@ -141,5 +178,8 @@ session_start();
         <span><a href="#">Over ons</a> </span>
     </ul>
 </div>
+
+
+
 </body>
 </html>
