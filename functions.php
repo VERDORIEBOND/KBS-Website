@@ -409,67 +409,23 @@ $stockzoeker = function ($connection)   {
     }
 };
 
-$winkelwagendetails = function($connection){
+$winkelwagendetails = function($connection) {
     $returnValue = []; ?>
 
-<?php
-    foreach ($_SESSION["cart"] as $key => $value){
-        if ($value>0) {
+    <?php
+    foreach ($_SESSION["cart"] as $key => $value) {
+        if ($value > 0) {
             $query = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID ='$key'";
-            //$query="SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE StockItemID ='$key';";
+            //  $query="SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE StockItemID ='$key';";
 
             $results = mysqli_query($connection, $query);
-            $row = mysqli_fetch_array($results,MYSQLI_BOTH);
+            $row = mysqli_fetch_array($results, MYSQLI_BOTH);
             $productdetails = ["ProductId" => $row["StockItemID"], "Name" => $row["StockItemName"], "Price" => $row["RecommendedRetailPrice"], "Aantal" => $value];
             array_push($returnValue, $productdetails);
         }
 
-        if($row['StockGroupName'] == 'Airline Novelties')
-        {
-            $imgDirectory = "images/categories/Airline%20Novelties.png";
-        }
-        if($row['StockGroupName'] == 'Clothing')
-        {
-            $imgDirectory = "images/categories/Clothing.png";
-        }
-        if($row['StockGroupName'] == 'Computing Novelties')
-        {
-            $imgDirectory = "images/categories/Computer%20Novelties.png";
-        }
-        if($row['StockGroupName'] == 'Furry Footwear')
-        {
-            $imgDirectory = "images/categories/Furry%20Footwear.png";
-        }
-        if($row['StockGroupName'] == 'Mugs')
-        {
-            $imgDirectory = "images/categories/Mugs.png";
-        }
-        if($row['StockGroupName'] == 'Novelty Items')
-        {
-            $imgDirectory = "images/categories/Novelty%20Items.png";
-        }
-        if($row['StockGroupName'] == 'Packaging Materials')
-        {
-            $imgDirectory = "images/categories/Packing%20Materials.png";
-        }
-        if($row['StockGroupName'] == 'T-Shirts')
-        {
-            $imgDirectory = "images/categories/T-Shirts.png";
-        }
-        if($row['StockGroupName'] == 'Toys')
-        {
-            $imgDirectory = "images/categories/Toys.png";
-        }
-        if($row['StockGroupName'] == 'USB Novelties')
-        {
-            $imgDirectory = "images/categories/USB%20Novelties.png";
-        }
-
     }
-
     return $returnValue;
-
-
 };
 
 $tempShower = function ($connection)   {

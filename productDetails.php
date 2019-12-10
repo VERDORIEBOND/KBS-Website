@@ -27,23 +27,12 @@ include "index.php";
     ?>
 </div>
 
-    <div class="Productfoto">
-        <?php
-
-        //foto printen
-
-        $numFromUrl = $_GET['productId'];
-        $query = "SELECT i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1  ;";
-        $result= mysqli_query($conn,$query);
-        while($row = mysqli_fetch_assoc($result)) {
-        ?>
-        <div class="foto">
-            <img src="<?php echo $imgCategory($row['groupname']) ?>" class= alt="a" />
-            <?php } ?>
-
-        </div>
-    </div>
-
+<div class="Productfoto">
+    <?php
+    //foto printen
+    echo '<img src="images/no-product-image.png" alt="ProductImage">';
+    ?>
+</div>
 
 <div class="Prijs">
     <?php
@@ -65,16 +54,9 @@ include "index.php";
     ?>
 </div>
 <?php //dit zijn de knoppen en de omschrijving ?>
-<div class="Button">
-    <form method="POST" action="verlanglijstje.php">
-        <input type="submit" name="add"   value="Toevoegen aan verlanglijst">
-        <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
-        <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
-    </form>
 
-</div>
-    <div class="verlanglijstje-btn">
-        <form method="POST" action="winkelfunctie.php">
+    <div class="Button">
+        <form method="post" action="winkelfunctie.php">
 
             <input type="submit" name="add"   value="Toevoegen aan winkelmand">
             <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
@@ -87,20 +69,7 @@ include "index.php";
 
 
 <div class="Omschrijving">
-    <?php
-    $NumberUrl = $_GET ['productId'];
-    $query2 = "SELECT i.StockItemID, MarketingComments FROM stockitems i WHERE StockItemID = '$NumberUrl'";
-    $result2 = mysqli_query($conn,$query2);
-    if(!empty(trim($row['MarketingComments']))) {
-        echo "Bij dit product zit geen beschrijving";
-    }
-    else{
-        $row = mysqli_fetch_assoc($result2);
-        echo $row['MarketingComments'];
-
-    }
-    ?>
-
+    <p>Omschrijving</p>
 </div>
 <div class="TempShower"
     <?php
