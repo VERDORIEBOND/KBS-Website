@@ -25,9 +25,9 @@ session_start();
 <!--- SALE NAVIGATION BAR --->
 <nav class="navbar navbar-inverse navbar-expand-lg" id="sale-navbar">
     <ul class="nav navbar-nav">
-        <p class="navbar-text">Some text</p>
+        <p class="navbar-text">KERST AANBIEDINGEN</p>
         <!-- Display the countdown timer in an element -->
-        <p id="demo" style="top: 10px;">
+        <p id="demo">
 
         <script id="countdown-timer">
             // Set the date we're counting down to
@@ -60,7 +60,7 @@ session_start();
             }, 1000);
         </script>
         </p>
-
+        <p class="navbar-text">KOOP NU</p>
 
     </ul>
 
