@@ -127,7 +127,7 @@ error_reporting(0);
                     echo "Fout opgetreden in het systeem.";
                 }
             }
-            if($newsletter=true){
+            if($newsletter==true){
                 $sql2= "INSERT INTO Nieuwsbriefinschrijving (email, has_account) VALUES (?,?)";
                 if($stmt2=mysqli_prepare($conn,$sql2)){
                     mysqli_stmt_bind_param($stmt2,"si",$param1_email,$param_account);
