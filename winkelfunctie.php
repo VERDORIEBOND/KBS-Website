@@ -6,7 +6,7 @@ include_once "connection.php";
 include_once "functions.php";
 include_once "index.php";
 //include_once "orderEmail.php";
-error_reporting(-1);
+error_reporting(0);
 //$InvoiceTest = new Quickshiftin\Pdf\Invoice\InvoiceTest();
 
 
@@ -22,13 +22,17 @@ if(isset($_POST['add'])) {
 
 
 }
-
-
 if (isset($_GET["action"])&&$_GET["action"] == "delete"){
-    //unset($_SESSION["cart"][$_GET["productId"]]);
-    ($_SESSION["cart"][$_GET["productId"]]=($_SESSION["cart"][$_GET["productId"]]-1));
+    unset($_SESSION["cart"][$_GET["productId"]]);
+    //($_SESSION["cart"][$_GET["productId"]]=($_SESSION["cart"][$_GET["productId"]]-1));
     print'<script>window.location="winkelfunctie.php"</script>';
 }
+
+
+
+    //unset($_SESSION["cart"][$_GET["productId"]]);
+
+
 if (isset($_POST['Remove'])){
 
     $_SESSION["cart"]="";
@@ -97,7 +101,7 @@ if (isset($_POST['Remove'])){
 
     <div style="clear: both"></div>
     <h3 class="title2">Shopping Cart Details</h3>
-    <div class="table-responsive">
+    <div style="overflow-x:auto;">
         <table class="table table-bordered">
             <tr class="Table_Row">
                 <th><h5>
@@ -130,57 +134,28 @@ if (isset($_POST['Remove'])){
                 <td> <?php echo $value['ProductId'] ?></td>
                 <td> <?php echo $value['Name'] ?></td>
                 <td> <?php echo "€". $value['Price'] ?></td>
-                <td><?php echo $value['Aantal'] ?></td>
                 <td>
-                    <form aantal="<?= $value['Aantal']?>" action="winkelfunctie.php" method="get" >
-                        <div class="form-group">
+                    <a href="winkelfunctie.php?action=Min&productId=<?php echo $value['ProductId'] ?>">
+                        <span class="text-danger"><span class="fas fa-minus"></span></a>
 
-                            <select name="aantal" style="width 35%; height: 38px; border-radius: 5px" onchange="document.getElementById('<?= $value['Aantal']?>').submit();">
-                                <?php
+                    &nbsp;&nbsp;
+                    <?php
 
-                                for ($i = 1; $i <= 100; $i++) {
-                                    if ($i == $value['Aantal']){
-                                        print "<span>" . "<option selected value='$i'>$i</option>" . "</span>";
-                                    }else{
-                                        print "<span>" . "<option value='$i'>$i</option>" . "</span>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <input type="hidden" name="aantal" value="<?php echo $value['Aantal'] ?>">
-                        </div>
-                    </form>
+                    if ((isset($_GET["action"]) && $_GET["action"] == "Min")) {
+                        ($_SESSION["cart"][$_GET["productId"]] = ($_SESSION["cart"][$_GET["productId"]] - 1));
+                    } elseif ((isset($_GET["action"]) && $_GET["action"] == "Plus")) {
+                        ($_SESSION["cart"][$_GET["productId"]] = ($_SESSION["cart"][$_GET["productId"]] + 1));
+                    }
+
+
+                    echo $value['Aantal'] ?>
+                    &nbsp;&nbsp;
+
+                    <a href="winkelfunctie.php?action=Plus&productId=<?php echo $value['ProductId'] ?>">
+                        <span class="text-danger"><span class="fas fa-plus"></span></a>
+
                 </td>
-                <td>
-                    <form>
 
-                        <select id="mySelect">
-                            <?php
-                            for ($i = 1; $i <= 100; $i++) {
-                                if ($i == $value['Aantal']){
-                                    print "<span>" . "<option selected value='$i'>$i</option>" . "</span>";
-                                }else{
-                                    print "<span>" . "<option value='$i'>$i</option>" . "</span>";
-                                }
-                            }
-
-                            ?>
-                        </select>
-                    </form>
-
-
-
-                    <button type="button" onclick="myFunction()">try</button>
-
-                    <script>
-                        function myFunction() {
-                            document.getElementById("mySelect").value = <?php echo ($value['Aantal'] * $value['Price']) ?> ;
-                        }
-                    </script>
-                </td>
-                <td>
-                    <input type="number" class="form-control" value="<?php $value['Aantal'] ?>" style="width:35%">
-                </td>
 
 
 
@@ -190,6 +165,13 @@ if (isset($_POST['Remove'])){
                 }
 
             }
+
+            $cartItem =(count($producten));
+            $b=$cartItem;
+            echo $b;
+
+
+
                      ?>
 
 
@@ -198,9 +180,15 @@ if (isset($_POST['Remove'])){
                 <td colspan="4" align="right">Total</td>
                 <td align="center">$ <?php echo number_format($total, 2); ?></td>
 
+
+            </tr>
+            <tr><td colspan="4" align="right">Total+BTW</td>
+                <td align="center">$<?php $prec =(21/100)*$total; $totalMBTW=$total+$prec; echo number_format($totalMBTW, 2); ?>
+                </td>
             </tr>
 
         </table>
+
         <form method="get" action="winkelfunctie.php">
             <input type="submit" name="button1" value="Order">
         </form>

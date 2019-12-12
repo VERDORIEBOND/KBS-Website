@@ -16,6 +16,8 @@ session_start();
     <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/dda578f1eb.js" crossorigin="anonymous"></script>
@@ -65,46 +67,10 @@ session_start();
     </ul>
 
 </nav>
+
 <!--- SALE NAVIGATION BAR --->
 
-<div class="snowflakes" aria-hidden="true">
-    <div class="snowflake">
-        ❅
-    </div>
-    <div class="snowflake">
-        ❆
-    </div>
-    <div class="snowflake">
-        ❅
-    </div>
-    <div class="snowflake">
-        ❆
-    </div>
-    <div class="snowflake">
-        ❅
-    </div>
-    <div class="snowflake">
-        ❆
-    </div>
-    <div class="snowflake">
-        ❅
-    </div>
-    <div class="snowflake">
-        ❆
-    </div>
-    <div class="snowflake">
-        ❅
-    </div>
-    <div class="snowflake">
-        ❆
-    </div>
-    <div class="snowflake">
-        ❅
-    </div>
-    <div class="snowflake">
-        ❆
-    </div>
-</div>
+
 
 
 
@@ -143,9 +109,10 @@ session_start();
                 </div>
             </form>
         </div>
+        <div>
         <?php if($_SESSION['loggedin'] == true){?>
             <div class="verlanglijstje1">
-                <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
+                <span><a href="verlanglijstje.php"><span class="glyphicon glyphicon-heart"></span></a></span>
             </div>
             <div class="winkelmandje1">
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
@@ -161,6 +128,9 @@ session_start();
                     <p>Welkom <?php print($_SESSION['name']); ?></p>
                 </span>
         <?php } else{ ?>
+            <div class="verlanglijstje1">
+                <span><a href="verlanglijstje.php"><span class="glyphicon glyphicon-heart"></span></span></a></span>
+            </div>
             <div class="winkelmandje">
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
             </div>
@@ -170,6 +140,7 @@ session_start();
         <?php } ?>
     </div>
 </nav>
+
 <div class="footer">
     <ul>
         <span><a href="#">Service</a> </span>
@@ -178,8 +149,5 @@ session_start();
         <span><a href="#">Over ons</a> </span>
     </ul>
 </div>
-
-
-
 </body>
 </html>

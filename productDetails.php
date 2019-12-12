@@ -65,6 +65,16 @@ include "index.php";
         </form>
 
     </div>
+    <div class="verlanglijstje-btn">
+        <form method="post" action="verlanglijstje.php">
+
+            <input type="submit" name="voegtoe"  value="Toevoegen aan verlanglijst">
+            <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
+            <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
+
+        </form>
+
+    </div>
 
 
 

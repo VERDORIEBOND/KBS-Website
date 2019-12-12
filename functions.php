@@ -429,6 +429,25 @@ $winkelwagendetails = function($connection) {
     return $returnValue;
 };
 
+$verlanglijstdetails = function($connection) {
+    $returnValue = []; ?>
+
+    <?php
+    foreach ($_SESSION["verlang"] as $key => $value) {
+        if ($value > 0) {
+            $query = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID ='$key'";
+            //  $query="SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE StockItemID ='$key';";
+
+            $results = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($results, MYSQLI_BOTH);
+            $wishlistdetails = ["ProductId" => $row["StockItemID"], "Name" => $row["StockItemName"], "Price" => $row["RecommendedRetailPrice"], "Aantal" => $value];
+            array_push($returnValue, $wishlistdetails);
+        }
+
+    }
+    return $returnValue;
+};
+
 $tempShower = function ($connection)   {
     $numFromUrl = $_GET['productId'];
     $query = "SELECT c.Temperature, s.StockItemID FROM coldroomtemperatures c JOIN stockitems s on c.ColdRoomSensorNumber = s.IsChillerStock where s.StockItemID = '$numFromUrl' AND s.IsChillerStock = 1;";
