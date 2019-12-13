@@ -27,12 +27,23 @@ include "index.php";
     ?>
 </div>
 
-<div class="Productfoto">
-    <?php
-    //foto printen
-    echo '<img src="images/no-product-image.png" alt="ProductImage">';
-    ?>
-</div>
+    <div class="Productfoto">
+        <?php
+
+        //foto printen
+
+        $numFromUrl = $_GET['productId'];
+        $query = "SELECT i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1  ;";
+        $result= mysqli_query($conn,$query);
+        while($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <div class="foto">
+            <img src="<?php echo $imgCategory($row['groupname']) ?>" class= alt="a" />
+            <?php } ?>
+
+        </div>
+    </div>
+
 
 <div class="Prijs">
     <?php
@@ -85,6 +96,18 @@ include "index.php";
     <?php
      echo $tempShower($conn);
     ?>
+</div>
+<div class="Video" style="position:absolute; left:65%; top:65%; "   >
+    <video width="400" height="auto" controls="controls">
+        <source src="/images/Videos/Testvideo.mp4" type="video/mp4">
+        <source src="images/Videos/TestvideoWebM.webm" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <p>
+        Video courtesy  of
+        <a href=https://www.youtube.com/watch?v=HluANRwPyNo target="_blank"> Jombo </a>.
+    </p>
 </div>
 
 
