@@ -11,7 +11,7 @@
     border-radius: 16px;
 }
 .Button {
-    width: 500px;
+    width: 350px;
     max-width: 45%;
     padding: 5px 20px;
     background-color: #55acee;
@@ -19,7 +19,7 @@
     color: white;
     position: relative;
     left: 65%;
-    bottom: 265px;
+    bottom: 247px;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
@@ -32,13 +32,15 @@ opacity: 90%;
 }
 .Prijs{
     position: relative;
+    width: auto;
+    max-width: 25%;
     left: 65%;
-    bottom: 255px;
+    bottom: 250px;
     font-size: 36px;
     color: black;
 }
 .verlanglijstje-btn{
-    width: 500px;
+    width: 350px;
     max-width: 45%;
     padding: 1px  20px;
     background-color: orangered;
@@ -46,7 +48,7 @@ opacity: 90%;
     color: white;
     position: relative;
     left: 65%;
-    bottom: 255px;
+    bottom: 235px;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
@@ -61,10 +63,10 @@ opacity: 90%;
 
 .Omschrijving{
     position: relative;
-    width: 500px;
+    width: 350px;
     height: 10%;
     left: 65%;
-    bottom: 245px;
+    bottom: 220px;
     font-size: 16px;
     border: 1px solid #3b5998;
     border-radius: 8px;
@@ -74,6 +76,7 @@ opacity: 90%;
     position: relative;
     left: 65%;
     width: auto;
+    max-width: 20%;
     bottom: 255px;
 }
 .ProductTemp{
