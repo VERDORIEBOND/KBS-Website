@@ -60,7 +60,7 @@ $mail = new PHPMailer(true);
                 <div class="mask rgba-black-strong"></div>
             </div>
             <div class="carousel-caption">
-                <h3 class="h3-responsive">k</h3>
+                <h3 class="h3-responsive"></h3>
                 <p>Clothing</p>
             </div>
         </div>

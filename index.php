@@ -25,9 +25,14 @@ session_start();
 <!--- SALE NAVIGATION BAR --->
 <nav class="navbar navbar-inverse navbar-expand-lg" id="sale-navbar">
     <ul class="nav navbar-nav">
-        <p class="navbar-text">KERST AANBIEDINGEN</p>
+        <a class="navbar-brand" href="#">
+            <img src="/images/jing.fm-christmas-ornament-clipart-black-190781.png" style="height: 60px; width: auto;">
+        </a>
+        <a href="/productPage.php" style="text-decoration: none">
+        <p class="navbar-text" style="font-weight: bold; color: #FF3213; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 2px;">KERST AANBIEDINGEN EINDIGEN IN</p>
+        </a>
         <!-- Display the countdown timer in an element -->
-        <p id="demo">
+        <p id="demo" style="margin-top: 19px; color: #FF3213; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 1.5px;">
 
         <script id="countdown-timer">
             // Set the date we're counting down to
@@ -60,12 +65,11 @@ session_start();
             }, 1000);
         </script>
         </p>
-        <p class="navbar-text">KOOP NU</p>
 
     </ul>
 
 </nav>
-<!--- SALE NAVIGATION BAR --->
+<!--- SALE NAVIGATION BAR
 
 <div class="snowflakes" aria-hidden="true">
     <div class="snowflake">
@@ -105,7 +109,7 @@ session_start();
         ❆
     </div>
 </div>
-
+--->
 
 
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
