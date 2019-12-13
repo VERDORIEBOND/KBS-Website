@@ -2,7 +2,7 @@
     left: 250px;
     position: relative;
     color: #496ebc;
-    font-size: 250%;
+    font-size: 200%;
     top: 80px;
 }
 .Productfoto{
@@ -14,11 +14,12 @@
 }
 .Button {
     width: 500px;
+    max-width: 26%;
     padding: 5px 20px;
     background-color: #55acee;
     text-decoration: none;
     color: white;
-    position: absolute;
+    position: relative;
     left: 65%;
     top: 40%;
     text-align: center;
@@ -32,7 +33,7 @@
 background-color: #496ebc;
 }
 .Prijs{
-    position: absolute;
+    position: relative;
     left: 65%;
     top: 30%;
     font-size: 36px;
@@ -44,7 +45,7 @@ background-color: #496ebc;
     background-color: orangered;
     text-decoration: none;
     color: white;
-    position: absolute;
+    position: relative;
     left: 65%;
     top: 46%;
     text-align: center;
@@ -57,7 +58,7 @@ background-color: #496ebc;
 }
 
 .Omschrijving{
-    position: absolute;
+    position: relative;
     width: 500px;
     height: 10%;
     left: 65%;
@@ -68,19 +69,19 @@ background-color: #496ebc;
 }
 
 .Stock{
-    position: absolute;
+    position: relative;
     left: 65%;
     width: auto;
     top: 35%;
 }
 .ProductTemp{
-    position: absolute;
+    position: relative;
     left: 65%;
     top: 37%;
 }
 .alt\=\"a\"{
     position: relative;
-    width: 120%;
+    width: 100%;
     height: auto;
     border-radius: 2px;
 
