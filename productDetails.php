@@ -94,7 +94,7 @@ include "index.php";
         echo $tempShower($conn);
         ?>
     </div>
-    <div class="Video" style="position:relative; left:65%; bottom: 235px"   >
+    <div class="Video" style="position:relative; left:65%; bottom: 225px"   >
         <video width="400" height="auto" controls="controls">
             <source src="/images/Videos/Testvideo.mp4" type="video/mp4">
             <source src="images/Videos/TestvideoWebM.webm" type="video/mp4">
