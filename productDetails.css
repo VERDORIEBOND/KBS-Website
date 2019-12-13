@@ -1,5 +1,4 @@
 .Productname{
-    left: 250px;
     position: relative;
     color: #496ebc;
     font-size: 200%;
@@ -8,20 +7,19 @@
 .Productfoto{
     position: relative;
     width: 500px;
-    left: 250px;
     top: 150px;
     border-radius: 16px;
 }
 .Button {
     width: 500px;
-    max-width: 26%;
+    max-width: 45%;
     padding: 5px 20px;
     background-color: #55acee;
     text-decoration: none;
     color: white;
     position: relative;
     left: 65%;
-    top: 40%;
+    bottom: 275px;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
@@ -30,28 +28,32 @@
 
 }
 .Button:hover{
-background-color: #496ebc;
+opacity: 90%;
 }
 .Prijs{
     position: relative;
     left: 65%;
-    top: 30%;
+    bottom: 250px;
     font-size: 36px;
     color: black;
 }
 .verlanglijstje-btn{
     width: 500px;
+    max-width: 45%;
     padding: 1px  20px;
     background-color: orangered;
     text-decoration: none;
     color: white;
     position: relative;
     left: 65%;
-    top: 46%;
+    bottom: 265px;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
     border-radius: 8px;
+}
+.verlanglijstje-btn:hover{
+opacity: 90%;
 }
 .Button-twee:hover{
     background-color: brown;
@@ -62,7 +64,7 @@ background-color: #496ebc;
     width: 500px;
     height: 10%;
     left: 65%;
-    top: 51%;
+    bottom: 255px;
     font-size: 16px;
     border: 1px solid #3b5998;
     border-radius: 8px;
@@ -72,12 +74,12 @@ background-color: #496ebc;
     position: relative;
     left: 65%;
     width: auto;
-    top: 35%;
+    bottom: 260px;
 }
 .ProductTemp{
     position: relative;
-    left: 65%;
-    top: 37%;
+    left: 80%;
+    bottom: 280px;
 }
 .alt\=\"a\"{
     position: relative;
