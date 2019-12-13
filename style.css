@@ -355,13 +355,22 @@ div.carousel-item div.carousel-caption p
 }
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
-    background-color: #018667;
-    height: 80px;
     font-size: 40px;
     color: #fff;
     text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #000000, 0 0 20px #999999, 0 0 30px #8406E6, 0 0 40px #8406E6, 0 0 50px #8406E6, 0 0 60px #8406E6, 0 0 70px #8406E6;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #FF005C, 0 0 40px #FF005C, 0 0 50px #FF005C, 0 0 60px #FF005C, 0 0 70px #FF005C, 0 0 80px #FF005C;
+    }
+}
 
 
 .snowflake {
