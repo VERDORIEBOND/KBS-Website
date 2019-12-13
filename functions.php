@@ -18,6 +18,7 @@
 
 <?php
 include "connection.php";
+//error_reporting(-1);
 
 
 
@@ -237,7 +238,6 @@ $filterItems = function ()
 
 $itemsToProductCards = function ($connection)
 {
-    $itemspp = 0;
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
     } else {
@@ -249,22 +249,18 @@ $itemsToProductCards = function ($connection)
     if (isset($_POST['use_button']))
     {
         $nr_of_records_per_page = 25;
-        pageammountchange();
     }
     if (isset($_POST['use_button1']))
     {
         $nr_of_records_per_page = 50;
-        pageammountchange();
     }
     if (isset($_POST['use_button2']))
     {
         $nr_of_records_per_page = 75;
-        pageammountchange();
     }
     if (isset($_POST['use_button3']))
     {
         $nr_of_records_per_page = 100;
-        pageammountchange();
     }
 
     echo
@@ -391,15 +387,14 @@ if (in_array($productName, $completedItems) == false)
 
 <?php
 
-    function pageammountchange($itemspp)
+    $pageammountchange = function ($itemspp)
     {
-
-        $finalurl = $_SERVER['REQUEST_URI']."&itemspp=<?php echo $itemspp";
+        $finalurl = $_SERVER['REQUEST_URI']."&itemspp=$itemspp";
         ?>
-        <a href="<?php echo $finalurl ?>"></a>
+        <a href="<?php echo $_POST['$finalurl'] ?>"></a>
         <?php
     };
-
+    $pageammountchange($nr_of_records_per_page);
     mysqli_free_result($result);
 };
 //Haalt de naam op van een artikel en print hem
