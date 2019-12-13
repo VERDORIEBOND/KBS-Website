@@ -87,8 +87,23 @@ include "index.php";
         </div>
 
     <div class="Omschrijving">
-        <p>Omschrijving</p>
+        <?php
+        $NumberUrl = $_GET ['productId'];
+        $query2 = "SELECT i.StockItemID, MarketingComments FROM stockitems i WHERE StockItemID = '$NumberUrl'";
+        $result2 = mysqli_query($conn,$query2);
+        if(!empty(trim($row['MarketingComments']))) {
+            echo "Bij dit product zit geen beschrijving";
+        }
+        else{
+            $row = mysqli_fetch_assoc($result2);
+            echo $row['MarketingComments'];
+
+        }
+        ?>
+
     </div>
+
+
     <div class="TempShower"
         <?php
         echo $tempShower($conn);
