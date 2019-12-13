@@ -22,9 +22,11 @@ include "index.php";
 include "functions.php";
 include "connection.php";
 ;
+?>
 
 
 
+<?php
 
 // FUNCTIONS ----------->
 //$filterItems();
@@ -36,6 +38,10 @@ else
 {
     $itemsToProductCards($conn);
 }
+
+?>
+
+<?php
 
 
 

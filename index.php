@@ -123,20 +123,20 @@ session_start();
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-links-sale" href="#">Sale!</a>
-                <a class="navbar-links-categorieen" href="productPage.php">Alle Producten</a>
+                <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10">Alle Producten</a>
         </div>
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
-                    <li><a href="productPage.php?productGroup=Airline Novelties">Airline Novelties</a></li>
-                    <li><a href="productPage.php?productGroup=Clothing">Clothing</a></li>
-                    <li><a href="productPage.php?productGroup=Computing Novelties">Computing Novelties</a></li>
-                    <li><a href="productPage.php?productGroup=Furry Footwear">Furry Footwear</a></li>
-                    <li><a href="productPage.php?productGroup=Mugs">Mugs</a></li>
-                    <li><a href="productPage.php?productGroup=Novelty Items">Novelty Items</a></li>
-                    <li><a href="productPage.php?productGroup=Packing Materials">Packing Materials</a></li>
-                    <li><a href="productPage.php?productGroup=T-Shirts">T-Shirts</a></li>
-                    <li><a href="productPage.php?productGroup=Toys">Toys</a></li>
+                    <li><a href="productPage.php?productGroup=Airline Novelties&itemspp=10">Airline Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Clothing&itemspp=10">Clothing</a></li>
+                    <li><a href="productPage.php?productGroup=Computing Novelties&itemspp=10">Computing Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Furry Footwear&itemspp=10">Furry Footwear</a></li>
+                    <li><a href="productPage.php?productGroup=Mugs&itemspp=10">Mugs</a></li>
+                    <li><a href="productPage.php?productGroup=Novelty Items&itemspp=10">Novelty Items</a></li>
+                    <li><a href="productPage.php?productGroup=Packing Materials&itemspp=10">Packing Materials</a></li>
+                    <li><a href="productPage.php?productGroup=T-Shirts&itemspp=10">T-Shirts</a></li>
+                    <li><a href="productPage.php?productGroup=Toys&itemspp=10">Toys</a></li>
                 </ul>
         </span>
         <div class="Search-Bar">

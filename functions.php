@@ -53,7 +53,7 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
         $pagenr = 1;
     }
 
-    $nr_of_records_per_page = 5;
+    $nr_of_records_per_page = $_GET['itemspp'];
     if (isset($_POST['use_button'])) {
         $nr_of_records_per_page = 25;
     }
@@ -129,20 +129,28 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
     echo '</div></div>';
 ?>
 
-    <ul class="pagination">
-        <li><a href="?pagenr=1&productGroup=<?php echo $category ?>">First</a></li>
-        <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
-        <li class="Prev-buton" >
-            <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
-        </li>
-        <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-            <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
-        </li>
-        <li><a href="?pagenr=<?php echo $total_pages; ?>">Last<br></a></li>
-
-    </ul>
+    <div class="container">
+        <ul class="pagination">
+            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
+            <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
+            <li class="Prev-buton" >
+                <a href="<?php if($pagenr <= 1){ echo 'disabled'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
+            </li>
+            <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
+                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?productGroup=".$category.'&itemspp='.$nr_of_records_per_page."&pagenr=".($pagenr + 1); } ?>">Next</a>
+            </li>
+            <li><a href="?productGroup=<?php echo $category; ?>&itemspp=<?php echo $nr_of_records_per_page;?>&pagenr=<?php echo $total_pages; ?>">Last</a></li>
+        </ul>
+    </div>
 <?php
-
+    $pageammountchange = function ($itemspp)
+    {
+        $finalurl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?&itemspp=$itemspp";
+        ?>
+        <a href="<?php echo $_POST['$finalurl'] ?>"></a>
+        <?php
+    };
+    $pageammountchange($nr_of_records_per_page);
     mysqli_free_result($result);
 };
 
@@ -373,15 +381,15 @@ if (in_array($productName, $completedItems) == false)
     ?>
 <div class="container">
         <ul class="pagination">
-            <li><a href="?pagenr=1">First</a></li>
+            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
             <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
             <li class="Prev-buton" >
-                <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1); } ?>">Prev</a>
+                <a href="<?php if($pagenr <= 1){ echo 'disabled'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
             </li>
             <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-                <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?pagenr=".($pagenr + 1); ;} ?>">Next</a>
+                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?pagenr=".($pagenr + 1).'&itemspp='.$nr_of_records_per_page; ;} ?>">Next</a>
             </li>
-            <li><a href="?pagenr=<?php echo $total_pages; ?>">Last</a></li>
+            <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page;?>">Last</a></li>
         </ul>
 </div>
 
@@ -389,7 +397,7 @@ if (in_array($productName, $completedItems) == false)
 
     $pageammountchange = function ($itemspp)
     {
-        $finalurl = $_SERVER['REQUEST_URI']."&itemspp=$itemspp";
+        $finalurl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?&itemspp=$itemspp";
         ?>
         <a href="<?php echo $_POST['$finalurl'] ?>"></a>
         <?php
