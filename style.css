@@ -355,6 +355,9 @@ div.carousel-item div.carousel-caption p
 }
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
+    background-color: #03C03C;
+    height: 80px;
+    justify-content: center;
     font-size: 40px;
     color: #fff;
     text-align: center;
