@@ -45,7 +45,7 @@ $checkIfCategory = function ($connection,$navCategory)
 
 
 
-$itemsCategory = function ($connection, $category,$imgDirectory)                              //With this function we display all items corresponding to a specific category
+$itemsCategory = function ($connection, $category, $imgDirectory, $discount)                              //With this function we display all items corresponding to a specific category
 {
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
@@ -65,6 +65,10 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
     }
     if (isset($_POST['use_button3'])) {
         $nr_of_records_per_page = 100;
+    }
+    else
+    {
+        $nr_of_records_per_page = 10;
     }
 
     echo
@@ -110,7 +114,22 @@ $itemsCategory = function ($connection, $category,$imgDirectory)                
                     <a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                         <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
                         <h1><?php echo $productName ?></h1>
-                        <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
+                        <p class="price">
+                            <?php
+                            if($discount == 0)
+                            {
+                                echo $row["RecommendedRetailPrice"]." €";
+                            }
+                            else
+                            {
+                                $discountPrice = round($row["RecommendedRetailPrice"] / 100 * (100 - $discount), 2);
+                                echo "<p style='text-decoration: line-through; text-line-through-color: red'>" . $row["RecommendedRetailPrice"] . "€" ."</p>";
+                                echo "<p style='font-weight: bold; color: red'>" . " $discountPrice €" . "</p>";
+                            }
+
+                            ?>
+
+                        </p>
                         <p><?php echo $row["MarketingComments"]; ?></p>
                         <span>
                     <p>

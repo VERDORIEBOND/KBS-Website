@@ -66,7 +66,7 @@ class MyOrderItem implements OrderItem
 
     /**
      * The price including tax
-     * @return flaot
+     * @return float
      */
     public function getPrice()
     {

@@ -25,10 +25,10 @@ session_start();
 <!--- SALE NAVIGATION BAR --->
 <nav class="navbar navbar-inverse navbar-expand-lg" id="sale-navbar">
     <ul class="nav navbar-nav">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="salesPage.php">
             <img src="/images/jing.fm-christmas-ornament-clipart-black-190781.png" style="height: 60px; width: auto;">
         </a>
-        <a href="/productPage.php" style="text-decoration: none">
+        <a href="salesPage.php" style="text-decoration: none">
         <p class="navbar-text" style="font-weight: bold; color: #FF3213; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 2px;">KERST AANBIEDINGEN EINDIGEN IN</p>
         </a>
         <!-- Display the countdown timer in an element -->
@@ -122,7 +122,7 @@ session_start();
 
         <div class="navbar-header">
             <a class="navbar-header">
-                <a class="navbar-links-sale" href="#">Sale!</a>
+                <a class="navbar-links-sale" href="salesPage.php">Sale!</a>
                 <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10">Alle Producten</a>
         </div>
         <span class="dropdown">
