@@ -9,9 +9,12 @@ body {
 }
 
 .navbar-logo{
-    position: relative;
-    right: 150px;
+    position: absolute;
+    padding-right: 50%;
+
 }
+
+
 
 .navbar-links-categorieen{
     color: #6ac1ff;
