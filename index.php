@@ -144,7 +144,7 @@ session_start();
             <form action="searchFunction.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
-                    <input class="search-btn"  type="submit" value="Search" href="#">
+                    <input class="search-btn"  type="submit" value="Zoeken" href="#">
                 </div>
             </form>
         </div>

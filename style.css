@@ -340,19 +340,22 @@ a.footer-betaling{
     left: 15px;
 }
 
-.winkelmandje{
+.container .winkelmandje {
     position: absolute;
     color: #6ac1ff;
-    right: 50%;
-    top: 40%;
-    font-size: 150%;
+    right: 10%;
+    top: 27%;
+    font-size: 200%;
+
+
 }
-.verlanglijstje{
+.container .verlanglijstje1{
     position: absolute;
     color: #6ac1ff;
-    right: 50%;
-    top: 40%;
+    right: 15%;
+    top: 27%;
     font-size: 150%;
+
 }
 
 p p2{

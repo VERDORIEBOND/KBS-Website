@@ -6,7 +6,7 @@ include_once "connection.php";
 include_once "functions.php";
 include_once "index.php";
 //include_once "orderEmail.php";
-error_reporting(-1);
+error_reporting(0);
 //$InvoiceTest = new Quickshiftin\Pdf\Invoice\InvoiceTest();
 
 
@@ -178,7 +178,7 @@ if (isset($_POST['Remove'])){
             </tr>
             <tr>
                 <td colspan="4" align="right">Total</td>
-                <td align="center">$ <?php echo number_format($total, 2); ?></td>
+                <td align="center">€ <?php echo number_format($total, 2); ?></td>
 
 
             </tr>
@@ -190,6 +190,7 @@ if (isset($_POST['Remove'])){
         </table>
         <form method="post" action="CheckoutPage.php">
             <input type="submit" name="CheckOut" value="Bestellen Afronden">
+
         </form>
         <?php
         if(isset($_POST['CheckOut']))
