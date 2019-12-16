@@ -336,6 +336,10 @@ a.footer-verzenden{
     left: 40px;
 }
 
+a.footer-betaling{
+    left: 15px;
+}
+
 .winkelmandje{
     position: absolute;
     color: #6ac1ff;

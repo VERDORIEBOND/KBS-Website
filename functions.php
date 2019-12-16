@@ -261,12 +261,13 @@ $filterItems = function ()
 
 $itemsToProductCards = function ($connection)
 {
+    // Pagina nummer bepalen
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
     } else {
         $pagenr = 1;
     }
-
+// Bepalen van aantal items per pagina + knoppen voor het vast zetten van een aantal per pagina
     $nr_of_records_per_page = $_GET['itemspp'];
 
     if (isset($_POST['use_button']))
@@ -286,6 +287,7 @@ $itemsToProductCards = function ($connection)
         $nr_of_records_per_page = 100;
     }
 
+    // Knoppen voor de resultaten per pagina
     echo
     "<form action='' method='post'>
 <p class='Resultaten'>Resultaten per pagina:</p>
@@ -294,12 +296,15 @@ $itemsToProductCards = function ($connection)
 <input type='submit' name='use_button2' value='75' />
 <input type='submit' name='use_button3' value='100' />
 </form>";
+
+    // Pagination
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
     $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ";
     $result_rows = mysqli_query($connection, $total_rows);
     $row = mysqli_fetch_assoc($result_rows);
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
+    // Einde pagination
 
     $i=0;
     $completedItems = array();
@@ -394,6 +399,7 @@ if (in_array($productName, $completedItems) == false)
 
 
     ?>
+    <!--- Knoppen voor First,Prev,Next,Last --->
 <div class="container">
         <ul class="pagination">
             <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
@@ -407,9 +413,9 @@ if (in_array($productName, $completedItems) == false)
             <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page;?>">Last</a></li>
         </ul>
 </div>
-
+    <!--- Einde Knoppen voor First,Prev,Next,Last --->
 <?php
-
+    // Neemt aantal per pagina mee naar alle paginas
     $pageammountchange = function ($itemspp)
     {
         $finalurl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?&itemspp=$itemspp";
@@ -418,6 +424,7 @@ if (in_array($productName, $completedItems) == false)
         <?php
     };
     $pageammountchange($nr_of_records_per_page);
+    // EINDE Neemt aantal per pagina mee naar alle paginas
     mysqli_free_result($result);
 };
 //Haalt de naam op van een artikel en print hem
