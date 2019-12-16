@@ -95,23 +95,23 @@ if (isset($_POST['Remove'])){
 <body>
 
 <div class="container" style="width: 65%">
-    <h2>Shopping Cart</h2>
+    <h2>Winkelmand</h2>
 
 
 
     <div style="clear: both"></div>
-    <h3 class="title2">Shopping Cart Details</h3>
+
     <div style="overflow-x:auto;">
         <table class="table table-bordered">
             <tr class="Table_Row">
                 <th><h5>
-                        <form class="RemoveAll" method="post" action="winkelfunctie.php" onclick="return confirm('Are you sure want to clear all items?')">
-                            <input type="submit" name="Remove"  value="Remove all">
+                        <form class="RemoveAll" method="post" action="winkelfunctie.php" onclick="return confirm('Weet u zeker dat u alle artikelen uit het winkelmand wilt verwijderen?')">
+                            <input type="submit" name="Remove"  value="Alles verwijderen">
                     </h5></th>
                 <th><h5>Id</h5></th>
-                <th><h5>Product Name</h5></th>
-                <th><h5>Price</h5></th>
-                <th><h5>Quantity</h5></th>
+                <th><h5>Artikel naam</h5></th>
+                <th><h5>Prijs</h5></th>
+                <th><h5>Hoeveelheid</h5></th>
 
             </tr>
 
@@ -128,7 +128,7 @@ if (isset($_POST['Remove'])){
                 ?>
             <tr>
                 <td>
-                    <a href="winkelfunctie.php?action=delete&productId=<?php echo $value['ProductId'] ?>" onclick="return confirm('Are you sure want to delete this item?')">
+                    <a href="winkelfunctie.php?action=delete&productId=<?php echo $value['ProductId'] ?>" onclick="return confirm('Weet u zeker dat u dit artikel wilt verwijderen?')">
                         <span class="text-danger"><span class="fas fa-trash"></span></a>
                 </td>
                 <td> <?php echo $value['ProductId'] ?></td>
@@ -166,9 +166,9 @@ if (isset($_POST['Remove'])){
 
             }
 
-            $cartItem =(count($producten));
+          /*/  $cartItem =(count($producten));
             $b=$cartItem;
-            echo $b;
+            echo $b;*/
 
 
 
@@ -189,7 +189,9 @@ if (isset($_POST['Remove'])){
 
         </table>
         <form method="post" action="CheckoutPage.php">
-            <input type="submit" name="CheckOut" value="Bestellen Afronden">
+            <div class="text-center" style="width: 20%">
+                <button type="submit" name="CheckOut" value="Veilig betalen" class="btn btn-success btn-block" style=" border: #66afe9; background-color: #66afe9 ">Besellen afronden</button>
+            </div>
 
         </form>
         <?php

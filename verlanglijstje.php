@@ -85,23 +85,23 @@ if (isset($_POST['Remove'])){
 <body>
 
 <div class="container" style="width: 65%">
-    <h2>Wish List</h2>
+    <h2>Verlanglijst</h2>
 
 
 
     <div style="clear: both"></div>
-    <h3 class="title2">Wish List Details</h3>
+
     <div style="overflow-x:auto;">
 
         <table class="table table-bordered">
             <tr class="Table_Row">
                 <th><h5>
-                        <form class="RemoveAll" method="post" action="verlanglijstje.php" onclick="return confirm('Are you sure want to clear all items?')">
-                            <input type="submit" name="Remove"  value="Remove all">
+                        <form class="RemoveAll" method="post" action="verlanglijstje.php" onclick="return confirm('Weet u zeker dat u alle artikelen uit het verlanglijst wilt verwijderen?')">
+                            <input type="submit" name="Remove"  value="Alles verwijderen">
                     </h5></th>
                 <th><h5>Id</h5></th>
-                <th><h5>Product Name</h5></th>
-                <th><h5>Price</h5></th>
+                <th><h5>Artikel naam</h5></th>
+                <th><h5>Prijs</h5></th>
 
 
 
