@@ -10,21 +10,21 @@ body {
 
 .navbar-logo{
     position: absolute;
-    padding-right: 50%;
+    padding-left: 1%;
 
 }
 
 .navbar-links-categorieen{
     color: #6ac1ff;
     position: relative;
-    right: 200px;
-    padding-right: 20px;
+    padding-left: 50px;
+
 }
 .navbar-links-sale{
     color: red;
     position: relative;
-    right: 200px;
-    padding-right: 20px;
+    padding-left: 50px;
+
 }
 
 .dropdown-toggle{
