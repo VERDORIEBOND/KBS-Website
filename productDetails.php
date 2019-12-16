@@ -110,22 +110,14 @@ include "index.php";
             echo $tempShower($conn);
             ?>
         </div>
-    <div class="Testmotherfucker">
+    <div class="Testmotherfucker" style="max-width:400px;">
         <iframe width="400" height="225" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>
+        <p>
+            Video courtesy  of
+            <a href=https://www.youtube.com/watch?v=HluANRwPyNo target="_blank"> Jombo </a>.
+        </p>
     </div>
-    <!--
-        <div class="Video" style="position:relative; left:65%; bottom: 200px">
-            <video width="width" height="250" controls="controls">
-                <source src="/images/Videos/Testvideo.mp4" type="video/mp4">
-                <source src="images/Videos/TestvideoWebM.webm" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
-<-->
-            <p>
-                Video courtesy  of
-                <a href=https://www.youtube.com/watch?v=HluANRwPyNo target="_blank"> Jombo </a>.
-            </p>
-        </div>
+
     </div>
 </div>
 

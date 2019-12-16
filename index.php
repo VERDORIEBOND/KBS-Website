@@ -125,6 +125,7 @@ session_start();
                 <a class="navbar-links-sale" href="salesPage.php">Sale!</a>
                 <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10">Alle Producten</a>
         </div>
+
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
