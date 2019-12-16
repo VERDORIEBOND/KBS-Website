@@ -66,10 +66,6 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
     if (isset($_POST['use_button3'])) {
         $nr_of_records_per_page = 100;
     }
-    else
-    {
-        $nr_of_records_per_page = 10;
-    }
 
     echo
     "<form action='' method='post'>
@@ -80,12 +76,12 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 <input type='submit' name='use_button3' value='100' />
 </form>";
 
-    $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ";
+    $offset = ($pagenr-1) * $nr_of_records_per_page;
+    $maxitemspp = $pagenr * $nr_of_records_per_page;
+    $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' ";
     $result_rows = mysqli_query($connection, $total_rows);
     $row = mysqli_fetch_assoc($result_rows);
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
-    $offset = ($pagenr-1) * $nr_of_records_per_page;
-    $maxitemspp = $pagenr * $nr_of_records_per_page;
 
 
 
@@ -153,7 +149,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
             <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
             <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
             <li class="Prev-buton" >
-                <a href="<?php if($pagenr <= 1){ echo 'disabled'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
+                <a href="<?php if($pagenr <= 1){ echo ''; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
             </li>
             <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
                 <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?productGroup=".$category.'&itemspp='.$nr_of_records_per_page."&pagenr=".($pagenr + 1); } ?>">Next</a>
