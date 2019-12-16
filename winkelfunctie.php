@@ -5,7 +5,7 @@ session_start();
 include_once "connection.php";
 include_once "functions.php";
 include_once "index.php";
-include_once "orderEmail.php";
+//include_once "orderEmail.php";
 error_reporting(-1);
 //$InvoiceTest = new Quickshiftin\Pdf\Invoice\InvoiceTest();
 
@@ -188,8 +188,19 @@ if (isset($_POST['Remove'])){
             </tr>
 
         </table>
+        <form method="post" action="CheckoutPage.php">
+            <input type="submit" name="CheckOut" value="Bestellen Afronden">
+        </form>
+        <?php
+        if(isset($_POST['CheckOut'])){
+            print'<script>window.location="CheckoutPage.php"</script>';
+        }
 
-        <form method="get" action="winkelfunctie.php">
+
+        ?>
+
+
+        <form method="post" action="winkelfunctie.php">
             <input type="submit" name="button1" value="Order">
         </form>
         <?php
