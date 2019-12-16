@@ -117,9 +117,9 @@ if (isset($_POST['Remove'])){
 
             <?php
             $producten = $winkelwagendetails($conn);
-
-            if(!empty($producten)){
             $total = 0;
+            if(!empty($producten)){
+
             foreach ($producten as $key => $value){
 
 
@@ -192,9 +192,26 @@ if (isset($_POST['Remove'])){
             <input type="submit" name="CheckOut" value="Bestellen Afronden">
         </form>
         <?php
-        if(isset($_POST['CheckOut'])){
-            print'<script>window.location="CheckoutPage.php"</script>';
+        if(isset($_POST['CheckOut']))
+        {
+            if( $_SESSION["loggedin"] == false){
+
+               // $registeren = '<script>window.location="register.php"</script>';
+                //$Guest = '<script>window.location="CheckOutPage.php"</script>';
+                print("U bent niet geregistereerd" . "<br>");
+                ?>
+                Wilt u  <a href="register.php"> Registeren</a> of wilt u uw bestelling afronden als een <a
+                        href="CheckOutPage.php"> Gast</a>?
+                <?php
+            } else {
+
+                print'<script>window.location="CheckoutPage.php"</script>';
+
+            }
         }
+
+
+
 
 
         ?>

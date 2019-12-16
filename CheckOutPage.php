@@ -1,7 +1,10 @@
 <?php
-error_reporting(0);
-session_start();
-if($_SESSION['loggedin'] == true){ ?>
+
+include_once "connection.php";
+
+include_once "index.php";
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -162,8 +165,6 @@ if($_SESSION['loggedin'] == true){ ?>
         </div>
     </form>
 </div>
-<?php
-}
-?>
+
 </body>
 </html>
