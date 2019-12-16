@@ -13,18 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
-</head>
-<body>
+
 
 <?php
-error_reporting(0);
+error_reporting(-1);
 include "index.php";
 include "functions.php";
 include "connection.php";
 ;
 ?>
 
-
+</head>
+<body>
 
 <?php
 
