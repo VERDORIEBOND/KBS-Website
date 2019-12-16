@@ -13,6 +13,7 @@
 include "connection.php";
 include "functions.php";
 include "index.php";
+error_reporting(-1)
 
 
 //Print de naam van het gekozen artikel
@@ -20,7 +21,7 @@ include "index.php";
 
 ?>
 <div class="container">
-    <div class="col">
+
         <div class="Productname">
             <?php
             //$detailprinter($conn);
@@ -44,15 +45,33 @@ include "index.php";
 
                 </div>
             </div>
-    </div>
-    <div class="col">
+
         <div class="Prijs">
             <?php
             //print de prijs functie
-            echo $prijsgever($conn);
+            $prijsgever = function ($connection) {
+                $numFromUrl = $_GET['productId'];
+                $query = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl'";
+                $result = mysqli_query($connection, $query);
+                while ($row = mysqli_fetch_assoc($result)){
+                    if($row['StockGroupName'] == 'USB Novelties'){
+                        echo $row["RecommendedRetailPrice"]* 0.85;
+                    }
+                }
+
+
+            }
+
+
+
+
+
+
             ?>
         </div>
+    <div class="saleartikel">
 
+    </div>
         <div class="Stock">
            <?php
            //print de voorraad
@@ -116,8 +135,6 @@ include "index.php";
             Video courtesy  of
             <a href=https://www.youtube.com/watch?v=HluANRwPyNo target="_blank"> Jombo </a>.
         </p>
-    </div>
-
     </div>
 </div>
 
