@@ -178,13 +178,12 @@ session_start();
         <?php } ?>
     </div>
 </nav>
+
 <div class="footer">
-    <ul>
-        <span><a href="#">Service</a> </span>
-        <span><a href="#">Verzenden</a> </span>
-        <span><a href="#">Betaling</a> </span>
-        <span><a href="#">Over ons</a> </span>
-    </ul>
+    <a class="footer-service" href="#">Service</a>
+    <a class="footer-verzenden" href="#">Verzenden</a>
+    <a class="footer-betaling" href="#">Betaling</a>
+    <a class="footer-overons" href="#">Over Ons</a>
 </div>
 
 

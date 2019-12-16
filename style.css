@@ -23,7 +23,7 @@ body {
 .navbar-links-sale{
     color: red;
     position: relative;
-    padding-left: 50px;
+    padding-left: 80px;
 
 }
 
@@ -326,36 +326,29 @@ div.carousel-item div.carousel-caption p
     text-align: center;
 }
 
-.Over{
-    color: #6ac1ff;
-    padding-right: 40%;
-    padding-left: 1%;
+a.footer-service{
+    position: relative;
+    left: 10px;
 }
 
-.Contact{
-    color: #6ac1ff;
-    padding-right: 40%;
+a.footer-verzenden{
+    position: relative;
+    left: 40px;
 }
 
-.Verzenden{
-    color: #6ac1ff;
-}
-.container .winkelmandje {
+.winkelmandje{
     position: absolute;
     color: #6ac1ff;
-    right: 10%;
-    top: 27%;
-    font-size: 200%;
-
-
-}
-.container .verlanglijstje1{
-    position: absolute;
-    color: #6ac1ff;
-    right: 15%;
-    top: 27%;
+    right: 50%;
+    top: 40%;
     font-size: 150%;
-
+}
+.verlanglijstje{
+    position: absolute;
+    color: #6ac1ff;
+    right: 50%;
+    top: 40%;
+    font-size: 150%;
 }
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
