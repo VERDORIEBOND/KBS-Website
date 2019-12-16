@@ -208,7 +208,7 @@ if (isset($_POST['Remove'])){
                 <?php
             } else {
 
-                print'<script>window.location="CheckoutPage.php"</script>';
+                print'<script>window.location="CheckOut2.php"</script>';
 
             }
         }

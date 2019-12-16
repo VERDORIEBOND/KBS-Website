@@ -5,95 +5,95 @@ include_once "winkelfunctie.php";
 include_once "index.php";
 
 
- if(isset($_POST['Betalen'])){
+/*if(isset($_POST['Betalen'])){
 
-        $email = $firstname = $lastname = $adres = $postal = $city = $phone = "";
-        $email_err = $firstname_err = $lastname_err = $postal_err = $city_err = $phone_err = "";
-        $newsletter=false;
+    $email = $firstname = $lastname = $adres = $postal = $city = $phone = "";
+    $email_err = $firstname_err = $lastname_err = $postal_err = $city_err = $phone_err = "";
+    $newsletter=false;
 
-        if(empty(trim($_POST['email']))){
-            $email_err="Voer een emailadres in";
-        } else{
-            $sql= "SELECT email FROM Consumerprivate WHERE email = ?";
-            if($stmt = mysqli_prepare($conn, $sql)){
-                mysqli_stmt_bind_param($stmt, "s", $param_email);
-                $param_email = trim($_POST["email"]);
-                if(mysqli_stmt_execute($stmt)){
-                    mysqli_stmt_store_result($stmt);
-                    if(mysqli_stmt_num_rows($stmt) == 1){
-                        $email_err = "Dit emailadres is reeds in gebruik";
-                    } else{
-                        $email = trim($_POST["email"]);
-                    }
+    if(empty(trim($_POST['email']))){
+        $email_err="Voer een emailadres in";
+    } else{
+        $sql= "SELECT email FROM Consumerprivate WHERE email = ?";
+        if($stmt = mysqli_prepare($conn, $sql)){
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            $param_email = trim($_POST["email"]);
+            if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "Dit emailadres is reeds in gebruik";
                 } else{
-                    echo "Er is een fout opgetreden in het systeem";
+                    $email = trim($_POST["email"]);
                 }
-            }
-            mysqli_stmt_close($stmt);
-        }
-        }if(empty(trim($_POST['first_name']))){
-            $firstname_err="Voer een voornaam in";
-        } else{
-            if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['first_name']))){
-                $firstname_err="De voornaam mag alleen letters bevatten m.u.v. ' en -";
             } else{
-                $firstname = trim($_POST['first_name']);
+                echo "Er is een fout opgetreden in het systeem";
             }
-        }if(empty(trim($_POST['last_name']))){
-            $lastname_err="Voer een achternaam in";
-        } else{
-            if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['last_name']))){
-                $lastname_err="De achternaam mag alleen letters bevatten m.u.v. ' en -";
-            } else{
-                $lastname = trim($_POST['last_name']);
-            }
-        }if(empty(trim($_POST['adres']))){
-            $adres_err="Voer een adres in";
-        } else{
-            if(!ctype_alpha(str_replace(array(),'',$_POST['adres'])))
-                $adres = trim($_POST['adres']);
-        }if(empty(trim($_POST['postal_code']))){
-            $postal_err="Voer een postcode in";
-        } else{
-            if(PostcodeCheck($_POST['postal_code']) == false){
-                $postal_err="Ongeldige postcode";
-            } else{
-                $postal = PostcodeCheck($_POST['postal_code']);
-            }
-        }if(empty(trim($_POST['city']))){
-            $city_err="Voer een plaatsnaam in";
-        } else{
-            $city = trim($_POST['city']);
-        }if(trim(!ctype_digit($_POST['phone']))){
-            $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
-        } else{
-            $phone = trim($_POST['phone']);
         }
-        if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)) {
-            $sql1 = "INSERT INTO ConsumerPrivate (email, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?,?)";
-            if ($stmt1 = mysqli_prepare($conn, $sql1)) {
-                mysqli_stmt_bind_param($stmt1, "sssssssss", $param_email, $param_firstname, $param_lastname, $param_adres, $param_postal, $param_city, $param_phone);
-                $param_email = $email;
+        mysqli_stmt_close($stmt);
+    }
+}if(empty(trim($_POST['first_name']))){
+    $firstname_err="Voer een voornaam in";
+} else{
+    if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['first_name']))){
+        $firstname_err="De voornaam mag alleen letters bevatten m.u.v. ' en -";
+    } else{
+        $firstname = trim($_POST['first_name']);
+    }
+}if(empty(trim($_POST['last_name']))){
+    $lastname_err="Voer een achternaam in";
+} else{
+    if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['last_name']))){
+        $lastname_err="De achternaam mag alleen letters bevatten m.u.v. ' en -";
+    } else{
+        $lastname = trim($_POST['last_name']);
+    }
+}if(empty(trim($_POST['adres']))){
+    $adres_err="Voer een adres in";
+} else{
+    if(!ctype_alpha(str_replace(array(),'',$_POST['adres'])))
+        $adres = trim($_POST['adres']);
+}if(empty(trim($_POST['postal_code']))){
+    $postal_err="Voer een postcode in";
+} else{
+    if(PostcodeCheck($_POST['postal_code']) == false){
+        $postal_err="Ongeldige postcode";
+    } else{
+        $postal = PostcodeCheck($_POST['postal_code']);
+    }
+}if(empty(trim($_POST['city']))){
+    $city_err="Voer een plaatsnaam in";
+} else{
+    $city = trim($_POST['city']);
+}if(trim(!ctype_digit($_POST['phone']))){
+    $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
+} else{
+    $phone = trim($_POST['phone']);
+}
+if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)) {
+    $sql1 = "INSERT INTO ConsumerPrivate (email, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?,?)";
+    if ($stmt1 = mysqli_prepare($conn, $sql1)) {
+        mysqli_stmt_bind_param($stmt1, "sssssssss", $param_email, $param_firstname, $param_lastname, $param_adres, $param_postal, $param_city, $param_phone);
+        $param_email = $email;
 
-                $param_firstname = $firstname;
-                $param_lastname = $lastname;
-                $param_adres = $adres;
-                $param_postal = $postal;
-                $param_city = $city;
-                $param_phone = $phone;
+        $param_firstname = $firstname;
+        $param_lastname = $lastname;
+        $param_adres = $adres;
+        $param_postal = $postal;
+        $param_city = $city;
+        $param_phone = $phone;
 
-                if (mysqli_stmt_execute($stmt1)) {
-                    echo "<script type='text/javascript'> document.location = 'CheckoutPage'; </script>";
-                } else {
-                    echo "Fout opgetreden in het systeem.";
-                }
-            }
-            echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
-            mysqli_stmt_close($stmt1);
+        if (mysqli_stmt_execute($stmt1)) {
+            echo "<script type='text/javascript'> document.location = 'CheckoutPage'; </script>";
+        } else {
+            echo "Fout opgetreden in het systeem.";
         }
+    }
+    echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
+    mysqli_stmt_close($stmt1);
+}
 
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -117,14 +117,15 @@ include_once "index.php";
             color: #66afe9;
         }
         .container.well{
-            width: 90%;
+            width: 80%;
         }
+
     </style>
 </head>
 <body>
 
 
-<div class="container well">
+<div class="container well" >
     <center><h2>Bestellen afronden</h2></center>
     <hr>
     <form method="post" action="" class="form-horizontal">
@@ -142,80 +143,7 @@ include_once "index.php";
 
 
 
-        <div class="row">
-            <div class="col-md-7 well " style="position: relative">
-                <h3>Klant Gegevens</h3>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </div>
-                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Voornaam">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </div>
-                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Achteraam">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                        </div>
-                        <input class="form-control" type="text" id="billing_email" name="billing_email"
-                               placeholder="Example@example.com">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-earphone"></span>
-                        </div>
-                        <input class="form-control" type="text" id="billing_tel" name="billing_tel"
-                               placeholder="06****">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon addon-diff-color">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                </div>
-                                <input class="form-control" type="text" id="billing_state" name="billing_state"
-                                       placeholder="Postcode">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-md-offset-2">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon addon-diff-color">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                </div>
-                                <input class="form-control" type="text" id="billing_zip" name="billing_zip"
-                                       placeholder="Adres">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-home"></span>
-                        </div>
-                        <input class="form-control" type="text" id="billing_country" name="billing_city"
-                               placeholder="stad">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-md-offset-1 well">
+            <div class="col-md-5 well" style="  margin-left: 30%; padding:3%;  ">
                 <div class="text-center">
                     <h3>Uw winkelmand</h3>
                 </div>
@@ -348,9 +276,9 @@ include_once "index.php";
                         <tr>
 
                             <td width="15%">
-                                <strong> <?php $cartItem =(count($producten));
+                                <strong> <?php /*$cartItem =(count($producten));
                                     $b=$cartItem;
-                                    echo $b; ?> </strong>
+                                    echo $b; */?> </strong>
                             </td>
                         </tr>
 
@@ -359,7 +287,7 @@ include_once "index.php";
                     </table>
                     <hr style="border: 1px solid gray;">
                     <p> <strong>
-                           Totaal: <span>€ <?php echo number_format($total, 2); ?></span>
+                            Totaal: <span>€ <?php echo number_format($total, 2); ?></span>
                         </strong>
                     </p>
                 </div>
