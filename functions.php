@@ -287,14 +287,18 @@ $itemsToProductCards = function ($connection)
         $nr_of_records_per_page = 100;
     }
 
+
     // Knoppen voor de resultaten per pagina
     echo
     "<form action='' method='post'>
-<p class='Resultaten'>Resultaten per pagina:</p>
-<input class='Sort' type='submit' name='use_button' value='25' />
-<input type='submit' name='use_button1' value='50' />
-<input type='submit' name='use_button2' value='75' />
-<input type='submit' name='use_button3' value='100' />
+<p class='Resultaten'><p1>Resultaten per pagina:</p1><p2>Sorteer op:<br></p2>
+<input class='Sort25' type='submit' name='use_button' value='25' />
+<input class='Sort50' type='submit' name='use_button1' value='50' />
+<input class='Sort75' type='submit' name='use_button2' value='75' />
+<input class='Sort100' type='submit' name='use_button3' value='100' />
+<input class='Sortbyname' type='submit' name='use_button4' value='Naam' /> 
+<input class='Sortbyprice' type='submit' name='use_button5' value='Prijs' /> 
+
 </form>";
 
     // Pagination
@@ -396,6 +400,7 @@ if (in_array($productName, $completedItems) == false)
         $i ++;
     }
     echo '</div></div>';
+
 
 
     ?>

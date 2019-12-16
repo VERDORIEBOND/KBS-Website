@@ -355,6 +355,31 @@ a.footer-betaling{
     font-size: 150%;
 }
 
+p p2{
+    padding-left: 70%;
+}
+
+p p1{
+    color: black;
+}
+
+input.Sort25{
+    position: relative;
+}
+
+input.Sortbyname{
+    position: relative;
+    left: 73%;
+    font-size: 17px;
+}
+
+input.Sortbyprice{
+    position: relative;
+    left: 74%;
+    font-size: 17px;
+}
+
+
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
     background-color: #03C03C;
     height: 80px;
