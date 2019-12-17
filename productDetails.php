@@ -45,20 +45,26 @@ error_reporting(-1)
 
                 </div>
             </div>
+    <div class="Prijs">
+        <?php
+        echo $prijsgever($conn);
+        ?>
+    </div>
 
-        <div class="Prijs">
+        <div class="Prijs2">
             <?php
             //print de prijs functie
                 $numFromUrl = $_GET['productId'];
-                $query = "SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl'";
+                $query = "SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1;";
                 $result = mysqli_query($conn, $query);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    if ($row['StockItemID'] == 76) {
-
-                        if ($row['StockGroupName'] == 'Clothing') {
-                            echo round("€" . ($row["RecommendedRetailPrice"] / 100 * (100 - $row['StockItemID'])), 2);
+                $row = mysqli_fetch_assoc($result);
+                  if ($row['StockGroupName'] == 'Novelty Items') {
+                            echo "€" . ($row['RecommendedRetailPrice']*0.85);
                         }
-                    }
+                        else {
+                            echo "€".$row['RecommendedRetailPrice'];
+
+
                 }
             ?>
         </div>
@@ -114,18 +120,9 @@ error_reporting(-1)
         </div>
 
 
-        <div class="TempShower"
-            <?php
-            echo $tempShower($conn);
-            ?>
-        </div>
-    <div class="Testmotherfucker" style="max-width:400px;">
-        <iframe width="400" height="225" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>
-        <p>
-            Video courtesy  of
-            <a href=https://www.youtube.com/watch?v=HluANRwPyNo target="_blank"> Jombo </a>.
-        </p>
-    </div>
+
+    <div class="Testvideo" style="max-width:400px;">
+        <iframe width="400" height="225" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>    </div>
 </div>
 
 
