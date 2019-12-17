@@ -24,21 +24,26 @@ if(isset($_POST['submit'])){
         $password = trim($_POST['password']);
     }
     if(empty($username_err) && empty($password_err)){
-        $sql = "SELECT Consumerid, email, passwrd, first_name FROM Consumerprivate WHERE email = ?";
+        $sql = "SELECT Consumerid, email, passwrd, first_name, last_name, adres, city, postal, phone FROM Consumerprivate WHERE email = ?";
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $name);
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $firstname, $lastname, $adres, $stad, $postcode, $telefoonnummer);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $email;
-                            $_SESSION["name"] = $name;
+                            $_SESSION["name"] = $firstname;
+                            $_SESSION["lastname"] = $lastname;
+                            $_SESSION["adres"] = $adres;
+                            $_SESSION["stad"] = $stad;
+                            $_SESSION["postcode"] = $postcode;
+                            $_SESSION["telefoonnummer"] = $telefoonnummer;
                             echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
                         } else{
                             $password_err = "Verkeerd wachtwoord";

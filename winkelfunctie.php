@@ -195,28 +195,9 @@ if (isset($_POST['Remove'])){
 
         </form>
         <?php
-        if(isset($_POST['CheckOut']))
-        {
-            if( $_SESSION["loggedin"] == false){
-
-               // $registeren = '<script>window.location="register.php"</script>';
-                //$Guest = '<script>window.location="CheckOutPage.php"</script>';
-                print("U bent niet geregistereerd" . "<br>");
-                ?>
-                Wilt u  <a href="register.php"> Registeren</a> of wilt u uw bestelling afronden als een <a
-                        href="CheckOutPage.php"> Gast</a>?
-                <?php
-            } else {
-
-                print'<script>window.location="CheckOut2.php"</script>';
-
-            }
+        if(isset($_POST['CheckOut'])){
+            print'<script>window.location="CheckOutPage.php"</script>';
         }
-
-
-
-
-
         ?>
 
 

@@ -1,96 +1,64 @@
 <?php
+if(isset($_POST['Betalen'])) {
+    try {
+        /*
+         * Initialize the Mollie API library with your API key.
+         *
+         * See: https://www.mollie.com/dashboard/developers/api-keys
+         */
+        require "initialize.php";
 
+         /*
+          * Generate a unique order id for this example. It is important to include this unique attribute
+          * in the redirectUrl (below) so a proper return page can be shown to the customer.
+          */
+         $orderId = time();
+         $total = $_POST['total'];
+         /*
+          * Determine the url parts to these example files.
+          */
+         $protocol = isset($_SERVER['HTTPS']) && strcasecmp('off', $_SERVER['HTTPS']) !== 0 ? "https" : "http";
+         $hostname = $_SERVER['HTTP_HOST'];
+         $path = dirname(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF']);
+
+         /*
+          * Payment parameters:
+          *   amount        Amount in EUROs. This example creates a € 10,- payment.
+          *   description   Description of the payment.
+          *   redirectUrl   Redirect location. The customer will be redirected there after the payment.
+          *   webhookUrl    Webhook location, used to report when the payment changes state.
+          *   metadata      Custom metadata that is stored with the payment.
+          */
+         $payment = $mollie->payments->create([
+             "amount" => [
+                 "currency" => "EUR",
+                 "value" => "$total" // You must send the correct number of decimals, thus we enforce the use of strings
+             ],
+             "description" => "Order #{$orderId}",
+             "redirectUrl" => "{$protocol}://{$hostname}{$path}/payments/return.php?order_id={$orderId}",
+             "webhookUrl" => "{$protocol}://{$hostname}{$path}/payments/webhook.php",
+             "metadata" => [
+                 "order_id" => $orderId,
+             ],
+         ]);
+
+         /*
+          * In this example we store the order with its payment status in a database.
+          */
+         database_write($orderId, $payment->status);
+
+         /*
+          * Send the customer off to complete the payment.
+          * This request should always be a GET, thus we enforce 303 http response code
+          */
+         header("Location: " . $payment->getCheckoutUrl(), true, 303);
+     } catch (\Mollie\Api\Exceptions\ApiException $e) {
+        echo "API call failed: " . htmlspecialchars($e->getMessage());
+    }
+}
 include_once "connection.php";
 include_once "winkelfunctie.php";
 include_once "index.php";
-
-
- if(isset($_POST['Betalen'])){
-
-        $email = $firstname = $lastname = $adres = $postal = $city = $phone = "";
-        $email_err = $firstname_err = $lastname_err = $postal_err = $city_err = $phone_err = "";
-        $newsletter=false;
-
-        if(empty(trim($_POST['email']))){
-            $email_err="Voer een emailadres in";
-        } else{
-            $sql= "SELECT email FROM Consumerprivate WHERE email = ?";
-            if($stmt = mysqli_prepare($conn, $sql)){
-                mysqli_stmt_bind_param($stmt, "s", $param_email);
-                $param_email = trim($_POST["email"]);
-                if(mysqli_stmt_execute($stmt)){
-                    mysqli_stmt_store_result($stmt);
-                    if(mysqli_stmt_num_rows($stmt) == 1){
-                        $email_err = "Dit emailadres is reeds in gebruik";
-                    } else{
-                        $email = trim($_POST["email"]);
-                    }
-                } else{
-                    echo "Er is een fout opgetreden in het systeem";
-                }
-            }
-            mysqli_stmt_close($stmt);
-        }
-        }if(empty(trim($_POST['first_name']))){
-            $firstname_err="Voer een voornaam in";
-        } else{
-            if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['first_name']))){
-                $firstname_err="De voornaam mag alleen letters bevatten m.u.v. ' en -";
-            } else{
-                $firstname = trim($_POST['first_name']);
-            }
-        }if(empty(trim($_POST['last_name']))){
-            $lastname_err="Voer een achternaam in";
-        } else{
-            if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['last_name']))){
-                $lastname_err="De achternaam mag alleen letters bevatten m.u.v. ' en -";
-            } else{
-                $lastname = trim($_POST['last_name']);
-            }
-        }if(empty(trim($_POST['adres']))){
-            $adres_err="Voer een adres in";
-        } else{
-            if(!ctype_alpha(str_replace(array(),'',$_POST['adres'])))
-                $adres = trim($_POST['adres']);
-        }if(empty(trim($_POST['postal_code']))){
-            $postal_err="Voer een postcode in";
-        } else{
-            if(PostcodeCheck($_POST['postal_code']) == false){
-                $postal_err="Ongeldige postcode";
-            } else{
-                $postal = PostcodeCheck($_POST['postal_code']);
-            }
-        }if(empty(trim($_POST['city']))){
-            $city_err="Voer een plaatsnaam in";
-        } else{
-            $city = trim($_POST['city']);
-        }if(trim(!ctype_digit($_POST['phone']))){
-            $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
-        } else{
-            $phone = trim($_POST['phone']);
-        }
-        if(!empty($email) && !empty($password) && !empty($firstname) && !empty($lastname) && !empty($adres) && !empty($postal) && !empty($city) && empty($phone_err)) {
-            $sql1 = "INSERT INTO ConsumerPrivate (email, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?,?)";
-            if ($stmt1 = mysqli_prepare($conn, $sql1)) {
-                mysqli_stmt_bind_param($stmt1, "sssssssss", $param_email, $param_firstname, $param_lastname, $param_adres, $param_postal, $param_city, $param_phone);
-                $param_email = $email;
-
-                $param_firstname = $firstname;
-                $param_lastname = $lastname;
-                $param_adres = $adres;
-                $param_postal = $postal;
-                $param_city = $city;
-                $param_phone = $phone;
-
-                if (mysqli_stmt_execute($stmt1)) {
-                    echo "<script type='text/javascript'> document.location = 'CheckoutPage'; </script>";
-                } else {
-                    echo "Fout opgetreden in het systeem.";
-                }
-            }
-            echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
-            mysqli_stmt_close($stmt1);
-        }
 
 
 
@@ -150,7 +118,7 @@ include_once "index.php";
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-user"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Voornaam">
+                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Voornaam" value="<?php echo $_SESSION['name'] ?>">
                     </div>
                 </div>
                 <div class="form-group">
@@ -158,7 +126,7 @@ include_once "index.php";
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-user"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Achteraam">
+                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Achteraam" value="<?php echo $_SESSION['lastname'] ?>">
                     </div>
                 </div>
 
@@ -168,7 +136,7 @@ include_once "index.php";
                             <span class="glyphicon glyphicon-envelope"></span>
                         </div>
                         <input class="form-control" type="text" id="billing_email" name="billing_email"
-                               placeholder="Example@example.com">
+                               placeholder="Example@example.com" value="<?php echo $_SESSION['username'] ?>">
                     </div>
                 </div>
 
@@ -178,7 +146,7 @@ include_once "index.php";
                             <span class="glyphicon glyphicon-earphone"></span>
                         </div>
                         <input class="form-control" type="text" id="billing_tel" name="billing_tel"
-                               placeholder="06****">
+                               placeholder="06****" value="<?php echo $_SESSION['telefoonnummer'] ?>">
                     </div>
                 </div>
                 <div class="row">
@@ -189,7 +157,7 @@ include_once "index.php";
                                     <span class="glyphicon glyphicon-home"></span>
                                 </div>
                                 <input class="form-control" type="text" id="billing_state" name="billing_state"
-                                       placeholder="Postcode">
+                                       placeholder="Postcode" value="<?php echo $_SESSION['postcode'] ?>">
                             </div>
                         </div>
                     </div>
@@ -200,7 +168,7 @@ include_once "index.php";
                                     <span class="glyphicon glyphicon-map-marker"></span>
                                 </div>
                                 <input class="form-control" type="text" id="billing_zip" name="billing_zip"
-                                       placeholder="Adres">
+                                       placeholder="Adres" value="<?php echo $_SESSION['adres'] ?>">
                             </div>
                         </div>
                     </div>
@@ -211,7 +179,7 @@ include_once "index.php";
                             <span class="glyphicon glyphicon-home"></span>
                         </div>
                         <input class="form-control" type="text" id="billing_country" name="billing_city"
-                               placeholder="stad">
+                               placeholder="stad" value="<?php echo $_SESSION['stad'] ?>">
                     </div>
                 </div>
             </div>
@@ -364,6 +332,7 @@ include_once "index.php";
                     </p>
                 </div>
                 <div class="text-center">
+                    <input type="hidden" value="<?php echo number_format($total, 2); ?>" name="total">
                     <button type="submit" name="Betalen" value="Veilig betalen" class="btn btn-success btn-block">Veilig betalen</button>
                 </div>
             </div>
