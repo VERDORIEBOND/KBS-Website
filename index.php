@@ -25,7 +25,7 @@ session_start();
 <!--- SALE NAVIGATION BAR --->
 <nav class="navbar navbar-inverse navbar-expand-lg" id="sale-navbar">
     <ul class="nav navbar-nav">
-        <a class="navbar-brand" href="salesPage.php">
+        <a class="navbar-brand" href="salesPage.php?&itemspp=10&orderby=StockItemName">
             <img src="/images/jing.fm-christmas-ornament-clipart-black-190781.png" style="height: 60px; width: auto;">
         </a>
         <a href="salesPage.php" style="text-decoration: none">
@@ -122,7 +122,7 @@ session_start();
 
         <div class="navbar-header">
             <a class="navbar-header">
-                <a class="navbar-links-sale" href="salesPage.php?&itemspp=10">Sale!</a>
+                <a class="navbar-links-sale" href="salesPage.php?&itemspp=10&orderby=StockItemName">Sale!</a>
                 <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10&orderby=StockItemName">Alle Producten</a>
         </div>
 
