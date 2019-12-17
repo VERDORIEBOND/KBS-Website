@@ -289,7 +289,6 @@ $itemsToProductCards = function ($connection)
 
 
 
-
     // Knoppen voor de resultaten per pagina
     echo
     "<form action='' method='post'>
@@ -298,10 +297,11 @@ $itemsToProductCards = function ($connection)
 <input class='Sort50' type='submit' name='use_button1' value='50' />
 <input class='Sort75' type='submit' name='use_button2' value='75' />
 <input class='Sort100' type='submit' name='use_button3' value='100' />
-<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderbyname=StockItemName ASC'>Naam(oplopend)</a>
-<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderbyname=StockItemName DESC'>Naam(aflopend)</a>
-<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderbyname=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
-<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderbyname=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderby=StockItemName ASC'>Naam(oplopend)</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderby=StockItemName DESC'>Naam(aflopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderby=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
+
 
 </form>";
 
@@ -315,7 +315,9 @@ $itemsToProductCards = function ($connection)
     // Einde pagination
 
 
-    $ordername = $_GET['orderbyname'];
+    $ordername = $_GET['orderby'];
+
+
 
     $i=0;
     $completedItems = array();
@@ -414,15 +416,15 @@ if (in_array($productName, $completedItems) == false)
     <!--- Knoppen voor First,Prev,Next,Last --->
 <div class="container">
         <ul class="pagination">
-            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
+            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
             <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
             <li class="Prev-buton" >
-                <a href="<?php if($pagenr <= 1){ echo 'disabled'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
+                <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page."&orderby=".$ordername; } ?>">Prev</a>
             </li>
             <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?pagenr=".($pagenr + 1).'&itemspp='.$nr_of_records_per_page; ;} ?>">Next</a>
+                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?pagenr=".($pagenr + 1).'&itemspp='.$nr_of_records_per_page."&orderby=".$ordername; ;} ?>">Next</a>
             </li>
-            <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page;?>">Last</a></li>
+            <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername;?>">Last</a></li>
         </ul>
 </div>
     <!--- Einde Knoppen voor First,Prev,Next,Last --->
