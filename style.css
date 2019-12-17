@@ -328,16 +328,24 @@ div.carousel-item div.carousel-caption p
 
 a.footer-service{
     position: relative;
-    left: 10px;
+    right: 50%;
+
 }
 
 a.footer-verzenden{
     position: relative;
-    left: 40px;
+    right: 25%;
+
 }
 
 a.footer-betaling{
-    left: 15px;
+    position: relative;
+}
+
+a.footer-overons{
+    position: relative;
+    left: 20%;
+
 }
 
 .container .winkelmandje {
@@ -398,6 +406,7 @@ a.OrderbyPrice{
     left: 63%;
     color: black;
 }
+
 
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
