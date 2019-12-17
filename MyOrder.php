@@ -2,7 +2,8 @@
 
 
 namespace MyApp;
-include_once 'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Spec\Order.php';
+include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/Order.php';
+include 'MyOrderItem.php';
 use Quickshiftin\Pdf\Invoice\Spec\Order;
 date_default_timezone_set('CET');
 
@@ -12,7 +13,7 @@ class MyOrder implements Order
     function __construct()
     {
         $conn = NULL;
-        include_once "connection.php";
+        include "connection.php";
         $this->conn = $conn;
     }
     /**
@@ -113,12 +114,21 @@ class MyOrder implements Order
 
     /**
      * Get an array of OrderItem objects
-     * @note This should return an array of instances of a class where you implement Quickshiftin\Pdf\Invoice\Spec\OrderItem
+     * @note This should return an array of instances of a class where you implement Quickshiftin/Pdf/Invoice/Spec/OrderItem
      * @return array
      */
     public function getOrderItems()
     {
-        $orderItems = MyOrderItem::class;
+        $orderItems = array();
+
+        $sql = "SELECT OrderLineID FROM wideworldimporters.orderlines where	OrderID = 47;";
+        $result = mysqli_query($this->conn,$sql);
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $orderItems[] = new MyOrderItem($row['OrderLineID']);
+
+        }
+
         return $orderItems;
     }
 
@@ -137,11 +147,7 @@ class MyOrder implements Order
      */
     public function getSaleDate($sFormat)
     {
-        $date = new \DateTime('2000-01-01');
-        return $date->format($sFormat);
-
-        //$date = date('M jS Y g:i a');
-        //return date_format($date,'M jS Y g:i a');
+        return date(DATE_RFC2822);
     }
     public function getOrderNote()
     {

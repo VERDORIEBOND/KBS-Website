@@ -288,7 +288,7 @@ $itemsToProductCards = function ($connection)
 
     echo
     "<form action='' method='post'>
-<p class='Resultaten'>Resultaten per pagina:</p>
+<p class='Resultaten' style='padding-left: 10px'>Resultaten per pagina:</p>
 <input class='Sort' type='submit' name='use_button' value='25' />
 <input type='submit' name='use_button1' value='50' />
 <input type='submit' name='use_button2' value='75' />

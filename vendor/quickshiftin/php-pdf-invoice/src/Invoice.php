@@ -21,6 +21,8 @@ function money_format($lc,$price)
 }
 
 include'C:\xampp\htdocs\vendor\quickshiftin\php-pdf-invoice\src\Spec\Order.php';
+
+use Doctrine\Instantiator\Exception\ExceptionInterface;
 use Quickshiftin\Pdf\Invoice\Spec\Order as OrderSpec;
 use Quickshiftin\Pdf\Invoice\Spec\OrderItem as OrderItemSpec;
 
@@ -30,7 +32,7 @@ use Zend_Pdf_Page;
 use Zend_Pdf_Color_GrayScale;
 use Zend_Pdf_Color_Rgb;
 use Zend_Pdf_Style;
-
+error_reporting(-1);
 /**
  * PDF Invoice generator
  * Cannibalized from Magento1
@@ -105,7 +107,7 @@ class Invoice implements \ArrayAccess
     private
         $_sOrderText                  = 'Order # ',
         $_sOrderDateText              = 'Order Date: ',
-        $_sOrderDateFormat            = 'M jS Y g:i a',
+        $_sOrderDateFormat            = DATE_RFC2822,
         $_sSoldToText                 = 'Sold to',
         $_sShipToText                 = 'Ship to',
         $_sPaymentMethodText          = 'Payment Method',
@@ -511,7 +513,6 @@ class Invoice implements \ArrayAccess
 
         return $oPage;
     }
-
     private function insertNote(Zend_Pdf_Page $oPage, OrderSpec $oOrder)
     {
         $sNote = $oOrder->getOrderNote();
@@ -545,12 +546,11 @@ class Invoice implements \ArrayAccess
         // Section Text Color
         $oPage->setFillColor($this->getTitleFontColor());
         $this->_setFontRegular($oPage, 10);
-        
+
         $oPage->drawText($this->_sOrderText . $this->_oOrder->getOrderId(), 35, ($top -= 15), 'UTF-8');
 
         $oPage->drawText(
-            $this->_sOrderDateText . $this->_oOrder->getSaleDate($this->_sOrderDateFormat), 
-            35, ($top -= 15), 'UTF-8'
+            $this->_sOrderDateText . $this->_oOrder->getSaleDate($this->_sOrderDateFormat), 35, ($top -= 15), 'UTF-8'
         );
 
         $top -= 10;

@@ -2,12 +2,15 @@
 
 
 namespace MyApp;
+include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/OrderItem.php';
 use Quickshiftin\Pdf\Invoice\Spec\OrderItem;
-include "connection.php";
+
 class MyOrderItem implements OrderItem
 {
-    function __construct()
+    private $lineID;
+    function __construct($lineID)
     {
+        $this->lineID = $lineID;
         $conn = NULL;
         include "connection.php";
         $this->conn = $conn;
@@ -19,11 +22,11 @@ class MyOrderItem implements OrderItem
      */
     public function getName()
     {
-        $sql = "SELECT StockItemName FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT Description FROM wideworldimporters.orderlines where	OrderID = $this->lineID;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
-            return $row['StockItemName'];
+            return $row['Description'];
         }
     }
     /**

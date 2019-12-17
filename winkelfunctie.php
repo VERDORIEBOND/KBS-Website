@@ -189,17 +189,15 @@ if (isset($_POST['Remove'])){
 
         </table>
 
-        <form method="get" action="winkelfunctie.php">
+        <form method="POST" action="winkelfunctie.php">
             <input type="submit" name="button1" value="Order">
         </form>
         <?php
-
-            if(isset($_GET['button1']))
+            if(isset($_POST['button1']))
             {
                 $orderEmail();
                 //$InvoiceTest->testSomething();
             }
-
         ?>
 
 
