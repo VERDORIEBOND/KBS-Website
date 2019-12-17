@@ -20,7 +20,7 @@ error_reporting(-1);
 include "index.php";
 include "functions.php";
 include "connection.php";
-;
+
 ?>
 
 </head>
