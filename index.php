@@ -123,7 +123,7 @@ session_start();
         <div class="navbar-header">
             <a class="navbar-header">
                 <a class="navbar-links-sale" href="salesPage.php?&itemspp=10">Sale!</a>
-                <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10">Alle Producten</a>
+                <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10&orderbyname=StockItemName">Alle Producten</a>
         </div>
 
         <span class="dropdown">

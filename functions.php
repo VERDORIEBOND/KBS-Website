@@ -288,6 +288,8 @@ $itemsToProductCards = function ($connection)
     }
 
 
+
+
     // Knoppen voor de resultaten per pagina
     echo
     "<form action='' method='post'>
@@ -296,8 +298,8 @@ $itemsToProductCards = function ($connection)
 <input class='Sort50' type='submit' name='use_button1' value='50' />
 <input class='Sort75' type='submit' name='use_button2' value='75' />
 <input class='Sort100' type='submit' name='use_button3' value='100' />
-<input class='Sortbyname' type='submit' name='use_button4' value='Naam' /> 
-<input class='Sortbyprice' type='submit' name='use_button5' value='Prijs' /> 
+<a class='Orderbyname' href='productPage.php?&itemspp=10&orderbyname=StockItemName'>Naam</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderbyname=RecommendedRetailPrice'>Prijs</a>
 
 </form>";
 
@@ -310,9 +312,12 @@ $itemsToProductCards = function ($connection)
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
     // Einde pagination
 
+
+    $ordername = $_GET['orderbyname'];
+
     $i=0;
     $completedItems = array();
-    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID LIMIT $offset,$nr_of_records_per_page";
+    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY $ordername LIMIT $offset,$nr_of_records_per_page";
     $result = mysqli_query($connection, $sql);
 
     echo '<div class="container-fluid">';
