@@ -1,5 +1,6 @@
 <?php
 include_once "functions.php";
+include "orderEmail.php";
 $mail_err=$firstname_err=$lastname_err=$city_err=$phone_err=$postal_err=$adres_err="";
 if(isset($_POST['Betalen'])) {
     if(empty(trim($_POST['firstname']))){
@@ -106,6 +107,7 @@ if(isset($_POST['Betalen'])) {
             echo "API call failed: " . htmlspecialchars($e->getMessage());
         }
     }
+    //$orderEmail();
 }
 include_once "connection.php";
 include_once "winkelfunctie.php";

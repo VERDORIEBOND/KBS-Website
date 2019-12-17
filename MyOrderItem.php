@@ -35,7 +35,7 @@ class MyOrderItem implements OrderItem
      */
     public function getSku()
     {
-        $sql = "SELECT StockItemID FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT StockItemID FROM wideworldimporters.orderlines where	OrderID = $this->lineID;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
@@ -59,11 +59,11 @@ class MyOrderItem implements OrderItem
      */
     public function getPricePerUnit()
     {
-        $sql = "SELECT UnitPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT UnitPrice, TaxRate FROM wideworldimporters.orderlines where	OrderID = $this->lineID;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
-            return $row['UnitPrice'];
+            return ($row['UnitPrice'] / 100 * (100 - $row['TaxRate']));
         }
     }
 
@@ -74,14 +74,12 @@ class MyOrderItem implements OrderItem
     public function getPrice()
     {
         $totalprice = 0;
-        $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT UnitPrice FROM wideworldimporters.orderlines where	OrderID = $this->lineID;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
-            return $row['RecommendedRetailPrice'];
+            return $row['UnitPrice'];
         }
-        $totalprice = $totalprice * 1.15;
-        return $totalprice;
     }
 
     /**
@@ -90,15 +88,12 @@ class MyOrderItem implements OrderItem
      */
     public function getSalesTaxAmount()
     {
-        $totaltax = 0;
-        $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT UnitPrice, TaxRate FROM wideworldimporters.orderlines where	OrderID = $this->lineID;";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
-            return $row['RecommendedRetailPrice'];
+            return ($row['UnitPrice'] / 100 * $row['TaxRate']);
         }
-        $totaltax = $totaltax * 0.15;
-        return $totaltax;
     }
 
 }

@@ -25,10 +25,10 @@ session_start();
 <!--- SALE NAVIGATION BAR --->
 <nav class="navbar navbar-inverse navbar-expand-lg" id="sale-navbar">
     <ul class="nav navbar-nav">
-        <a class="navbar-brand" href="salesPage.php?&itemspp=10">
+        <a class="navbar-brand" href="salesPage.php?&itemspp=10&orderby=StockItemName">
             <img src="/images/jing.fm-christmas-ornament-clipart-black-190781.png" style="height: 60px; width: auto;">
         </a>
-        <a href="salesPage.php?&itemspp=10" style="text-decoration: none">
+        <a href="salesPage.php?&itemspp=10&orderby=StockItemName" style="text-decoration: none">
         <p class="navbar-text" style="font-weight: bold; color: #FF3213; -webkit-text-stroke-color: black; -webkit-text-stroke-width: 2px;">KERST AANBIEDINGEN EINDIGEN IN</p>
         </a>
         <!-- Display the countdown timer in an element -->
@@ -122,29 +122,29 @@ session_start();
 
         <div class="navbar-header">
             <a class="navbar-header">
-                <a class="navbar-links-sale" href="salesPage.php?&itemspp=10">Sale!</a>
-                <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10">Alle Producten</a>
+                <a class="navbar-links-sale" href="salesPage.php?&itemspp=10&orderby=StockItemName">Sale!</a>
+                <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10&orderby=StockItemName">Alle Producten</a>
         </div>
 
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
-                    <li><a href="productPage.php?productGroup=Airline Novelties&itemspp=10">Airline Novelties</a></li>
-                    <li><a href="productPage.php?productGroup=Clothing&itemspp=10">Clothing</a></li>
-                    <li><a href="productPage.php?productGroup=Computing Novelties&itemspp=10">Computing Novelties</a></li>
-                    <li><a href="productPage.php?productGroup=Furry Footwear&itemspp=10">Furry Footwear</a></li>
-                    <li><a href="productPage.php?productGroup=Mugs&itemspp=10">Mugs</a></li>
-                    <li><a href="productPage.php?productGroup=Novelty Items&itemspp=10">Novelty Items</a></li>
-                    <li><a href="productPage.php?productGroup=Packing Materials&itemspp=10">Packing Materials</a></li>
-                    <li><a href="productPage.php?productGroup=T-Shirts&itemspp=10">T-Shirts</a></li>
-                    <li><a href="productPage.php?productGroup=Toys&itemspp=10">Toys</a></li>
+                    <li><a href="productPage.php?productGroup=Airline Novelties&itemspp=10&orderby=StockItemName">Airline Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Clothing&itemspp=10&orderby=StockItemName">Clothing</a></li>
+                    <li><a href="productPage.php?productGroup=Computing Novelties&itemspp=10&orderby=StockItemName">Computing Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Furry Footwear&itemspp=10&orderby=StockItemName">Furry Footwear</a></li>
+                    <li><a href="productPage.php?productGroup=Mugs&itemspp=10&orderby=StockItemName">Mugs</a></li>
+                    <li><a href="productPage.php?productGroup=Novelty Items&itemspp=10&orderby=StockItemName">Novelty Items</a></li>
+                    <li><a href="productPage.php?productGroup=Packing Materials&itemspp=10&orderby=StockItemName">Packing Materials</a></li>
+                    <li><a href="productPage.php?productGroup=T-Shirts&itemspp=10&orderby=StockItemName">T-Shirts</a></li>
+                    <li><a href="productPage.php?productGroup=Toys&itemspp=10&orderby=StockItemName">Toys</a></li>
                 </ul>
         </span>
         <div class="Search-Bar">
             <form action="searchFunction.php" method="get">
                 <div class="search-txt">
                     <input class="search-text" type="text"  placeholder="Zoeken" name="search" value="" dir="ltr" required>
-                    <input class="search-btn"  type="submit" value="Search" href="#">
+                    <input class="search-btn"  type="submit" value="Zoeken" href="#">
                 </div>
             </form>
         </div>
@@ -166,6 +166,9 @@ session_start();
                     <p>Welkom <?php print($_SESSION['name']); ?></p>
                 </span>
         <?php } else{ ?>
+            <div class="verlanglijstje1">
+                <span><a href="verlanglijstje.php"><span class="glyphicon glyphicon-heart"></span></span></a></span>
+            </div>
             <div class="winkelmandje">
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
             </div>

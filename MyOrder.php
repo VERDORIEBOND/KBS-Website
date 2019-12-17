@@ -10,8 +10,10 @@ date_default_timezone_set('CET');
 class MyOrder implements Order
 {
     private $conn;
+    private $lineID;
     function __construct()
     {
+
         $conn = NULL;
         include "connection.php";
         $this->conn = $conn;
@@ -23,11 +25,11 @@ class MyOrder implements Order
     public function getPriceBeforeShippingNoTax()
     {
         $totalprice = 0;
-        $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT UnitPrice ,TaxRate FROM wideworldimporters.orderlines where	OrderID = 47";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
-            $totalprice = $totalprice + $row['RecommendedRetailPrice'];
+            $totalprice = $totalprice + ($row['UnitPrice'] / 100 * (100 - $row['TaxRate']));
         }
         return $totalprice;
     }
@@ -38,7 +40,7 @@ class MyOrder implements Order
      */
     public function getCustomerShipCharge()
     {
-        return 0.0;
+        return 10.0;
     }
 
     /**
@@ -48,7 +50,7 @@ class MyOrder implements Order
     public function getSalesTaxAmount()
     {
         $totaltax = 0.0;
-        $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $sql = "SELECT UnitPrice ,TaxRate FROM wideworldimporters.orderlines where	OrderID = 47";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
@@ -65,15 +67,14 @@ class MyOrder implements Order
      */
     public function getTotalCost()
     {
-        $totalprice = 0.0;
-        $sql = "SELECT RecommendedRetailPrice FROM wideworldimporters.stockitems WHERE StockItemID = 15;";
+        $totalprice = 0;
+        $sql = "SELECT UnitPrice ,TaxRate FROM wideworldimporters.orderlines where	OrderID = 47";
         $result = mysqli_query($this->conn,$sql);
         while ($row = mysqli_fetch_assoc($result))
         {
-            return $row['RecommendedRetailPrice'];
+            $totalprice = $totalprice + ($row['UnitPrice'] / 100 * (100 - $row['TaxRate']));
         }
-        $totalprice = $totalprice * 1.15;
-        return $totalprice;
+        return $totalprice + 10;
     }
 
     /**
