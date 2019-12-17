@@ -49,29 +49,19 @@ error_reporting(-1)
         <div class="Prijs">
             <?php
             //print de prijs functie
-            $prijsgever = function ($connection) {
                 $numFromUrl = $_GET['productId'];
-                $query = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl'";
-                $result = mysqli_query($connection, $query);
-                while ($row = mysqli_fetch_assoc($result)){
-                    if($row['StockGroupName'] == 'USB Novelties'){
-                        echo $row["RecommendedRetailPrice"]* 0.85;
+                $query = "SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl'";
+                $result = mysqli_query($conn, $query);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if ($row['StockItemID'] == 76) {
+
+                        if ($row['StockGroupName'] == 'Clothing') {
+                            echo round("€" . ($row["RecommendedRetailPrice"] / 100 * (100 - $row['StockItemID'])), 2);
+                        }
                     }
                 }
-
-
-            }
-
-
-
-
-
-
             ?>
         </div>
-    <div class="saleartikel">
-
-    </div>
         <div class="Stock">
            <?php
            //print de voorraad
@@ -111,7 +101,7 @@ error_reporting(-1)
             $NumberUrl = $_GET ['productId'];
             $query2 = "SELECT i.StockItemID, MarketingComments FROM stockitems i WHERE StockItemID = '$NumberUrl'";
             $result2 = mysqli_query($conn,$query2);
-            if(!empty(trim($row['MarketingComments']))) {
+            if(!empty($row['MarketingComments'])) {
                 echo "Bij dit product zit geen beschrijving";
             }
             else{
