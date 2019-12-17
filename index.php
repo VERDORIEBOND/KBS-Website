@@ -129,15 +129,15 @@ session_start();
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
-                    <li><a href="productPage.php?productGroup=Airline Novelties&itemspp=10">Airline Novelties</a></li>
-                    <li><a href="productPage.php?productGroup=Clothing&itemspp=10">Clothing</a></li>
-                    <li><a href="productPage.php?productGroup=Computing Novelties&itemspp=10">Computing Novelties</a></li>
-                    <li><a href="productPage.php?productGroup=Furry Footwear&itemspp=10">Furry Footwear</a></li>
-                    <li><a href="productPage.php?productGroup=Mugs&itemspp=10">Mugs</a></li>
-                    <li><a href="productPage.php?productGroup=Novelty Items&itemspp=10">Novelty Items</a></li>
-                    <li><a href="productPage.php?productGroup=Packing Materials&itemspp=10">Packing Materials</a></li>
-                    <li><a href="productPage.php?productGroup=T-Shirts&itemspp=10">T-Shirts</a></li>
-                    <li><a href="productPage.php?productGroup=Toys&itemspp=10">Toys</a></li>
+                    <li><a href="productPage.php?productGroup=Airline Novelties&itemspp=10&orderby=StockItemName">Airline Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Clothing&itemspp=10&orderby=StockItemName">Clothing</a></li>
+                    <li><a href="productPage.php?productGroup=Computing Novelties&itemspp=10&orderby=StockItemName">Computing Novelties</a></li>
+                    <li><a href="productPage.php?productGroup=Furry Footwear&itemspp=10&orderby=StockItemName">Furry Footwear</a></li>
+                    <li><a href="productPage.php?productGroup=Mugs&itemspp=10&orderby=StockItemName">Mugs</a></li>
+                    <li><a href="productPage.php?productGroup=Novelty Items&itemspp=10&orderby=StockItemName">Novelty Items</a></li>
+                    <li><a href="productPage.php?productGroup=Packing Materials&itemspp=10&orderby=StockItemName">Packing Materials</a></li>
+                    <li><a href="productPage.php?productGroup=T-Shirts&itemspp=10&orderby=StockItemName">T-Shirts</a></li>
+                    <li><a href="productPage.php?productGroup=Toys&itemspp=10&orderby=StockItemName">Toys</a></li>
                 </ul>
         </span>
         <div class="Search-Bar">

@@ -382,6 +382,18 @@ input.Sortbyprice{
     font-size: 17px;
 }
 
+a.OrderbynameASC{
+    position: relative;
+    left: 62%;
+    color: black;
+}
+
+a.OrderbyPrice{
+    position: relative;
+    left: 63%;
+    color: black;
+}
+
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
     background-color: #03C03C;
