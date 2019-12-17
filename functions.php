@@ -298,8 +298,10 @@ $itemsToProductCards = function ($connection)
 <input class='Sort50' type='submit' name='use_button1' value='50' />
 <input class='Sort75' type='submit' name='use_button2' value='75' />
 <input class='Sort100' type='submit' name='use_button3' value='100' />
-<a class='Orderbyname' href='productPage.php?&itemspp=10&orderbyname=StockItemName'>Naam</a>
-<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderbyname=RecommendedRetailPrice'>Prijs</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderbyname=StockItemName ASC'>Naam(oplopend)</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderbyname=StockItemName DESC'>Naam(aflopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderbyname=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderbyname=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
 
 </form>";
 
