@@ -59,7 +59,11 @@ error_reporting(0);
                 if(strlen(trim($_POST['password'])) <= 6){
                     $password_err = "Het wachtwoord moet minimaal 7 tekens lang zijn";
                 } else{
-                    $password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT);
+                    if(preg_match('~[A-Z]~', $_POST['password']) && preg_match('~[a-z]~', $_POST['password']) && preg_match('~\d~', $_POST['password'])){
+                        $password = password_hash(trim($_POST['password']),PASSWORD_DEFAULT);
+                    } else{
+                        $password_err = "Het wachtwoord moet een hoofdletter, kleine letter en een cijfer bevatten";
+                    }
                 }
             }
         }if(empty(trim($_POST['confirm_password']))){

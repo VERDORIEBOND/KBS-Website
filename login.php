@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
     } else {
         $password = trim($_POST['password']);
     }
-    if(empty($username_err) && empty($password_err)){
+    if(empty($email_err) && empty($password_err)){
         $sql = "SELECT Consumerid, email, passwrd, first_name, last_name, adres, city, postal, phone FROM Consumerprivate WHERE email = ?";
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
@@ -46,11 +46,13 @@ if(isset($_POST['submit'])){
                             $_SESSION["telefoonnummer"] = $telefoonnummer;
                             echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
                         } else{
-                            $password_err = "Verkeerd wachtwoord";
+                            $password_err = "Verkeerde combinatie email en wachtwoord";
+                            $email_err = "Verkeerde combinatie email en wachtwoord";
                         }
                     }
                 } else{
-                    $email_err = "Er is geen account met dit emailadres";
+                    $email_err = "Verkeerde combinatie email en wachtwoord";
+                    $password_err = "Verkeerde combinatie email en wachtwoord";
                 }
             } else{
                 $email_err= "Er is een fout in het syteem opgetreden";
@@ -77,7 +79,7 @@ if(isset($_POST['submit'])){
         <form action="" method="post">
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Emailadres</label>
-                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="Emailadres">
+                <input type="text" name="email" class="form-control" value="" placeholder="Emailadres">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">

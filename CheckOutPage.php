@@ -1,61 +1,110 @@
 <?php
+include_once "functions.php";
 $mail_err=$firstname_err=$lastname_err=$city_err=$phone_err=$postal_err=$adres_err="";
 if(isset($_POST['Betalen'])) {
+    if(empty(trim($_POST['firstname']))){
+        $firstname_err = "Voer een voornaam in";
+    } else{
+        if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['firstname']))){
+            $firstname_err="De voornaam mag alleen letters bevatten m.u.v. ' en -";
+        } else{
 
-    try {
-        /*
-         * Initialize the Mollie API library with your API key.
-         *
-         * See: https://www.mollie.com/dashboard/developers/api-keys
-         */
-        require "initialize.php";
+        }
+    }
+    if(empty(trim($_POST['lastname']))){
+        $lastname_err = "Voer een achternaam in";
+    } else{
+        if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['lastname']))){
+            $lastname_err="De achternaam mag alleen letters bevatten m.u.v. ' en -";
+        } else{
 
-         /*
-          * Generate a unique order id for this example. It is important to include this unique attribute
-          * in the redirectUrl (below) so a proper return page can be shown to the customer.
-          */
-         $orderId = time();
-         $total = $_POST['total'];
-         /*
-          * Determine the url parts to these example files.
-          */
-         $protocol = isset($_SERVER['HTTPS']) && strcasecmp('off', $_SERVER['HTTPS']) !== 0 ? "https" : "http";
-         $hostname = $_SERVER['HTTP_HOST'];
-         $path = dirname(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF']);
+        }
+    }
+    if(empty(trim($_POST['mail']))){
+        $mail_err = "Voer een emailadres in";
+    } else{
 
-         /*
-          * Payment parameters:
-          *   amount        Amount in EUROs. This example creates a € 10,- payment.
-          *   description   Description of the payment.
-          *   redirectUrl   Redirect location. The customer will be redirected there after the payment.
-          *   webhookUrl    Webhook location, used to report when the payment changes state.
-          *   metadata      Custom metadata that is stored with the payment.
-          */
-         $payment = $mollie->payments->create([
-             "amount" => [
-                 "currency" => "EUR",
-                 "value" => "$total" // You must send the correct number of decimals, thus we enforce the use of strings
-             ],
-             "description" => "Order #{$orderId}",
-             "redirectUrl" => "{$protocol}://{$hostname}{$path}/payments/return.php?order_id={$orderId}",
-             "webhookUrl" => "{$protocol}://{$hostname}{$path}/payments/webhook.php",
-             "metadata" => [
-                 "order_id" => $orderId,
-             ],
-         ]);
+    }
+    if(empty(trim($_POST['city']))){
+        $city_err = "Voer een stad in";
+    } else{
 
-         /*
-          * In this example we store the order with its payment status in a database.
-          */
-         database_write($orderId, $payment->status);
+    }
+    if(empty(trim($_POST['adres']))){
+        $adres_err = "Voer een adres in";
+    } else{
 
-         /*
-          * Send the customer off to complete the payment.
-          * This request should always be a GET, thus we enforce 303 http response code
-          */
-         header("Location: " . $payment->getCheckoutUrl(), true, 303);
-     } catch (\Mollie\Api\Exceptions\ApiException $e) {
-        echo "API call failed: " . htmlspecialchars($e->getMessage());
+    }
+    if(empty(trim($_POST['postcode']))){
+        $postal_err = "Voer een postcode in";
+    } else{
+        if(PostcodeCheck($_POST['postcode']) == false){
+            $postal_err="Ongeldige postcode";
+        } else{
+
+        }
+    }
+    if(trim(!ctype_digit($_POST['phone']))){
+        $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
+    } else{
+
+    }
+    if(empty($mail_err) && empty($firstname_err) && empty($lastname_err) && empty($city_err) && empty($phone_err) && empty($postal_err) && empty($adres_err)) {
+        try {
+            /*
+             * Initialize the Mollie API library with your API key.
+             *
+             * See: https://www.mollie.com/dashboard/developers/api-keys
+             */
+            require "initialize.php";
+
+            /*
+             * Generate a unique order id for this example. It is important to include this unique attribute
+             * in the redirectUrl (below) so a proper return page can be shown to the customer.
+             */
+            $orderId = time();
+            $total = $_POST['total'];
+            /*
+             * Determine the url parts to these example files.
+             */
+            $protocol = isset($_SERVER['HTTPS']) && strcasecmp('off', $_SERVER['HTTPS']) !== 0 ? "https" : "http";
+            $hostname = $_SERVER['HTTP_HOST'];
+            $path = dirname(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF']);
+
+            /*
+             * Payment parameters:
+             *   amount        Amount in EUROs. This example creates a € 10,- payment.
+             *   description   Description of the payment.
+             *   redirectUrl   Redirect location. The customer will be redirected there after the payment.
+             *   webhookUrl    Webhook location, used to report when the payment changes state.
+             *   metadata      Custom metadata that is stored with the payment.
+             */
+            $payment = $mollie->payments->create([
+                "amount" => [
+                    "currency" => "EUR",
+                    "value" => "$total" // You must send the correct number of decimals, thus we enforce the use of strings
+                ],
+                "description" => "Order #{$orderId}",
+                "redirectUrl" => "{$protocol}://{$hostname}{$path}/return.php?order_id={$orderId}",
+                "webhookUrl" => "{$protocol}://{$hostname}{$path}/payments/webhook.php",
+                "metadata" => [
+                    "order_id" => $orderId,
+                ],
+            ]);
+
+            /*
+             * In this example we store the order with its payment status in a database.
+             */
+            database_write($orderId, $payment->status);
+
+            /*
+             * Send the customer off to complete the payment.
+             * This request should always be a GET, thus we enforce 303 http response code
+             */
+            header("Location: " . $payment->getCheckoutUrl(), true, 303);
+        } catch (\Mollie\Api\Exceptions\ApiException $e) {
+            echo "API call failed: " . htmlspecialchars($e->getMessage());
+        }
     }
 }
 include_once "connection.php";
@@ -139,7 +188,7 @@ include_once "index.php";
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-envelope"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_email" name="mail"
+                        <input class="form-control" type="email" id="billing_email" name="mail"
                                placeholder="Example@example.com" value="<?php echo $_SESSION['username'] ?>">
                     </div>
                     <span class="help-block"><?php echo $mail_err; ?></span>
@@ -150,7 +199,7 @@ include_once "index.php";
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-earphone"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_tel" name="billing_tel"
+                        <input class="form-control" type="text" id="billing_tel" name="phone"
                                placeholder="06****" value="<?php echo $_SESSION['telefoonnummer'] ?>">
                     </div>
                     <span class="help-block"><?php echo $phone_err; ?></span>
