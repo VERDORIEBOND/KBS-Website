@@ -362,6 +362,11 @@ p p2{
     padding-left: 70%;
 }
 
+p2{
+    position: relative;
+    padding-left: 70%;
+}
+
 p p1{
     color: black;
 }

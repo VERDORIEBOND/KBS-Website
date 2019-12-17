@@ -69,7 +69,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 
     echo
     "<form action='' method='post'>
-<p class='Resultaten'>Resultaten per pagina:</p>
+<p1 class='Resultaten'><p1>Resultaten per pagina:</p1><p2>Sorteer op:<br></p2>
 <input class='Sort' type='submit' name='use_button' value='25' />
 <input type='submit' name='use_button1' value='50' />
 <input type='submit' name='use_button2' value='75' />
@@ -89,7 +89,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
 
 
-    $category = $_GET['productGroup'];
+
     $ordername = $_GET['orderby'];
 
 
@@ -154,10 +154,10 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 
     <div class="container">
         <ul class="pagination">
-            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
+            <li><a href="?productGroup=<?php echo $category; ?>&pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
             <li class="<?php if($pagenr <= 1){ echo '#'; } ?>">
             <li class="Prev-buton" >
-                <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page."&orderby=".$ordername; } ?>">Prev</a>
+                <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo"?productGroup=".$category."&pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page."&orderby=".$ordername; } ?>">Prev</a>
             </li>
             <li class="<?php if($pagenr >= $total_pages){ echo '#'; } ?>">
                 <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?productGroup=".$category.'&itemspp='.$nr_of_records_per_page."&pagenr=".($pagenr + 1)."&orderby=".$ordername; } ?>">Next</a>
@@ -166,14 +166,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
         </ul>
     </div>
 <?php
-    $pageammountchange = function ($itemspp)
-    {
-        $finalurl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?&itemspp=$itemspp";
-        ?>
-        <a href="<?php echo $_POST['$finalurl'] ?>"></a>
-        <?php
-    };
-    $pageammountchange($nr_of_records_per_page);
+
     mysqli_free_result($result);
 };
 
