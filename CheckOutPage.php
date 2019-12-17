@@ -1,5 +1,7 @@
 <?php
+$mail_err=$firstname_err=$lastname_err=$city_err=$phone_err=$postal_err=$adres_err="";
 if(isset($_POST['Betalen'])) {
+
     try {
         /*
          * Initialize the Mollie API library with your API key.
@@ -113,34 +115,37 @@ include_once "index.php";
         <div class="row">
             <div class="col-md-7 well " style="position: relative">
                 <h3>Klant Gegevens</h3>
-                <div class="form-group">
+                <div class="form-group <?php echo  (!empty($firstname_err)) ?  'has-error' : ''; ?>">
                     <div class="input-group">
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-user"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Voornaam" value="<?php echo $_SESSION['name'] ?>">
+                        <input class="form-control" type="text" id="billing_name" name="firstname" placeholder="Voornaam" value="<?php echo $_SESSION['name'] ?>">
                     </div>
+                    <span class="help-block"><?php echo $firstname_err; ?></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group <?php echo  (!empty($lastname_err)) ?  'has-error' : ''; ?>">
                     <div class="input-group">
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-user"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_name" name="billing_name" placeholder="Achteraam" value="<?php echo $_SESSION['lastname'] ?>">
+                        <input class="form-control" type="text" id="billing_name" name="lastname" placeholder="Achteraam" value="<?php echo $_SESSION['lastname'] ?>">
                     </div>
+                    <span class="help-block"><?php echo $lastname_err; ?></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group <?php echo  (!empty($mail_err)) ?  'has-error' : ''; ?>">
                     <div class="input-group">
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-envelope"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_email" name="billing_email"
+                        <input class="form-control" type="text" id="billing_email" name="mail"
                                placeholder="Example@example.com" value="<?php echo $_SESSION['username'] ?>">
                     </div>
+                    <span class="help-block"><?php echo $mail_err; ?></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group <?php echo  (!empty($phone_err)) ?  'has-error' : ''; ?>">
                     <div class="input-group">
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-earphone"></span>
@@ -148,39 +153,43 @@ include_once "index.php";
                         <input class="form-control" type="text" id="billing_tel" name="billing_tel"
                                placeholder="06****" value="<?php echo $_SESSION['telefoonnummer'] ?>">
                     </div>
+                    <span class="help-block"><?php echo $phone_err; ?></span>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <div class="form-group">
+                        <div class="form-group <?php echo  (!empty($postal_err)) ?  'has-error' : ''; ?>">
                             <div class="input-group">
                                 <div class="input-group-addon addon-diff-color">
                                     <span class="glyphicon glyphicon-home"></span>
                                 </div>
-                                <input class="form-control" type="text" id="billing_state" name="billing_state"
+                                <input class="form-control" type="text" id="billing_state" name="postcode"
                                        placeholder="Postcode" value="<?php echo $_SESSION['postcode'] ?>">
                             </div>
+                            <span class="help-block"><?php echo $postal_err; ?></span>
                         </div>
                     </div>
                     <div class="col-md-5 col-md-offset-2">
-                        <div class="form-group">
+                        <div class="form-group <?php echo  (!empty($adres_err)) ?  'has-error' : ''; ?>">
                             <div class="input-group">
                                 <div class="input-group-addon addon-diff-color">
                                     <span class="glyphicon glyphicon-map-marker"></span>
                                 </div>
-                                <input class="form-control" type="text" id="billing_zip" name="billing_zip"
+                                <input class="form-control" type="text" id="billing_zip" name="adres"
                                        placeholder="Adres" value="<?php echo $_SESSION['adres'] ?>">
                             </div>
+                            <span class="help-block"><?php echo $adres_err; ?></span>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group <?php echo  (!empty($city_err)) ?  'has-error' : ''; ?>">
                     <div class="input-group">
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-home"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_country" name="billing_city"
+                        <input class="form-control" type="text" id="billing_country" name="city"
                                placeholder="stad" value="<?php echo $_SESSION['stad'] ?>">
                     </div>
+                    <span class="help-block"><?php echo $city_err; ?></span>
                 </div>
             </div>
             <div class="col-md-4 col-md-offset-1 well">
