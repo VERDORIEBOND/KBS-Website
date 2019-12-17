@@ -13,6 +13,7 @@
 include "connection.php";
 include "functions.php";
 include "index.php";
+error_reporting(-1)
 
 
 //Print de naam van het gekozen artikel
@@ -20,7 +21,7 @@ include "index.php";
 
 ?>
 <div class="container">
-    <div class="col">
+
         <div class="Productname">
             <?php
             //$detailprinter($conn);
@@ -44,15 +45,29 @@ include "index.php";
 
                 </div>
             </div>
+    <div class="Prijs">
+        <?php
+        echo $prijsgever($conn);
+        ?>
     </div>
-    <div class="col">
-        <div class="Prijs">
+
+        <div class="Prijs2">
             <?php
             //print de prijs functie
-            echo $prijsgever($conn);
+                $numFromUrl = $_GET['productId'];
+                $query = "SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1;";
+                $result = mysqli_query($conn, $query);
+                $row = mysqli_fetch_assoc($result);
+                  if ($row['StockGroupName'] == 'Novelty Items') {
+                            echo "€" . ($row['RecommendedRetailPrice']*0.85);
+                        }
+                        else {
+                            echo "€".$row['RecommendedRetailPrice'];
+
+
+                }
             ?>
         </div>
-
         <div class="Stock">
            <?php
            //print de voorraad
@@ -92,7 +107,7 @@ include "index.php";
             $NumberUrl = $_GET ['productId'];
             $query2 = "SELECT i.StockItemID, MarketingComments FROM stockitems i WHERE StockItemID = '$NumberUrl'";
             $result2 = mysqli_query($conn,$query2);
-            if(!empty(trim($row['MarketingComments']))) {
+            if(!empty($row['MarketingComments'])) {
                 echo "Bij dit product zit geen beschrijving";
             }
             else{
@@ -105,20 +120,9 @@ include "index.php";
         </div>
 
 
-        <div class="TempShower"
-            <?php
-            echo $tempShower($conn);
-            ?>
-        </div>
-    <div class="Testmotherfucker" style="max-width:400px;">
-        <iframe width="400" height="225" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>
-        <p>
-            Video courtesy  of
-            <a href=https://www.youtube.com/watch?v=HluANRwPyNo target="_blank"> Jombo </a>.
-        </p>
-    </div>
 
-    </div>
+    <div class="Testvideo" style="max-width:400px;">
+        <iframe width="400" height="225" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>    </div>
 </div>
 
 

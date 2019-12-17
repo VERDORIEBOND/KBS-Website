@@ -14,12 +14,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
     <link rel="stylesheet" href="ssearchCSS.css">
+    <?php
+    include "index.php";
+    include "connection.php";
+    include "functions.php";
+    ?>
 </head>
 <body>
 
 <?php
-include "index.php";
-include "connection.php";
+
+
+
 
 $completedItems = array();
 $output="";

@@ -69,12 +69,17 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 
     echo
     "<form action='' method='post'>
-<p class='Resultaten'>Resultaten per pagina:</p>
+<p1 class='Resultaten'><p1>Resultaten per pagina:</p1><p2>Sorteer op:<br></p2>
 <input class='Sort' type='submit' name='use_button' value='25' />
 <input type='submit' name='use_button1' value='50' />
 <input type='submit' name='use_button2' value='75' />
 <input type='submit' name='use_button3' value='100' />
+<a class='OrderbynameASC' href='productPage.php?productGroup="; echo $category; echo"&itemspp=10&orderby=StockItemName ASC'>Naam(oplopend)</a>
+<a class='OrderbynameASC' href='productPage.php?productGroup="; echo $category; echo"&itemspp=10&orderby=StockItemName DESC'>Naam(aflopend)</a>
+<a class='OrderbyPrice' href='productPage.php?productGroup="; echo $category; echo"&itemspp=10&orderby=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
+<a class='OrderbyPrice' href='productPage.php?productGroup="; echo $category; echo"&itemspp=10&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
 </form>";
+
 
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
@@ -85,12 +90,15 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 
 
 
+    $ordername = $_GET['orderby'];
+
+
 
 
 
 
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
-    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' LIMIT $offset, $maxitemspp";
+    $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' ORDER BY $ordername LIMIT $offset, $maxitemspp";
     $result = mysqli_query($connection,$sql);
     echo '<div class="container-fluid">';                                       //All the product cards we crate will be in this container
     echo '<div class="row">';
@@ -146,26 +154,19 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 
     <div class="container">
         <ul class="pagination">
-            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
-            <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
+            <li><a href="?productGroup=<?php echo $category; ?>&pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
+            <li class="<?php if($pagenr <= 1){ echo '#'; } ?>">
             <li class="Prev-buton" >
-                <a href="<?php if($pagenr <= 1){ echo ''; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
+                <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo"?productGroup=".$category."&pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page."&orderby=".$ordername; } ?>">Prev</a>
             </li>
-            <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?productGroup=".$category.'&itemspp='.$nr_of_records_per_page."&pagenr=".($pagenr + 1); } ?>">Next</a>
+            <li class="<?php if($pagenr >= $total_pages){ echo '#'; } ?>">
+                <a href="<?php if($pagenr >= $total_pages){ echo '#'; } else { echo "?productGroup=".$category.'&itemspp='.$nr_of_records_per_page."&pagenr=".($pagenr + 1)."&orderby=".$ordername; } ?>">Next</a>
             </li>
-            <li><a href="?productGroup=<?php echo $category; ?>&itemspp=<?php echo $nr_of_records_per_page;?>&pagenr=<?php echo $total_pages; ?>">Last</a></li>
+            <li><a href="?productGroup=<?php echo $category; ?>&itemspp=<?php echo $nr_of_records_per_page;?>&pagenr=<?php echo $total_pages."&orderby=".$ordername; ?>">Last</a></li>
         </ul>
     </div>
 <?php
-    $pageammountchange = function ($itemspp)
-    {
-        $finalurl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?&itemspp=$itemspp";
-        ?>
-        <a href="<?php echo $_POST['$finalurl'] ?>"></a>
-        <?php
-    };
-    $pageammountchange($nr_of_records_per_page);
+
     mysqli_free_result($result);
 };
 
@@ -261,12 +262,13 @@ $filterItems = function ()
 
 $itemsToProductCards = function ($connection)
 {
+    // Pagina nummer bepalen
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
     } else {
         $pagenr = 1;
     }
-
+// Bepalen van aantal items per pagina + knoppen voor het vast zetten van een aantal per pagina
     $nr_of_records_per_page = $_GET['itemspp'];
 
     if (isset($_POST['use_button']))
@@ -286,24 +288,41 @@ $itemsToProductCards = function ($connection)
         $nr_of_records_per_page = 100;
     }
 
+
+
+    // Knoppen voor de resultaten per pagina
     echo
     "<form action='' method='post'>
-<p class='Resultaten' style='padding-left: 10px'>Resultaten per pagina:</p>
-<input class='Sort' type='submit' name='use_button' value='25' />
-<input type='submit' name='use_button1' value='50' />
-<input type='submit' name='use_button2' value='75' />
-<input type='submit' name='use_button3' value='100' />
+<p class='Resultaten'><p1>Resultaten per pagina:</p1><p2>Sorteer op:<br></p2>
+<input class='Sort25' type='submit' name='use_button' value='25' />
+<input class='Sort50' type='submit' name='use_button1' value='50' />
+<input class='Sort75' type='submit' name='use_button2' value='75' />
+<input class='Sort100' type='submit' name='use_button3' value='100' />
+<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderby=StockItemName ASC'>Naam(oplopend)</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderby=StockItemName DESC'>Naam(aflopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderby=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
+
+
 </form>";
+
+    // Pagination
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
-    $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ";
+    $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID";
     $result_rows = mysqli_query($connection, $total_rows);
     $row = mysqli_fetch_assoc($result_rows);
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
+    // Einde pagination
+
+
+    $ordername = $_GET['orderby'];
+
+
 
     $i=0;
     $completedItems = array();
-    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID LIMIT $offset,$nr_of_records_per_page";
+    $sql = "SELECT StockItemName, RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID ORDER BY $ordername LIMIT $offset, $nr_of_records_per_page";
     $result = mysqli_query($connection, $sql);
 
     echo '<div class="container-fluid">';
@@ -393,31 +412,25 @@ if (in_array($productName, $completedItems) == false)
     echo '</div></div>';
 
 
+
     ?>
+    <!--- Knoppen voor First,Prev,Next,Last --->
 <div class="container">
         <ul class="pagination">
-            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page; ?>">First</a></li>
+            <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
             <li class="<?php if($pagenr <= 1){ echo 'disabled'; } ?>">
             <li class="Prev-buton" >
-                <a href="<?php if($pagenr <= 1){ echo 'disabled'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page; } ?>">Prev</a>
+                <a href="<?php if($pagenr <= 1){ echo '#'; } else { echo "?pagenr=".($pagenr - 1)."&itemspp=".$nr_of_records_per_page."&orderby=".$ordername; } ?>">Prev</a>
             </li>
             <li class="<?php if($pagenr >= $total_pages){ echo 'disabled'; } ?>">
-                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?pagenr=".($pagenr + 1).'&itemspp='.$nr_of_records_per_page; ;} ?>">Next</a>
+                <a href="<?php if($pagenr >= $total_pages){ echo 'disabled'; } else { echo "?pagenr=".($pagenr + 1).'&itemspp='.$nr_of_records_per_page."&orderby=".$ordername; ;} ?>">Next</a>
             </li>
-            <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page;?>">Last</a></li>
+            <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername;?>">Last</a></li>
         </ul>
 </div>
-
+    <!--- Einde Knoppen voor First,Prev,Next,Last --->
 <?php
 
-    $pageammountchange = function ($itemspp)
-    {
-        $finalurl = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?&itemspp=$itemspp";
-        ?>
-        <a href="<?php echo $_POST['$finalurl'] ?>"></a>
-        <?php
-    };
-    $pageammountchange($nr_of_records_per_page);
     mysqli_free_result($result);
 };
 //Haalt de naam op van een artikel en print hem

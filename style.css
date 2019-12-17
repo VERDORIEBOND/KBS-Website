@@ -23,7 +23,7 @@ body {
 .navbar-links-sale{
     color: red;
     position: relative;
-    padding-left: 50px;
+    padding-left: 80px;
 
 }
 
@@ -326,34 +326,88 @@ div.carousel-item div.carousel-caption p
     text-align: center;
 }
 
-.Over{
-    color: #6ac1ff;
-    padding-right: 40%;
-    padding-left: 1%;
+a.footer-service{
+    position: relative;
+    right: 40%;
+
 }
 
-.Contact{
-    color: #6ac1ff;
-    padding-right: 40%;
+a.footer-verzenden{
+    position: relative;
+    right: 25%;
+
 }
 
-.Verzenden{
-    color: #6ac1ff;
+a.footer-betaling{
+    position: relative;
 }
-.winkelmandje{
+
+a.footer-overons{
+    position: relative;
+    left: 20%;
+
+}
+
+.container .winkelmandje {
     position: absolute;
     color: #6ac1ff;
-    right: 50%;
-    top: 40%;
-    font-size: 150%;
+    right: 10%;
+    top: 27%;
+    font-size: 200%;
+
+
 }
-.verlanglijstje{
+.container .verlanglijstje1{
     position: absolute;
     color: #6ac1ff;
-    right: 50%;
-    top: 40%;
+    right: 15%;
+    top: 27%;
     font-size: 150%;
+
 }
+
+p p2{
+    padding-left: 70%;
+}
+
+p2{
+    position: relative;
+    padding-left: 70%;
+}
+
+p p1{
+    color: black;
+}
+
+input.Sort25{
+    position: relative;
+}
+
+input.Sortbyname{
+    position: relative;
+    left: 73%;
+    font-size: 17px;
+}
+
+input.Sortbyprice{
+    position: relative;
+    left: 74%;
+    font-size: 17px;
+}
+
+a.OrderbynameASC{
+    position: relative;
+    left: 62%;
+    color: black;
+}
+
+a.OrderbyPrice{
+    position: relative;
+    left: 63%;
+    color: black;
+}
+
+
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
     background-color: #03C03C;
