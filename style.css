@@ -318,23 +318,20 @@ div.carousel-item div.carousel-caption p
 
 .footer{
     background-color: black;
-    padding: -5px;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 150%;
     z-index: 10;
     text-align: center;
 }
 
 a.footer-service{
-    position: relative;
-    right: 40%;
-
+    position: fixed;
 }
 
 a.footer-verzenden{
     position: relative;
-    right: 25%;
+
 
 }
 
@@ -344,8 +341,11 @@ a.footer-betaling{
 
 a.footer-overons{
     position: relative;
-    left: 20%;
+}
 
+.Contact{
+    position: relative;
+    left: 500px;
 }
 
 .container .winkelmandje {
@@ -364,6 +364,19 @@ a.footer-overons{
     top: 27%;
     font-size: 150%;
 
+}
+
+.OmschrijvingOverOns{
+    width: 500px;
+    border: 10px solid #6ac1ff;
+    padding: 20px;
+}
+
+.contactUs{
+    width: 500px;
+    left: 60%;
+    position: relative;
+    bottom: 500px;
 }
 
 p p2{

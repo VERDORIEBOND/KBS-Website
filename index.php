@@ -183,7 +183,7 @@ session_start();
         <span><a href="#">Service</a> </span>
         <span><a href="#">Verzenden</a> </span>
         <span><a href="#">Betaling</a> </span>
-        <span><a href="#">Over ons</a> </span>
+        <span><a href="overOns.php">Over ons</a> </span>
     </ul>
 </div>
 
