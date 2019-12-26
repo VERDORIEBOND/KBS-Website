@@ -325,17 +325,10 @@ div.carousel-item div.carousel-caption p
     text-align: center;
 }
 
-a.footer-verzenden{
-    position: fixed;
-    margin: 2px;
-}
 
-a.footer-betaling{
-    position: fixed;
-}
-
-a.footer-overons{
-    position: fixed;
+.footer a{
+    position: relative;
+    margin: 200px;
 }
 
 .Contact{

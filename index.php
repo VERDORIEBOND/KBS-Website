@@ -178,11 +178,15 @@ session_start();
         <?php } ?>
     </div>
 </nav>
+
+
 <div class="footer">
     <ul>
+        <div class="footer">
         <span><a href="verzenden.php">Verzenden</a> </span>
         <span><a href="betaling.php">Betaling</a> </span>
         <span><a href="overOns.php">Over ons</a> </span>
+        </div>
     </ul>
 </div>
 
