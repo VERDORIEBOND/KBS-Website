@@ -419,6 +419,26 @@ a.OrderbyPrice{
     color: black;
 }
 
+.betalingFAQ{
+    width: 800px;
+    border: 10px solid #6ac1ff;
+    padding: 20px;
+    position: relative;
+    left: 25%;
+}
+
+.verzendenFAQ{
+    width: 800px;
+    border: 10px solid #6ac1ff;
+    padding: 20px;
+    position: relative;
+    left: 25%;
+}
+
+.verzendenFAQ H1{
+    text-align: center;
+    ;
+}
 
 
 html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{

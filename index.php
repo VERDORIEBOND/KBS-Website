@@ -180,8 +180,8 @@ session_start();
 </nav>
 <div class="footer">
     <ul>
-        <span><a href="#">Verzenden</a> </span>
-        <span><a href="#">Betaling</a> </span>
+        <span><a href="verzenden.php">Verzenden</a> </span>
+        <span><a href="betaling.php">Betaling</a> </span>
         <span><a href="overOns.php">Over ons</a> </span>
     </ul>
 </div>
