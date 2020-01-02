@@ -33,7 +33,7 @@ $output="";
 if(isset($_GET['search']) && $_GET['search'] !== '')//if the search button clicked and the search button must not equal emty value
 {
     $search = trim($_GET['search']);
-    $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'");
+    $query = mysqli_query($conn, "SELECT distinct regexp_substr(StockItemName, '[a-z ]+') as stockitem,StockItemID,RecommendedRetailPrice,MarketingComments FROM stockitems WHERE StockItemName LIKE '%$search%' OR StockItemID LIKE '$search'");
     //here above will show the informarion from the DataBase using the database in the SQL
     $numberOfrows = mysqli_num_rows($query);// counting the result
 
@@ -67,7 +67,7 @@ if(isset($_GET['search']) && $_GET['search'] !== '')//if the search button click
                             <img src="images/no-product-image.png" alt="ProductImage" style="width:100%">
                             <h1><?php echo $name ?></h1>
                             <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
-                            <p><?php echo $row['stockitem']; ?></p>
+                            <p><?php echo $row['MarketingComments']; ?></p>
                             <span>
                     <p>
                         <button>In winkelmandje</button>

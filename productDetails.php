@@ -122,8 +122,8 @@ error_reporting(-1)
 
 
 
-    <div class="Testvideo" style="max-width:400px;">
-        <iframe width="400" height="225" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>    </div>
+    <div class="Testvideo" style="max-width:350px;">
+        <iframe width="350" height="200" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>    </div>
 </div>
 
 
