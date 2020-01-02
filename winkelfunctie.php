@@ -183,14 +183,14 @@ if (isset($_POST['Remove'])){
 
             </tr>
             <tr><td colspan="4" align="right">Total+BTW</td>
-                <td align="center">$<?php $prec =(21/100)*$total; $totalMBTW=$total+$prec; echo number_format($totalMBTW, 2); ?>
+                <td align="center">€<?php $prec =(21/100)*$total; $totalMBTW=$total+$prec; echo number_format($totalMBTW, 2); ?>
                 </td>
             </tr>
 
         </table>
         <form method="post" action="CheckoutPage.php">
             <div class="text-center" style="width: 20%">
-                <button type="submit" name="CheckOut" value="Veilig betalen" class="btn btn-success btn-block" style=" border: #66afe9; background-color: #66afe9 ">Bestelling afronden</button>
+                <button type="submit" name="CheckOut" value="Veilig betalen" class="btn btn-success btn-block" style=" border: #66afe9; background-color: #66afe9 ">Besellen afronden</button>
             </div>
 
         </form>
@@ -199,6 +199,22 @@ if (isset($_POST['Remove'])){
             print'<script>window.location="CheckOutPage.php"</script>';
         }
         ?>
+
+
+        <form method="post" action="winkelfunctie.php">
+            <input type="submit" name="button1" value="Order">
+        </form>
+        <?php
+
+            if(isset($_GET['button1']))
+            {
+                $orderEmail();
+                //$InvoiceTest->testSomething();
+            }
+
+        ?>
+
+
     </div>
 
 

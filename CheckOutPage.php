@@ -146,7 +146,7 @@ include_once "index.php";
 
 
 <div class="container well">
-    <center><h2>Bestellen afronden</h2></center>
+    <center><h2>Besteling afronden</h2></center>
     <hr>
     <form method="post" action="" class="form-horizontal">
 

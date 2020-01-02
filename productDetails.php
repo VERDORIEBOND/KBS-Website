@@ -87,6 +87,7 @@ error_reporting(-1)
                     <input type="submit" name="add"   value="Toevoegen aan winkelmand">
                     <input type="hidden" value="<?php echo $_GET["productId"] ?>" name="Id"/>
                     <input type="hidden" value="<?php echo $_GET["StockItemName"] ?>" name="name"/>
+                    <input type="hidden" value="<?php echo $_GET['Aantal'] ?>" name="Aantal"/>
 
                 </form>
 
