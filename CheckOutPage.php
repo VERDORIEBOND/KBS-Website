@@ -114,7 +114,7 @@ if(isset($_POST['Betalen'])) {
                 $quantity=$value['Aantal'];
                 $StockItemID=$value['ProductId'];
                 if($stmt2=mysqli_prepare($conn,$sql2)){
-                    mysqli_stmt_bind_param($stmt2, "iisii", $orderId, $StockItemID, $name, $quantity, $price);
+                    mysqli_stmt_bind_param($stmt2, "iisis", $orderId, $StockItemID, $name, $quantity, $price);
                     mysqli_stmt_execute($stmt2);
                 }
             }
