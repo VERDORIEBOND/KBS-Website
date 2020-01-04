@@ -1,10 +1,10 @@
 <?php
+include 'vendor/autoload.php';
 use Quickshiftin\Pdf\Invoice\Invoice as PdfInvoice;
 use Quickshiftin\Pdf\Invoice\Factory as InvoiceFactory;
-include 'MyOrder.php';
+include_once 'MyOrder.php';
 //include 'C:/xampp/htdocs/vendor/quickshiftin/php-pdf-invoice/src/Factory.php';
 //include 'C:/xampp/htdocs/vendor/quickshiftin/php-pdf-invoice/src/Invoice.php';
-include 'vendor/autoload.php';
 
 $orderEmail = function()
 {
@@ -42,7 +42,7 @@ $orderEmail = function()
     $oInvoicePdf->setLogoPath(__DIR__ . 'images/WWIJPG.jpg');
     // Build the PDF
     // $oPdf is an instance of Zend_Pdf
-    $oPdf = $oInvoicePdf->getPdf($myOrder);             //testen hoe ver het programma komt
+    $oPdf = $oInvoicePdf->getPdf($myOrder);
     // A string rendition, you could echo this to the browser with headers to implement a download
     $pdf = $oPdf->render();
 

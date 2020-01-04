@@ -2,15 +2,15 @@
 
 
 namespace MyApp;
-include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/Order.php';
-include 'MyOrderItem.php';
+include 'vendor/autoload.php';
+//include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/Order.php';
+include_once 'MyOrderItem.php';
 use Quickshiftin\Pdf\Invoice\Spec\Order;
 date_default_timezone_set('CET');
 
 class MyOrder implements Order
 {
     private $conn;
-    private $lineID;
     function __construct()
     {
 

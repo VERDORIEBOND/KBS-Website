@@ -12,9 +12,9 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <?php
+include_once 'index.php';
 include 'HTML_Emails.php';
 include 'connection.php';
-include 'index.php';
 include 'functions.php';
 
 // Import PHPMailer classes into the global namespace

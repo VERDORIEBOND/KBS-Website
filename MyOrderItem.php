@@ -2,7 +2,8 @@
 
 
 namespace MyApp;
-include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/OrderItem.php';
+//include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/OrderItem.php';
+include 'vendor/autoload.php';
 use Quickshiftin\Pdf\Invoice\Spec\OrderItem;
 
 class MyOrderItem implements OrderItem
