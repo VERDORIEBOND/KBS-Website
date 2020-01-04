@@ -19,7 +19,7 @@
 <?php
 include "connection.php";
 error_reporting(0);
-
+session_start();
 
 
 
@@ -563,24 +563,54 @@ $imgCategory = function ($category)
         return "images/categories/USB%20Novelties.png";
     }
 };
-function database_read($orderId)
+function database_read($connection, $orderId)
 {
-    $orderId = intval($orderId);
-    $database = dirname(__FILE__) . "/database/order-{$orderId}.txt";
-
-    $status = @file_get_contents($database);
-
+    $sql1="SELECT orderstatus FROM ordersprivate WHERE OrderID = ?";
+    if($stmt1=mysqli_prepare($connection,$sql1)){
+        mysqli_stmt_bind_param($stmt1, "i", $param_orderid);
+        $param_orderid=$orderId;
+        if(mysqli_stmt_execute($stmt1)){
+            mysqli_stmt_store_result($stmt1);
+            mysqli_stmt_bind_result($stmt1, $status);
+        }
+    }
     return $status ? $status : "unknown order";
 }
 
-function database_write($orderId, $status)
+function database_write($connection,$orderId, $status, $price, $email, $firstname, $lastname, $adres, $postal, $city, $phone)
 {
     $orderId = intval($orderId);
     $database = dirname(__FILE__) . "/database/order-{$orderId}.txt";
 
     file_put_contents($database, $status);
+    $sql1 = "INSERT INTO ordersprivate (OrderID, orderstatus, price, email, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    if($stmt1=mysqli_prepare($connection,$sql1)) {
+        mysqli_stmt_bind_param($stmt1, "isssssssss", $param_OrderID, $param_status, $param_price, $param_email, $param_firstname, $param_lastname, $param_adres, $param_postal, $param_city, $param_phone);
+        $param_email=$email;
+        $param_OrderID=$orderId;
+        $param_status=$status;
+        $param_price=$price;
+        $param_firstname=$firstname;
+        $param_lastname=$lastname;
+        $param_adres=$adres;
+        $param_postal=$postal;
+        $param_city=$city;
+        $param_phone=$phone;
+        if(mysqli_stmt_execute($stmt1)){
+            return true;
+        } else{
+            echo "Er is een fout opgetreden in het systeem";
+        }
+    }
 }
-
+function database_update($connection, $orderid, $status)
+{
+    $sql1= "UPDATE ordersprivate SET orderstatus = ? WHERE OrderID = ?";
+    if($stmt1=mysqli_prepare($connection,$sql1)){
+        mysqli_stmt_bind_param($stmt1, "ss", $status, $OrderID);
+        mysqli_stmt_execute($stmt1);
+    }
+}
 ?>
 
 

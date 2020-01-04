@@ -1,7 +1,9 @@
 <?php
 include_once "functions.php";
 include "orderEmail.php";
+error_reporting(-1);
 $mail_err=$firstname_err=$lastname_err=$city_err=$phone_err=$postal_err=$adres_err="";
+$email=$firstname=$lastname=$city=$phone=$postal=$adres="";
 if(isset($_POST['Betalen'])) {
     if(empty(trim($_POST['firstname']))){
         $firstname_err = "Voer een voornaam in";
@@ -9,7 +11,7 @@ if(isset($_POST['Betalen'])) {
         if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['firstname']))){
             $firstname_err="De voornaam mag alleen letters bevatten m.u.v. ' en -";
         } else{
-
+            $firstname=$_POST['firstname'];
         }
     }
     if(empty(trim($_POST['lastname']))){
@@ -18,23 +20,23 @@ if(isset($_POST['Betalen'])) {
         if(!ctype_alpha(str_replace(array(' ', "'", '-'),'',$_POST['lastname']))){
             $lastname_err="De achternaam mag alleen letters bevatten m.u.v. ' en -";
         } else{
-
+            $lastname=$_POST['lastname'];
         }
     }
     if(empty(trim($_POST['mail']))){
         $mail_err = "Voer een emailadres in";
     } else{
-
+        $email=$_POST['mail'];
     }
     if(empty(trim($_POST['city']))){
         $city_err = "Voer een stad in";
     } else{
-
+        $city=$_POST['city'];
     }
     if(empty(trim($_POST['adres']))){
         $adres_err = "Voer een adres in";
     } else{
-
+        $adres=$_POST['adres'];
     }
     if(empty(trim($_POST['postcode']))){
         $postal_err = "Voer een postcode in";
@@ -42,13 +44,13 @@ if(isset($_POST['Betalen'])) {
         if(PostcodeCheck($_POST['postcode']) == false){
             $postal_err="Ongeldige postcode";
         } else{
-
+            $postal=$_POST['postcode'];
         }
     }
     if(trim(!ctype_digit($_POST['phone']))){
         $phone_err="Voer alleen cijfers in bijvoorbeeld 0612345678";
     } else{
-
+        $phone=$_POST['phone'];
     }
     if(empty($mail_err) && empty($firstname_err) && empty($lastname_err) && empty($city_err) && empty($phone_err) && empty($postal_err) && empty($adres_err)) {
         try {
@@ -96,8 +98,26 @@ if(isset($_POST['Betalen'])) {
             /*
              * In this example we store the order with its payment status in a database.
              */
-            database_write($orderId, $payment->status);
+            $status=$payment->status;
+            //mysqli_query($conn, "INSERT INTO ordersprivate (OrderID, orderstatus, price, email, first_name, last_name, adres, postal, city, phone) VALUES ($orderId,$status,$total,$email,$firstname,$lastname,$adres,$postal,$city,$phone)");
 
+            $sql1 = "INSERT INTO ordersprivate (OrderID, orderstatus, price, email, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            if($stmt1=mysqli_prepare($conn,$sql1)) {
+                mysqli_stmt_bind_param($stmt1, "isssssssss", $orderId, $status, $total, $email, $firstname, $lastname, $adres, $postal, $city, $phone);
+                mysqli_stmt_execute($stmt1);
+            }
+            $producten = $winkelwagendetails($conn);
+            foreach($producten as $key => $value){
+                $sql2= "INSERT INTO orderlines (OrderID, StockItemID, Description, Quantity, UnitPrice) VALUES (?,?,?,?,?)";
+                $name=$value['Name'];
+                $price=$value['Price'];
+                $quantity=$value['Aantal'];
+                $StockItemID=$value['ProductId'];
+                if($stmt2=mysqli_prepare($conn,$sql2)){
+                    mysqli_stmt_bind_param($stmt2, "iisii", $orderId, $StockItemID, $name, $quantity, $price);
+                    mysqli_stmt_execute($stmt2);
+                }
+            }
             /*
              * Send the customer off to complete the payment.
              * This request should always be a GET, thus we enforce 303 http response code
@@ -180,7 +200,7 @@ include_once "index.php";
                         <div class="input-group-addon addon-diff-color">
                             <span class="glyphicon glyphicon-user"></span>
                         </div>
-                        <input class="form-control" type="text" id="billing_name" name="lastname" placeholder="Achteraam" value="<?php echo $_SESSION['lastname'] ?>">
+                        <input class="form-control" type="text" id="billing_name" name="lastname" placeholder="Achternaam" value="<?php echo $_SESSION['lastname'] ?>">
                     </div>
                     <span class="help-block"><?php echo $lastname_err; ?></span>
                 </div>
@@ -248,88 +268,6 @@ include_once "index.php";
                     <h3>Uw winkelmand</h3>
                 </div>
                 <?php
-
-                /*
-                         <div class="row">
-            <div class="col-md-7 well">
-                <h3>Klant Gegevens</h3>
-                <div class="form-group   <?php echo  (!empty($firstname_err)) ?  'has-error' : ''; ?>">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </div>
-                        <input type="text" name="first_name" placeholder="Voornaam" class="form-control" value="<?php echo $firstname; ?>">
-                        <span class="help-block"><?php echo $firstname_err; ?></span>
-                    </div>
-                </div>
-
-                <div class="form-group <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </div>
-                        <input type="text" name="last_name" placeholder="Achternaam" class="form-control" value="<?php echo $lastname; ?>">
-                        <span class="help-block"><?php echo $lastname_err; ?></span>
-                    </div>
-
-
-
-                <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                    <div class="input-group">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                        </div>
-                        <input type="email" name="email" placeholder="Emailadres" class="form-control" value="<?php echo $email; ?>">
-                        <span class="help-block"><?php echo $email_err; ?></span>
-                    </div>
-                </div>
-
-
-                    <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
-                        <div class="input-group">
-                            <div class="input-group-addon addon-diff-color">
-                                <span class="glyphicon glyphicon-earphone"></span>
-                            </div>
-                            <input type="text" name="phone" placeholder="Telefoonnummer" class="form-control" value="<?php echo $phone; ?>">
-                            <span class="help-block"><?php echo $phone_err; ?></span>
-                        </div>
-                    </div>
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group <?php echo (!empty($postal_err)) ? 'has-error' : ''; ?>">
-                            <div class="input-group">
-                                <div class="input-group-addon addon-diff-color">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                </div>
-                                <input type="text" name="postal_code" placeholder="Postcode" class="form-control" value="<?php echo $postal; ?>">
-                                <span class="help-block"><?php echo $postal_err; ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-md-offset-2">
-                        <div class="form-group <?php echo (!empty($adres_err)) ? 'has-error' : ''; ?>">
-                            <div class="input-group">
-                                <div class="input-group-addon addon-diff-color">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                </div>
-                                <input type="text" name="adres" placeholder="Adres" class="form-control" value="<?php echo $adres; ?>">
-                                <span class="help-block"><?php echo $adres_err; ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                    <div class="form-group <?php echo (!empty($city_err)) ? 'has-error' : ''; ?>">
-                        <div class="input-group-addon addon-diff-color">
-                            <span class="glyphicon glyphicon-home"></span>
-                        </div>
-                        <input type="text" name="city" placeholder="Stad" class="form-control" value="<?php echo $city; ?>">
-                        <span class="help-block"><?php echo $city_err; ?></span>
-                    </div>
-
-            </div>
-                 */
                 $producten = $winkelwagendetails($conn);
                 $total = 0;
                 if(!empty($producten)){

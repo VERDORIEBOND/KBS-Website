@@ -18,11 +18,15 @@ try {
      */
     $payment = $mollie->payments->get($_POST["id"]);
     $orderId = $payment->metadata->order_id;
-
+    $status = $payment->status;
     /*
      * Update the order in the database.
      */
-    database_write($orderId, $payment->status);
+    $sql1= "UPDATE ordersprivate SET orderstatus = ? WHERE OrderID = ?";
+    if($stmt1=mysqli_prepare($conn,$sql1)){
+        mysqli_stmt_bind_param($stmt1, "si", $status, $orderId);
+        mysqli_stmt_execute($stmt1);
+    }
 
     if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
         /*
