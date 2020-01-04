@@ -1,6 +1,4 @@
 <?php
-
-
 namespace MyApp;
 include 'vendor/autoload.php';
 //include_once 'vendor/quickshiftin/php-pdf-invoice/src/Spec/Order.php';

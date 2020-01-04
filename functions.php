@@ -88,14 +88,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
     $row = mysqli_fetch_assoc($result_rows);
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
 
-
-
     $ordername = $_GET['orderby'];
-
-
-
-
-
 
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
     $sql = "SELECT distinct StockItemName , RecommendedRetailPrice, MarketingComments, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' ORDER BY $ordername LIMIT $offset, $maxitemspp";
@@ -111,7 +104,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
         $bootstrapColWidth = 12 / $numOfCols;
         if (in_array($productName, $completedItems) == false)                   //Check if we didnt yet make a product card for the product
         {
-                                                                                // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
+                                                                                // we make a product card for every item returned from the sql query with the corresponding title, price and description
             ?>
             <div class="col-md-<?php echo $bootstrapColWidth; ?>">
                 <div class="card">
@@ -120,7 +113,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
                         <h1><?php echo $productName ?></h1>
                         <p class="price">
                             <?php
-                            if($discount == 0)
+                            if($discount == 0)                                  // if a product is on sale we add the old price crossed out and the new price in bold letters and another color
                             {
                                 echo $row["RecommendedRetailPrice"]." €";
                             }
@@ -146,7 +139,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
             $rowCount++;
             if ($rowCount % $numOfCols == 0) echo '</div><div class="row">';
 
-            array_push($completedItems,$productName);                      //Once we made a product card we add the product to the array with products we made so it wont be made again
+            array_push($completedItems,$productName);                      //Once we made a product card we add the product to the array with products we already made so it wont be made again
         }
     }
     echo '</div></div>';
@@ -167,27 +160,10 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
     </div>
 <?php
 
-    mysqli_free_result($result);
+    mysqli_free_result($result);                                                    // here we clear the results from the SQL query
 };
 
-//Haalt de naam op van een artikel en print hem
-
-/*
-$detailprinter = function ($connection) {
-    $numFromUrl = $_GET['productId'];
-    $sql= "SELECT StockItemID, StockItemName From stockitems WHERE StockItemID = '$numFromUrl'";
-    $result = mysqli_query($connection, $sql);
-    while($row = mysqli_fetch_array($result))   {
-        echo $row['StockItemName'];
-
-    }
-};
-*/
-
-
-
-
-$filterItems = function ()
+$filterItems = function ()                                                          // the filter function is currently not implemented in the website
 {
     ?>
     <div class="container-fluid">
@@ -315,10 +291,7 @@ $itemsToProductCards = function ($connection)
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
     // Einde pagination
 
-
     $ordername = $_GET['orderby'];
-
-
 
     $i=0;
     $completedItems = array();
@@ -328,8 +301,6 @@ $itemsToProductCards = function ($connection)
     echo '<div class="container-fluid">';
     echo '<div class="row">';
 
-
-
     while ($row = mysqli_fetch_assoc($result))
 {
 // Haalt de titels van de verschillende artikelen op en zet de hoeveelheid kolomen vast (3)
@@ -338,7 +309,7 @@ $numOfCols = 3;
 $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
 
-
+// for each product we get the product group name to determine the group image corresponding to the product, as each product group has a separate image
         if($row['StockGroupName'] == 'Airline Novelties')
         {
             $imgDirectory = "images/categories/Airline%20Novelties.png";
@@ -380,12 +351,9 @@ $bootstrapColWidth = 12 / $numOfCols;
             $imgDirectory = "images/categories/USB%20Novelties.png";
         }
 
-if (in_array($productName, $completedItems) == false)
+if (in_array($productName, $completedItems) == false)   // if the product is'nt in the array with completed items (items that already have a product card)
 {
-    // maakt voor elk artikel een losse kaart aan met de titel, prijs en beschrijving
-
-    //echo $bootstrapColWidth;
-
+    // we make a product card for every item returned from the sql query with the corresponding title, price and description
         ?>
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
             <div class="card">

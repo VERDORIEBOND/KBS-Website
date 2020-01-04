@@ -127,7 +127,7 @@ if(isset($_POST['Betalen'])) {
             echo "API call failed: " . htmlspecialchars($e->getMessage());
         }
     }
-    //$orderEmail();
+    $orderEmail();          //we create an email for the completed order
 }
 include_once "connection.php";
 include_once "winkelfunctie.php";

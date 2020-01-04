@@ -1,5 +1,4 @@
 <?php
-
 $host = "localhost";
 $databasename = "wideworldimporters";
 $user = "root";

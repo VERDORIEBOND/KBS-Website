@@ -17,21 +17,15 @@
     <script src="https://kit.fontawesome.com/dda578f1eb.js" crossorigin="anonymous"></script>
 
     <?php
+    error_reporting(-1);
     include 'index.php';
     include 'functions.php';
     include 'connection.php';
-    error_reporting(-1)
     ?>
-
 </head>
 <body>
 <?php
     $itemsCategory($conn, 'USB Novelties', $imgCategory('USB Novelties'), 15);
-
-
 ?>
-
-
-
 </body>
 </html>
