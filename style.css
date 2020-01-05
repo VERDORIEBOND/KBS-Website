@@ -509,3 +509,115 @@ html body nav#sale-navbar.navbar.navbar-inverse.navbar-expand-lg{
 .snowflake:nth-of-type(11){
     left:65%;-webkit-animation-delay:4s,2.5s;animation-delay:4s,2.5s
 }
+
+------------
+
+.ProduktNaam{
+    position: relative;
+    color: #496ebc;
+    font-size: 200%;
+    top: 80px;
+}
+.Productfoto{
+    position: relative;
+    width: 500px;
+    top: 150px;
+    border-radius: 16px;
+}
+.Button {
+    width: 350px;
+    max-width: 45%;
+    padding: 5px 20px;
+    background-color: #55acee;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    left: 65%;
+    bottom: 247px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+
+
+}
+.Button:hover{
+    opacity: 90%;
+}
+.Prijs{
+    position: relative;
+    width: auto;
+    max-width: 25%;
+    left: 65%;
+    bottom: 250px;
+    font-size: 36px;
+    color: black;
+}
+.verlanglijstje-btn{
+    width: 350px;
+    max-width: 45%;
+    padding: 1px  20px;
+    background-color: orangered;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    left: 65%;
+    bottom: 235px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.verlanglijstje-btn:hover{
+    opacity: 90%;
+}
+.Button-twee:hover{
+    background-color: brown;
+}
+
+.Omschrijving{
+    position: relative;
+    width: 350px;
+    height: 10%;
+    left: 65%;
+    bottom: 220px;
+    font-size: 16px;
+    border: 1px solid #3b5998;
+    border-radius: 8px;
+}
+
+.Stock{
+    position: relative;
+    left: 65%;
+    width: auto;
+    max-width: 20%;
+    bottom: 255px;
+}
+.ProductTemp{
+    position: relative;
+    left: 80%;
+    bottom: 275px;
+}
+.alt\=\"a\"{
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+
+}
+
+.Video{
+    max-width: 350px;
+    width: auto;
+}
+.Testvideo{
+    position: relative;
+    left: 65%;
+    bottom: 200px;
+}
+
+.reviewbtn{
+    position: relative;
+    left: 65%;
+    bottom: 200px;
+}

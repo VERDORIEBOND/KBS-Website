@@ -1,9 +1,9 @@
 <!doctype html>
-<div lang="en">
+<html lang="en">
 <head>
 
     <title>Wide World Importers</title>
-    <link rel="stylesheet" type="text/css" href="productDetails.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 
@@ -13,7 +13,8 @@
 include "connection.php";
 include "functions.php";
 include "index.php";
-error_reporting(-1)
+
+
 
 
 //Print de naam van het gekozen artikel
@@ -22,7 +23,7 @@ error_reporting(-1)
 ?>
 <div class="container">
 
-        <div class="Productname">
+        <div class="ProduktNaam" style="position: relative; color: #496ebc; font-size: 200%; top: 80px;" >
             <?php
             //$detailprinter($conn);
             echo $detailPrinter($conn);
@@ -123,9 +124,12 @@ error_reporting(-1)
 
 
     <div class="Testvideo" style="max-width:350px;">
-        <iframe width="350" height="200" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>    </div>
-</div>
+        <iframe width="350" height="200" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>
+    </div>
 
+
+
+</div>
 
 </body>
 </html>
