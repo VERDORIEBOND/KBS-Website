@@ -43,8 +43,10 @@ $mail = new PHPMailer(true);
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <div class="view">
+                <a href="productPage.php?productGroup=Furry%20Footwear&itemspp=10&orderby=StockItemName">
                 <img class="d-block w-100" src="images/SliderImg/img-1.png"
                      alt="First slide">
+                </a>
                 <div class="mask rgba-black-light"></div>
             </div>
             <div class="carousel-caption">
@@ -55,8 +57,10 @@ $mail = new PHPMailer(true);
         <div class="carousel-item">
             <!--Mask color-->
             <div class="view">
+                <a href="productPage.php?productGroup=Clothing&itemspp=10&orderby=StockItemName">
                 <img class="d-block w-100" src="images/SliderImg/img-2.png"
                      alt="Second slide">
+                </a>
                 <div class="mask rgba-black-strong"></div>
             </div>
             <div class="carousel-caption">
@@ -67,8 +71,10 @@ $mail = new PHPMailer(true);
         <div class="carousel-item">
             <!--Mask color-->
             <div class="view">
+                <a href="productPage.php?productGroup=Toys&itemspp=10&orderby=StockItemName">
                 <img class="d-block w-100" src="images/SliderImg/img-3.png"
                      alt="Third slide">
+                </a>
                 <div class="mask rgba-black-slight"></div>
             </div>
             <div class="carousel-caption">
@@ -137,8 +143,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -169,8 +173,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -201,8 +203,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -233,8 +233,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -269,8 +267,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -301,8 +297,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -333,8 +327,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>
@@ -365,8 +357,6 @@ $mail = new PHPMailer(true);
                                         </div>
                                     </div>
                                     <div class="separator clear-left">
-                                        <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>" class="hidden-sm">More details</a></p>
                                     </div>

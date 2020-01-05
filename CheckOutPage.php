@@ -109,12 +109,13 @@ if(isset($_POST['Betalen'])) {
             $producten = $winkelwagendetails($conn);
             foreach($producten as $key => $value){
                 $sql2= "INSERT INTO orderlines (OrderID, StockItemID, Description, Quantity, UnitPrice) VALUES (?,?,?,?,?)";
+
                 $name=$value['Name'];
-                $price=$value['Price'];
-                $quantity=$value['Aantal'];
-                $StockItemID=$value['ProductId'];
+                $price=floatval($value['Price']);
+                $quantity=intval($value['Aantal']);
+                $StockItemID=intval($value['ProductId']);
                 if($stmt2=mysqli_prepare($conn,$sql2)){
-                    mysqli_stmt_bind_param($stmt2, "iisis", $orderId, $StockItemID, $name, $quantity, $price);
+                    mysqli_stmt_bind_param($stmt2, "iisid", $orderId, $StockItemID, $name, $quantity, $price);
                     mysqli_stmt_execute($stmt2);
                 }
             }

@@ -46,12 +46,8 @@ body {
 
 
 .LogIn{
-    position: absolute;
+    position: relative;
     color: #6ac1ff;
-    right: 2%;
-    top: 27%;
-    font-size: 150%;
-
 }
 
 
@@ -120,8 +116,13 @@ body {
 a.dropdown{
     list-style-type: none;
 }
-
-
+.dropdown1{
+    position: relative;
+    color: #6ac1ff;
+}
+.dropdown-menu{
+    position: relative;
+}
 div.card
 {
     padding: 10px;
@@ -337,21 +338,20 @@ div.carousel-item div.carousel-caption p
 }
 
 .container .winkelmandje {
-    position: absolute;
+    position: relative;
     color: #6ac1ff;
-    right: 10%;
-    top: 27%;
-    font-size: 200%;
-
-
 }
-.container .verlanglijstje1{
-    position: absolute;
+.winkelmandje1{
+    position:relative;
     color: #6ac1ff;
-    right: 15%;
-    top: 27%;
-    font-size: 150%;
-
+}
+.verlanglijstje1{
+    position: relative;
+    color: #6ac1ff;
+}
+.verlanglijstje{
+    position: relative;
+    color: #6ac1ff;
 }
 
 .OmschrijvingOverOns{

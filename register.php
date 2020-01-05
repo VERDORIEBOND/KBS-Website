@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-<?php
+<?php                                                                                                                       //includen van alle benodigde pagina's plus de footer en header in index.php
 include "index.php";
 include "functions.php";
 include "connection.php";
@@ -158,6 +158,7 @@ error_reporting(0);
             <label>Wachtwoord</label>
             <input type="password" name="password" placeholder="Wachtwoord" class="form-control" value="">
             <span class="help-block"><?php echo $password_err; ?></span>
+            <span class="help-block">Het wachtwoord moet minimaal 7 tekens zijn en er moet minimaal 1 hoofdletter, 1 kleine letter en 1 cijfer in het wachtwoord zitten</span>
         </div>
         <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
             <label>Herhaal Wachtwoord</label>

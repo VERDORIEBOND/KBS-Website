@@ -1,7 +1,5 @@
 
 <?php
-
-session_start();
 include_once "connection.php";
 include_once "functions.php";
 include_once "index.php";
@@ -33,11 +31,11 @@ if (isset($_GET["action"])&&$_GET["action"] == "delete"){
     //unset($_SESSION["cart"][$_GET["productId"]]);
 
 
-if (isset($_POST['Remove'])){
+/*if (isset($_POST['Remove'])){
 
     $_SESSION["cart"]="";
 }
-
+*/
 ?>
 
 
@@ -132,7 +130,7 @@ if (isset($_POST['Remove'])){
                         <span class="text-danger"><span class="fas fa-trash"></span></a>
                 </td>
                 <td> <?php echo $value['ProductId'] ?></td>
-                <td> <?php echo $value['Name'] ?></td>
+                <td><a href="productDetails.php?productId=<?php echo $value['ProductId'] ?>"> <?php echo $value['Name'] ?></a></td>
                 <td> <?php echo "€". $value['Price'] ?></td>
                 <td>
                     <a href="winkelfunctie.php?action=Min&productId=<?php echo $value['ProductId'] ?>">
@@ -177,14 +175,8 @@ if (isset($_POST['Remove'])){
 
             </tr>
             <tr>
-                <td colspan="4" align="right">Total</td>
+                <td colspan="4" align="right">Totaal</td>
                 <td align="center">€ <?php echo number_format($total, 2); ?></td>
-
-
-            </tr>
-            <tr><td colspan="4" align="right">Total+BTW</td>
-                <td align="center">€<?php $prec =(21/100)*$total; $totalMBTW=$total+$prec; echo number_format($totalMBTW, 2); ?>
-                </td>
             </tr>
 
         </table>

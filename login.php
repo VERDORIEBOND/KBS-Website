@@ -12,7 +12,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 $email = $password = "";
 $email_err = $password_err = "";
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'])){                                //Checken of er iets ingevuld is bij het email en wachtwoord
     if (empty(trim($_POST['email']))) {
         $email_err = "Voer een emailadres in";
     } else {
@@ -24,18 +24,18 @@ if(isset($_POST['submit'])){
         $password = trim($_POST['password']);
     }
     if(empty($email_err) && empty($password_err)){
-        $sql = "SELECT Consumerid, email, passwrd, first_name, last_name, adres, city, postal, phone FROM Consumerprivate WHERE email = ?";
+        $sql = "SELECT Consumerid, email, passwrd, first_name, last_name, adres, city, postal, phone FROM Consumerprivate WHERE email = ?";            //query opzetten voor ophalen van gegevens van de persoon die in wil loggen
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
-            if(mysqli_stmt_execute($stmt)){
+            if(mysqli_stmt_execute($stmt)){                                                                                                            //resultaten opslaan bij het bijbehorende emailadres als er resultaten zijn
                 mysqli_stmt_store_result($stmt);
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $firstname, $lastname, $adres, $stad, $postcode, $telefoonnummer);
                     if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
+                        if(password_verify($password, $hashed_password)){                                                                               //Checken of het ingevulde wachtwoord klopt
                             session_start();
-                            $_SESSION["loggedin"] = true;
+                            $_SESSION["loggedin"] = true;                                                                                               //De gegevens van de klant opslaan in de session van de website zodat ze later te gebruiken zijn
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $email;
                             $_SESSION["name"] = $firstname;
@@ -44,9 +44,9 @@ if(isset($_POST['submit'])){
                             $_SESSION["stad"] = $stad;
                             $_SESSION["postcode"] = $postcode;
                             $_SESSION["telefoonnummer"] = $telefoonnummer;
-                            echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";
+                            echo "<script type='text/javascript'> document.location = 'homePage.php'; </script>";                                       //Redirecten naar de home pagina
                         } else{
-                            $password_err = "Verkeerde combinatie email en wachtwoord";
+                            $password_err = "Verkeerde combinatie email en wachtwoord";                                                                 //Verschillende foutmeldingen
                             $email_err = "Verkeerde combinatie email en wachtwoord";
                         }
                     }
@@ -73,7 +73,7 @@ if(isset($_POST['submit'])){
     </style>
 </head>
 <body>
-<div style="display:flex;justify-content: center;align-items: baseline;">
+<div style="display:flex;justify-content: center;align-items: baseline;">                                                                       <!--HTML formulier voor het invullen van het emailadres en het wachtwoord met ingebouwde foutmeldingen-->
     <div class="wrapper2">
         <h2>Login</h2>
         <form action="" method="post">

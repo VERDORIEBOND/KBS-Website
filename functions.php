@@ -110,6 +110,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
                 <div class="card">
                     <a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                         <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
+
                         <h1><?php echo $productName ?></h1>
                         <p class="price">
                             <?php
@@ -129,10 +130,11 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
                         </p>
                         <p><?php echo $row["MarketingComments"]; ?></p>
                         <span>
-                    <p>
-                        <button>In winkelmandje</button>
-                    </p>
-                </span>
+                            <p>
+                                <button>Meer Details</button>
+                            </p>
+                        </span>
+                    </a>
                 </div>
             </div>
             <?php
@@ -274,10 +276,10 @@ $itemsToProductCards = function ($connection)
 <input class='Sort50' type='submit' name='use_button1' value='50' />
 <input class='Sort75' type='submit' name='use_button2' value='75' />
 <input class='Sort100' type='submit' name='use_button3' value='100' />
-<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderby=StockItemName ASC'>Naam(oplopend)</a>
-<a class='OrderbynameASC' href='productPage.php?&itemspp=10&orderby=StockItemName DESC'>Naam(aflopend)</a>
-<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderby=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
-<a class='OrderbyPrice' href='productPage.php?&itemspp=10&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=StockItemName ASC'>Naam(oplopend)</a>
+<a class='OrderbynameASC' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=StockItemName DESC'>Naam(aflopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
+<a class='OrderbyPrice' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
 
 
 </form>";
@@ -359,14 +361,16 @@ if (in_array($productName, $completedItems) == false)   // if the product is'nt 
             <div class="card">
                 <a href="productDetails.php?productId=<?php echo $row["StockItemID"] ?>">
                 <img src="<?php echo $imgDirectory ?>" alt="ProductImage" style="width:100%">
+
                 <h1><?php echo $productName ?></h1>
                 <p class="price"><?php echo $row["RecommendedRetailPrice"]." €"; ?></p>
                 <p><?php echo $row["MarketingComments"]; ?></p>
                     <span>
                         <p>
-                            <button>In winkelmandje</button>
+                            <button>Meer Details</button>
                         </p>
                     </span>
+                </a>
             </div>
         </div>
         <?php

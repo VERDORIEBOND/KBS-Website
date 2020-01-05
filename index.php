@@ -150,7 +150,7 @@ session_start();
         </div>
         <?php if($_SESSION['loggedin'] == true){?>
             <div class="verlanglijstje1">
-                <span><a href="verlanglijstje.php"><span class="far fa-heart"></span></a></span>
+                <span><a href="verlanglijstje.php"><span class="glyphicon glyphicon-heart"></span></a></span>
             </div>
             <div class="winkelmandje1">
                 <span><a href="winkelfunctie.php"><span class="fas fa-shopping-cart"></span></a></span><br>
@@ -158,7 +158,6 @@ session_start();
             <span class="dropdown1">
                     <a data-toggle="dropdown" href="#" class="glyphicon glyphicon-user"></a>
                 <ul class="dropdown-menu">
-                    <li><a href="reset-password.php">Wachtwoord veranderen</a></li>
                     <li><a href="logout.php">Uitloggen</a></li>
                 </ul>
                 </span>
@@ -166,7 +165,7 @@ session_start();
                     <p>Welkom <?php print($_SESSION['name']); ?></p>
                 </span>
         <?php } else{ ?>
-            <div class="verlanglijstje1">
+            <div class="verlanglijstje">
                 <span><a href="verlanglijstje.php"><span class="glyphicon glyphicon-heart"></span></span></a></span>
             </div>
             <div class="winkelmandje">
