@@ -4,7 +4,7 @@ include "orderEmail.php";
 error_reporting(-1);
 $mail_err=$firstname_err=$lastname_err=$city_err=$phone_err=$postal_err=$adres_err="";
 $email=$firstname=$lastname=$city=$phone=$postal=$adres="";
-if(isset($_POST['Betalen'])) {
+if(isset($_POST['Betalen'])) {                                                                                          //Error handling for the form to make sure the entered answers are not fake inputs
     if(empty(trim($_POST['firstname']))){
         $firstname_err = "Voer een voornaam in";
     } else{
@@ -85,7 +85,7 @@ if(isset($_POST['Betalen'])) {
             $payment = $mollie->payments->create([
                 "amount" => [
                     "currency" => "EUR",
-                    "value" => "$total" // You must send the correct number of decimals, thus we enforce the use of strings
+                    "value" => "$total" //You should use a string so the decimals won't get lost
                 ],
                 "description" => "Order #{$orderId}",
                 "redirectUrl" => "{$protocol}://{$hostname}{$path}/return.php?order_id={$orderId}",
@@ -96,10 +96,9 @@ if(isset($_POST['Betalen'])) {
             ]);
 
             /*
-             * In this example we store the order with its payment status in a database.
+             * Storing the order in the database using mysqli. Also creating orderlines for each product
              */
             $status=$payment->status;
-            //mysqli_query($conn, "INSERT INTO ordersprivate (OrderID, orderstatus, price, email, first_name, last_name, adres, postal, city, phone) VALUES ($orderId,$status,$total,$email,$firstname,$lastname,$adres,$postal,$city,$phone)");
 
             $sql1 = "INSERT INTO ordersprivate (OrderID, orderstatus, price, email, first_name, last_name, adres, postal, city, phone) VALUES (?,?,?,?,?,?,?,?,?,?)";
             if($stmt1=mysqli_prepare($conn,$sql1)) {
@@ -109,7 +108,7 @@ if(isset($_POST['Betalen'])) {
             $producten = $winkelwagendetails($conn);
             foreach($producten as $key => $value){
                 $sql2= "INSERT INTO orderlines (OrderID, StockItemID, Description, Quantity, UnitPrice) VALUES (?,?,?,?,?)";
-
+                // Defining the name, price, quantity and ID from each product in the cart. Also transforming some variables so they get accepted into the database
                 $name=$value['Name'];
                 $price=floatval($value['Price']);
                 $quantity=intval($value['Aantal']);
@@ -183,7 +182,7 @@ include_once "index.php";
 
 
 
-
+              <!--Below you can see the form that gets the input from the user to get into the database for the order-->
         <div class="row">
             <div class="col-md-7 well " style="position: relative">
                 <h3>Klant Gegevens</h3>

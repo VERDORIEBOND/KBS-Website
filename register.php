@@ -20,11 +20,10 @@
     </style>
 </head>
 <body>
-<?php                                                                                                                       //includen van alle benodigde pagina's plus de footer en header in index.php
+<?php
 include "index.php";
 include "functions.php";
 include "connection.php";
-error_reporting(0);
     if(isset($_POST['submit'])){
 
         $email = $password = $confirm_password = $firstname = $lastname = $adres = $postal = $city = $phone = "";

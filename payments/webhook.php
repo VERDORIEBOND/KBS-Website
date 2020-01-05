@@ -28,11 +28,18 @@ try {
         mysqli_stmt_execute($stmt1);
     }
 
-    if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
-        /*
-         * The payment is paid and isn't refunded or charged back.
-         * At this point you'd probably want to start the process of delivering the product to the customer.
-         */
+    if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {                                      //Changing stock to represent the order once paid
+        $result = mysqli_query($conn,"SELECT StockItemID, Quantity FROM orderlines WHERE OrderID = $orderId");
+        while($row = mysqli_fetch_array($result)){
+            $quantity=$row['Quantity'];
+            $itemID=$row['StockItemID'];
+            $sql="UPDATE stockitemholdings SET QuantityOnHand = QuantityOnHand - ? WHERE StockItemID = ? ";
+            if($stmt=mysqli_prepare($conn,$sql)){
+                mysqli_stmt_bind_param($stmt, "ii",$quantity,$itemID);
+                mysqli_stmt_execute($stmt);
+            }
+        }
+        mysqli_free_result($result);
     } elseif ($payment->isOpen()) {
         /*
          * The payment is open.

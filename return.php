@@ -1,18 +1,8 @@
 <?php
-/*
- * How to show a return page to the customer.
- *
- * In this example we retrieve the order stored in the database.
- * Here, it's unnecessary to use the Mollie API Client.
- */
 include_once "index.php";
 include_once "connection.php";
-/*
- * NOTE: The examples are using a text file as a database.
- * Please use a real database like MySQL in production code.
- */
 require_once "functions.php";
-$orderID=$_GET['order_id'];
+$orderID=$_GET['order_id'];                                //Get order status from database using mysqli
 $status="";
 $sql1= "SELECT orderstatus FROM ordersprivate WHERE OrderID = ?";
 if($stmt1=mysqli_prepare($conn,$sql1)){
@@ -30,7 +20,7 @@ if($stmt1=mysqli_prepare($conn,$sql1)){
     }
 }
 
-if($status == "paid"){
+if($status == "paid"){                        //Create message to display based on if the payment has succeeded
     $message = "geslaagd";
 } else{
     $message = "niet geslaagd probeer het afrekenen nogmaals";
