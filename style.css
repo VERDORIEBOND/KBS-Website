@@ -326,16 +326,11 @@ div.carousel-item div.carousel-caption p
     text-align: center;
 }
 
-
 .footer a{
     position: relative;
     margin: 200px;
 }
 
-.Contact{
-    position: relative;
-    left: 500px;
-}
 
 .container .winkelmandje {
     position: relative;
@@ -430,7 +425,6 @@ a.OrderbyPrice{
 
 .verzendenFAQ H1{
     text-align: center;
-    ;
 }
 
 

@@ -22,7 +22,7 @@ session_start();
 
 </head>
 <body>
-<!--- SALE NAVIGATION BAR --->
+<!--- SALE Navigation Bar --->
 <nav class="navbar navbar-inverse navbar-expand-lg" id="sale-navbar">
     <ul class="nav navbar-nav">
         <a class="navbar-brand" href="salesPage.php?&itemspp=10&orderby=StockItemName">
@@ -69,7 +69,9 @@ session_start();
     </ul>
 
 </nav>
-<!--- SALE NAVIGATION BAR
+
+<!-- Snowflakes -->
+<!--
 
 <div class="snowflakes" aria-hidden="true">
     <div class="snowflake">
@@ -111,9 +113,10 @@ session_start();
 </div>
 --->
 
-
+<!-- Top Navigation bar -->
 <nav class="navbar navbar-inverse navbar-expand-lg navbar-fixed-top">
     <div class="container-fluid">
+        <!-- WWI logo with link back to homepage -->
         <div class="navbar-logo">
             <a href="homePage.php">
                 <img src="images/WWI.png" alt="Logo" height="50"></a>
@@ -122,10 +125,13 @@ session_start();
 
         <div class="navbar-header">
             <a class="navbar-header">
+                <!-- Link for sales page -->
                 <a class="navbar-links-sale" href="salesPage.php?&itemspp=10&orderby=StockItemName">Sale!</a>
+                <!-- Link for all productspage -->
                 <a class="navbar-links-categorieen" href="productPage.php?&itemspp=10&orderby=StockItemName">Alle Producten</a>
         </div>
 
+        <!-- Dropdown menu for categories / Sets numbers of records per page to 10 / Orders the page by StockItemName -->
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorieën</a>
                 <ul class="dropdown-menu">
@@ -178,7 +184,7 @@ session_start();
     </div>
 </nav>
 
-
+<!-- Footer of the page with links to customer service pages -->
 <div class="footer">
     <ul>
         <div class="footer">

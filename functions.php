@@ -47,14 +47,16 @@ $checkIfCategory = function ($connection,$navCategory)
 
 $itemsCategory = function ($connection, $category, $imgDirectory, $discount)                              //With this function we display all items corresponding to a specific category
 {
+    // Gets pagenr from URL if nothing is returned sets pagenr to 1
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
     } else {
         $pagenr = 1;
     }
 
-    $nr_of_records_per_page = $_GET['itemspp'];
-    if (isset($_POST['use_button'])) {
+
+    $nr_of_records_per_page = $_GET['itemspp'];             // Gets number of records per page from URL, standard numbers of records per page is set via link on Index.php
+    if (isset($_POST['use_button'])) {                      // Sets numbers of records per page to a user defined number
         $nr_of_records_per_page = 25;
     }
     if (isset($_POST['use_button1'])) {
@@ -67,8 +69,9 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
         $nr_of_records_per_page = 100;
     }
 
+   // Buttons for sorting the page and setting number of records per page
     echo
-    "<form action='' method='post'>
+    "<form action='' method='post'>          
 <p1 class='Resultaten'><p1>Resultaten per pagina:</p1><p2>Sorteer op:<br></p2>
 <input class='Sort' type='submit' name='use_button' value='25' />
 <input type='submit' name='use_button1' value='50' />
@@ -80,7 +83,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
 <a class='OrderbyPrice' href='productPage.php?productGroup="; echo $category; echo"&itemspp=10&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
 </form>";
 
-
+    // Pagination
     $offset = ($pagenr-1) * $nr_of_records_per_page;
     $maxitemspp = $pagenr * $nr_of_records_per_page;
     $total_rows = "SELECT COUNT(*) as aantal FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE o.StockGroupName = '$category' ";
@@ -88,6 +91,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
     $row = mysqli_fetch_assoc($result_rows);
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
 
+    // Gets the order name for URL to define the sorting function
     $ordername = $_GET['orderby'];
 
     $completedItems = array();                                                  //We keep track of all item names we have made a product card of in an array so we dont get anny duplicate cards
@@ -146,7 +150,7 @@ $itemsCategory = function ($connection, $category, $imgDirectory, $discount)    
     }
     echo '</div></div>';
 ?>
-
+    <!-- Buttons for First, Prev, Next, Last -->
     <div class="container">
         <ul class="pagination">
             <li><a href="?productGroup=<?php echo $category; ?>&pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
@@ -240,16 +244,16 @@ $filterItems = function ()                                                      
 
 $itemsToProductCards = function ($connection)
 {
-    // Pagina nummer bepalen
+    // Gets pagenr from URL if nothing is returned sets pagenr to 1
     if (isset($_GET['pagenr'])){
         $pagenr = $_GET['pagenr'];
     } else {
         $pagenr = 1;
     }
-// Bepalen van aantal items per pagina + knoppen voor het vast zetten van een aantal per pagina
-    $nr_of_records_per_page = $_GET['itemspp'];
 
-    if (isset($_POST['use_button']))
+    $nr_of_records_per_page = $_GET['itemspp'];     // Gets number of records per page from URL, standard numbers of records per page is set via link on Index.php
+
+    if (isset($_POST['use_button']))                // Sets numbers of records per page to a user defined number
     {
         $nr_of_records_per_page = 25;
     }
@@ -268,7 +272,7 @@ $itemsToProductCards = function ($connection)
 
 
 
-    // Knoppen voor de resultaten per pagina
+    // Buttons for sorting the page and setting number of records per page
     echo
     "<form action='' method='post'>
 <p class='Resultaten'><p1>Resultaten per pagina:</p1><p2>Sorteer op:<br></p2>
@@ -280,8 +284,6 @@ $itemsToProductCards = function ($connection)
 <a class='OrderbynameASC' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=StockItemName DESC'>Naam(aflopend)</a>
 <a class='OrderbyPrice' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=RecommendedRetailPrice ASC'>Prijs(oplopend)</a>
 <a class='OrderbyPrice' href='productPage.php?&itemspp=$nr_of_records_per_page&orderby=RecommendedRetailPrice DESC'>Prijs(aflopend)</a>
-
-
 </form>";
 
     // Pagination
@@ -291,9 +293,11 @@ $itemsToProductCards = function ($connection)
     $result_rows = mysqli_query($connection, $total_rows);
     $row = mysqli_fetch_assoc($result_rows);
     $total_pages = ceil( $row["aantal"]/ $nr_of_records_per_page);
-    // Einde pagination
 
+
+    // Gets the order name for URL to define the sorting function
     $ordername = $_GET['orderby'];
+
 
     $i=0;
     $completedItems = array();
@@ -386,7 +390,7 @@ if (in_array($productName, $completedItems) == false)   // if the product is'nt 
 
 
     ?>
-    <!--- Knoppen voor First,Prev,Next,Last --->
+    <!--- Buttons for First,Prev,Next,Last --->
 <div class="container">
         <ul class="pagination">
             <li><a href="?pagenr=1&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername; ?>">First</a></li>
@@ -400,7 +404,6 @@ if (in_array($productName, $completedItems) == false)   // if the product is'nt 
             <li><a href="?pagenr=<?php echo $total_pages; ?>&itemspp=<?php echo $nr_of_records_per_page."&orderby=".$ordername;?>">Last</a></li>
         </ul>
 </div>
-    <!--- Einde Knoppen voor First,Prev,Next,Last --->
 <?php
 
     mysqli_free_result($result);

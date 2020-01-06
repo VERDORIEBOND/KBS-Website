@@ -17,6 +17,7 @@
 
 <?php
 //error_reporting(-1);
+// Including pages for connection to DB and for styling the page and getting functions
 include "index.php";
 include "functions.php";
 include "connection.php";
