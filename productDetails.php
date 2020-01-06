@@ -5,7 +5,7 @@
     <title>Wide World Importers</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
+<body>
 
 
 
@@ -17,7 +17,7 @@ include "index.php";
 
 
 
-//Print de naam van het gekozen artikel
+
 
 
 ?>
@@ -25,7 +25,7 @@ include "index.php";
 
         <div class="ProduktNaam" style="position: relative; color: #496ebc; font-size: 200%; top: 80px;" >
             <?php
-            //$detailprinter($conn);
+            //Shows the name of the product
             echo $detailPrinter($conn);
             ?>
         </div>
@@ -33,7 +33,7 @@ include "index.php";
             <div class="Productfoto">
                 <?php
 
-                //foto printen
+                //Shows a foto
 
                 $numFromUrl = $_GET['productId'];
                 $query = "SELECT i.StockGroupName as groupname FROM stockgroups i JOIN stockitemstockgroups g ON i.StockGroupID=g.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1  ;";
@@ -48,40 +48,24 @@ include "index.php";
             </div>
     <div class="Prijs">
         <?php
+        //Shows the price of a product
         echo $prijsgever($conn);
         ?>
     </div>
 
-        <div class="Prijs2">
-            <?php
-            //print de prijs functie
-                $numFromUrl = $_GET['productId'];
-                $query = "SELECT StockItemName, RecommendedRetailPrice, o.StockGroupName, i.StockItemID FROM stockitems i JOIN stockitemstockgroups g on i.StockItemID = g.StockItemID JOIN stockgroups o on g.StockGroupID = o.StockGroupID WHERE g.StockItemID = '$numFromUrl' ORDER BY RAND() LIMIT 1;";
-                $result = mysqli_query($conn, $query);
-                $row = mysqli_fetch_assoc($result);
-                  if ($row['StockGroupName'] == 'Novelty Items') {
-                            echo "€" . ($row['RecommendedRetailPrice']*0.85);
-                        }
-                        else {
-                            echo "€".$row['RecommendedRetailPrice'];
-
-
-                }
-            ?>
-        </div>
         <div class="Stock">
            <?php
-           //print de voorraad
+           //Shows the stock
              echo $stockzoeker($conn);
             ?>
         </div>
         <div class= "ProductTemp">
         <?php
-        //print de voorraad
+        //Shows the temperature of certain products
         echo $tempShower($conn);
          ?>
         </div>
-        <?php //dit zijn de knoppen en de omschrijving ?>
+        <?php //These are the buttons for the "winkelmand" and "verlanglijstje" ?>
 
         <div class="Button">
                 <form method="post" action="winkelfunctie.php">
@@ -106,6 +90,7 @@ include "index.php";
 
         <div class="Omschrijving">
             <?php
+            //Shows the description of a product
             $NumberUrl = $_GET ['productId'];
             $query2 = "SELECT i.StockItemID, MarketingComments FROM stockitems i WHERE StockItemID = '$NumberUrl'";
             $result2 = mysqli_query($conn,$query2);
@@ -122,7 +107,7 @@ include "index.php";
         </div>
 
 
-
+<!-- Shows a "test video" -->
     <div class="Testvideo" style="max-width:350px;">
         <iframe width="350" height="200" src="https://www.youtube.com/embed/HluANRwPyNo"></iframe>
     </div>

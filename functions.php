@@ -408,9 +408,8 @@ if (in_array($productName, $completedItems) == false)   // if the product is'nt 
 
     mysqli_free_result($result);
 };
-//Haalt de naam op van een artikel en print hem
 
-
+//Gets the name from the database and shows him
 $detailPrinter = function ($connection) {
     $numFromUrl = $_GET['productId'];
     $sql = "SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID = '$numFromUrl'";
@@ -419,7 +418,7 @@ $detailPrinter = function ($connection) {
         echo $row['StockItemName'];
     }
 };
-//deze functie kijkt wat een artikel kost en print de prijs uit de database
+//This function looks up how much a product costs and shows it
 $prijsgever = function ($connection) {
     $numFromUrl = $_GET['productId'];
     $result = mysqli_query($connection,"SELECT StockItemID, StockItemName,RecommendedRetailPrice FROM stockitems WHERE StockItemID = '$numFromUrl'");
@@ -427,7 +426,7 @@ $prijsgever = function ($connection) {
         echo "€". $row["RecommendedRetailPrice"];
     }
 };
-//deze funtie kijkt hoeveel voorraad er bij het gekozen product hoort
+//This function looks how much stock there is of a product and shows it
 $stockzoeker = function ($connection)   {
     $numFromUrl = $_GET['productId'];
     $query = "SELECT StockItemID, QuantityOnHand FROM stockitemholdings WHERE StockItemID = '$numFromUrl'";
@@ -474,7 +473,7 @@ $verlanglijstdetails = function($connection) {
     }
     return $returnValue;
 };
-
+//This function looks up if the product is a cooled product and shows it only when a product is cooled
 $tempShower = function ($connection)   {
     $numFromUrl = $_GET['productId'];
     $query = "SELECT c.Temperature, s.StockItemID FROM coldroomtemperatures c JOIN stockitems s on c.ColdRoomSensorNumber = s.IsChillerStock where s.StockItemID = '$numFromUrl' AND s.IsChillerStock = 1;";
